@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IponPal — Your Taglish budget & ipon coach</title>
+<meta name="description" content="Budget, mag-ipon, at unawain ang pera mo — with a coach that talks like your barkada. Free, private, made in the Philippines. Early access.">
+<link rel="canonical" href="https://iponpal.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="IponPal">
+<meta property="og:title" content="IponPal — Your Taglish budget & ipon coach">
+<meta property="og:description" content="Budget, mag-ipon, at unawain ang pera mo. Free, private, made in PH. Kaya mo 'yan! 💪">
+<meta property="og:url" content="https://iponpal.com/">
+<meta property="og:image" content="https://iponpal.com/og-image.svg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IponPal — Your Taglish budget & ipon coach">
+<meta name="twitter:description" content="Budget, mag-ipon, at unawain ang pera mo. Free, private, made in PH.">
+<meta name="twitter:image" content="https://iponpal.com/og-image.svg">
+<meta name="theme-color" content="#7C5CFC">
+<link rel="icon" href="https://app.iponpal.com/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* ── shared design tokens (kept in sync with the app) ── */
+  :root{
+    --purple:#7C5CFC; --purple-dk:#6547E0; --purple-soft:#EEEAFF;
+    --needs:#1CB0F6; --wants:#FF4B8C; --savings:#58CC02; --savings-dk:#46A302;
+    --orange:#FF9600; --ink:#2E2A3B; --muted:#7d7a8c; --line:#ECEAF4; --bg:#F6F5FB; --card:#fff;
+    --radius:20px; --sh:0 8px 24px rgba(80,60,160,.10);
+    --font-head:'Baloo 2',sans-serif; --font-body:'Nunito',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--font-head);line-height:1.15;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
+  .sec{padding:52px 0}
+  .center{text-align:center}
+  .muted{color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-head);font-weight:800;font-size:16px;padding:14px 24px;border-radius:16px;border:none;cursor:pointer;transition:transform .12s ease}
+  .btn:active{transform:translateY(1px)}
+  .btn.primary{background:var(--purple);color:#fff;box-shadow:0 4px 0 var(--purple-dk)}
+  .btn.ghost{background:#fff;color:var(--purple-dk);border:2px solid var(--purple-soft)}
+  .btn.sm{font-size:14px;padding:10px 16px;border-radius:12px}
+  .badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--line);color:var(--muted);font-weight:800;font-size:12.5px;padding:7px 14px;border-radius:999px;box-shadow:var(--sh)}
+  .pill{display:inline-block;background:var(--purple-soft);color:var(--purple-dk);font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+
+  /* header */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(246,245,251,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .in{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
+  .nav .brand{font-family:var(--font-head);font-weight:800;font-size:18px;display:flex;align-items:center;gap:6px}
+  .nav .spacer{flex:1}
+  .seg{display:flex;background:#fff;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
+  .seg button{border:none;background:none;font-family:var(--font-head);font-weight:800;font-size:12.5px;padding:7px 12px;cursor:pointer;color:var(--muted)}
+  .seg button.on{background:var(--purple);color:#fff}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+  @media(max-width:640px){.grid3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--sh)}
+  .card .ic{font-size:32px}
+  .card h3{font-size:19px;margin:10px 0 6px;font-weight:800}
+  .card p{font-size:14.5px;color:#55516a;font-weight:600}
+
+  .hero{background:radial-gradient(1200px 500px at 50% -10%, #efeaff 0%, var(--bg) 60%);padding:34px 0 44px;text-align:center}
+  .hero .logo{font-size:54px;line-height:1}
+  .hero h1{font-size:clamp(29px,6vw,46px);margin:12px 0 8px;font-weight:800}
+  .hero .sub{font-size:clamp(15px,3.4vw,19px);color:#4a4658;font-weight:700;max-width:620px;margin:0 auto 20px}
+  .hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .hero .fineprint{margin-top:14px;font-size:13px;color:var(--muted);font-weight:700}
+
+  .sech2{font-size:clamp(23px,5vw,33px);font-weight:800;text-align:center}
+  .sechint{text-align:center;color:var(--muted);font-weight:700;max-width:620px;margin:8px auto 0;font-size:15px}
+
+  /* app mockups (representative — rebuilt from app components, not pixel clones) */
+  .mocks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  @media(max-width:760px){.mocks{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
+  .mock{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--sh)}
+  .mcap{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:12px}
+  .ring-num{font-family:var(--font-head);font-weight:800;font-size:44px;fill:var(--ink)}
+  .coachbub{display:flex;gap:9px;align-items:flex-start;margin-top:6px}
+  .coachbub .av{width:30px;height:30px;border-radius:9px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+  .coachbub .msg{background:var(--purple-soft);border-radius:14px;border-bottom-left-radius:4px;padding:9px 12px;font-size:13.5px;font-weight:700}
+  .chip{display:inline-block;background:var(--purple-soft);color:var(--purple-dk);border:1.5px solid var(--purple);border-radius:14px;padding:5px 11px;font-size:12px;font-weight:800;margin-top:8px}
+  .jar .top{display:flex;align-items:center;gap:10px}
+  .jar .em{font-size:24px}
+  .jbar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:10px}
+  .jbar>div{height:100%;background:var(--savings)}
+
+  .step{display:flex;gap:14px;align-items:flex-start;padding:12px 0}
+  .step .n{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:var(--purple);color:#fff;font-family:var(--font-head);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .step h3{font-size:17px;font-weight:800}
+  .step p{font-size:14.5px;color:#55516a;font-weight:600}
+
+  .trust{background:#fff;border-radius:24px;border:1px solid var(--line);box-shadow:var(--sh);padding:28px}
+  .trust .row{display:flex;gap:12px;align-items:flex-start;padding:9px 0}
+  .trust .row .ic{font-size:20px;flex-shrink:0}
+  .trust .never{background:#FFF1F5;border:1px solid #ffd6e4;border-radius:16px;padding:16px 18px;margin-top:14px}
+  .trust .never b{color:#C9356E}
+
+  .bip{background:linear-gradient(135deg,#7C5CFC,#9B7DFF);color:#fff;border-radius:24px;padding:30px;box-shadow:var(--sh)}
+  .bip h2{font-size:clamp(22px,5vw,31px);font-weight:800}
+  .bip .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+  @media(max-width:640px){.bip .cols{grid-template-columns:1fr}}
+  .bip .box{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:16px 18px}
+  .bip .box h3{font-size:14px;text-transform:uppercase;letter-spacing:.6px;font-weight:800}
+  .bip .box ul{list-style:none;margin-top:8px}
+  .bip .box li{font-size:14.5px;font-weight:700;padding:4px 0}
+  .bip .ask{margin-top:18px;font-size:16px;font-weight:800}
+
+  /* FAQ */
+  .faq details{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);margin-top:12px;overflow:hidden}
+  .faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-family:var(--font-head);font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:'+';color:var(--purple);font-size:22px;font-weight:800}
+  .faq details[open] summary::after{content:'–'}
+  .faq .a{padding:0 18px 16px;font-size:14.5px;color:#55516a;font-weight:600}
+
+  .nl{background:var(--purple-soft);border-radius:24px;padding:30px;text-align:center}
+  .nl form{display:flex;gap:10px;max-width:460px;margin:16px auto 0;flex-wrap:wrap}
+  .nl input{flex:1;min-width:200px;border:2px solid #fff;border-radius:14px;padding:14px 16px;font-family:var(--font-body);font-size:15px;font-weight:700;background:#fff;color:var(--ink)}
+  .nl input:focus{outline:none;border-color:var(--purple)}
+  .nl .note{font-size:12.5px;color:var(--purple-dk);font-weight:700;margin-top:10px}
+  #nl-msg{margin-top:10px;font-weight:800;font-size:14px;min-height:20px}
+
+  footer{padding:34px 0 46px;text-align:center;color:var(--muted)}
+  footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:12px 0;font-weight:800;font-size:14px}
+  footer a{color:var(--purple-dk)}
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <div class="nav"><div class="in">
+    <div class="brand">🐷 IponPal</div>
+    <div class="spacer"></div>
+    <div class="seg"><button id="lang-tl" class="on" onclick="setLang('tl')">TL</button><button id="lang-en" onclick="setLang('en')">EN</button></div>
+    <a class="btn primary sm appcta" href="https://app.iponpal.com" target="_blank" rel="noopener">Open app →</a>
+  </div></div>
+
+  <!-- HERO -->
+  <header class="hero"><div class="wrap">
+    <span class="badge" data-k="badge">🚧 Early access · Building in public</span>
+    <div class="logo" style="margin-top:16px">🐷</div>
+    <h1 data-k="hero_h1">Your Taglish budget &amp; ipon coach.<br>Kaya mo 'yan! 💪</h1>
+    <p class="sub" data-k="hero_sub">Mag-budget, mag-ipon, at unawain ang pera mo — with a coach that talks like your barkada. Libre, private, gawa sa Pilipinas.</p>
+    <div class="cta">
+      <a class="btn primary appcta" href="https://app.iponpal.com" target="_blank" rel="noopener" data-k="cta_open">Open the app →</a>
+      <a class="btn ghost" href="#join" data-k="cta_join">Sumali sa early crew</a>
+    </div>
+    <p class="fineprint" data-k="hero_fine">No download needed · gumagana sa browser mo · 100% libre habang ginagawa namin</p>
+  </div></header>
+
+  <!-- SEE IT (mockups) -->
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <h2 class="sech2" data-k="see_h">Silipin mo</h2>
+    <p class="sechint" data-k="see_sub">Isang tunay na coach — hindi lang tracker.</p>
+    <div class="mocks">
+      <div class="mock center">
+        <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+          <circle cx="66" cy="66" r="54" fill="none" stroke="#EEEAFF" stroke-width="14"/>
+          <circle cx="66" cy="66" r="54" fill="none" stroke="#7C5CFC" stroke-width="14" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="95" transform="rotate(-90 66 66)"/>
+          <text x="66" y="80" text-anchor="middle" class="ring-num">72</text>
+        </svg>
+        <div class="mcap" data-k="see_score">Financial Health Score</div>
+      </div>
+      <div class="mock">
+        <div class="mcap" style="margin-top:0">Coach</div>
+        <div class="coachbub"><div class="av">✦</div><div class="msg" data-k="see_coach">Ang ₱2,400 Wants mo this month = ~20 milk teas. 🧋 Sulit ba lahat?</div></div>
+        <span class="chip" data-k="see_chip">Paano gumaling? ›</span>
+      </div>
+      <div class="mock jar">
+        <div class="top"><span class="em">🏖️</span><div style="flex:1"><div style="font-family:var(--font-head);font-weight:800">Boracay 2027</div><div style="font-size:12.5px;color:var(--muted);font-weight:700" data-k="see_jar_sub">3 kabarkada · sama-samang ipon</div></div></div>
+        <div class="jbar"><div style="width:62%"></div></div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:12.5px;font-weight:800"><span style="color:var(--savings-dk)">₱12,400</span><span class="muted">₱20,000</span></div>
+      </div>
+    </div>
+    <p class="center" style="margin-top:8px;font-size:12px;color:var(--muted);font-weight:700" data-k="see_note">*Sample view. Ganito kadali sa totoong app.</p>
+  </div></section>
+
+  <!-- WHY -->
+  <section class="sec" style="padding-top:0"><div class="wrap center">
+    <span class="pill" data-k="why_pill">Ang totoo</span>
+    <h2 class="sech2" style="margin-top:12px" data-k="why_h">Sweldo, ubos. Ipon, wala.</h2>
+    <p class="sechint" data-k="why_sub">Hindi ka nag-iisa — karamihan ng Pinoy, walang emergency fund at nahihirapang mag-ipon. Hindi dahil tamad ka. Kailangan mo lang ng system na simple at kakampi mo. Yun ang IponPal.</p>
+  </div></section>
+
+  <!-- WHAT -->
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <h2 class="sech2" data-k="what_h">Isang app, tatlong bagay</h2>
+    <div class="grid3">
+      <div class="card"><div class="ic">💰</div><h3 data-k="p1_h">Budget</h3><p data-k="p1_p">Auto 50-30-20: needs, wants, at ipon. Alam mo agad kung saan napupunta ang pera mo.</p></div>
+      <div class="card"><div class="ic">🐷</div><h3 data-k="p2_h">Ipon</h3><p data-k="p2_p">Goal jars at barkada jars — mag-ipon nang sabay-sabay kasama ang mga kaibigan mo.</p></div>
+      <div class="card"><div class="ic">🤖</div><h3 data-k="p3_h">Coach</h3><p data-k="p3_p">Isang daily Financial Health Score at personal na coaching, sa Taglish. Parang kausap mong kabarkada.</p></div>
+    </div>
+  </div></section>
+
+  <!-- HOW -->
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <div class="card" style="max-width:640px;margin:0 auto">
+      <h2 class="sech2" style="font-size:24px;margin-bottom:6px" data-k="how_h">Paano gumagana</h2>
+      <div class="step"><div class="n">1</div><div><h3 data-k="s1_h">I-log ang gastos — 10 seconds lang</h3><p data-k="s1_p">Tap lang. Walang kailangang i-connect na bank account.</p></div></div>
+      <div class="step"><div class="n">2</div><div><h3 data-k="s2_h">Tingnan ang Score mo</h3><p data-k="s2_p">Isang numero (0–100) na nagsasabi kung kumusta ang pera mo ngayon.</p></div></div>
+      <div class="step"><div class="n">3</div><div><h3 data-k="s3_h">Makinig sa Coach</h3><p data-k="s3_p">Malalaman mo ang susunod na hakbang — hindi ka iiwang naguguluhan.</p></div></div>
+    </div>
+  </div></section>
+
+  <!-- TRUST -->
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <h2 class="sech2" data-k="trust_h">Ang pera mo, sa'yo lang.</h2>
+    <p class="sechint" data-k="trust_sub">Isang finance app na hindi nagbebenta ng data mo. Ito ang pangako namin — at kung ano ang hindi namin gagawin, kailanman.</p>
+    <div class="trust" style="margin-top:22px">
+      <div class="row"><span class="ic">🔒</span><div data-k="t1">Private &amp; naka-backup. Secure ang financial data mo — hindi ibinebenta, hindi ibinabahagi kahit kanino.</div></div>
+      <div class="row"><span class="ic">📤</span><div data-k="t2">Ikaw ang may hawak. Pwede mong i-export o burahin ang lahat, anytime.</div></div>
+      <div class="row"><span class="ic">🇵🇭</span><div data-k="t3">Data Privacy Act (RA 10173). Anonymous usage stats lang ang kinokolekta para mapaganda ang app.</div></div>
+      <div class="never" data-k="t_never"><b>❌ Ang hindi namin gagawin:</b> Walang <b>pautang</b>. Hindi namin hinahawakan ang <b>pera</b> mo. Walang <b>credit score na ibinebenta sa lenders</b>. Walang paluwagan. Coach kami — hindi bangko, hindi lending app.</div>
+    </div>
+  </div></section>
+
+  <!-- BUILDING IN PUBLIC -->
+  <section class="sec" style="padding-top:0"><div class="wrap"><div class="bip">
+    <span class="badge" style="background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.3);color:#fff" data-k="bip_badge">🚧 Building in public</span>
+    <h2 style="margin-top:14px" data-k="bip_h">Nasa maaga pa kami — at bukas kami tungkol dito.</h2>
+    <p style="margin-top:10px;font-size:15.5px;font-weight:700;opacity:.96" data-k="bip_p">Isang maliit na Pinoy team, ginagawa ang IponPal nang hayag, kasama ang mga unang users. Rather na mangako ng kung ano-ano, sasabihin namin sa'yo kung nasaan kami — at kung saan kami pupunta.</p>
+    <div class="cols">
+      <div class="box"><h3 data-k="bip_live_h">✅ Live na ngayon</h3><ul>
+        <li data-k="bip_live1">✔️ Budget (50-30-20)</li>
+        <li data-k="bip_live2">✔️ Ipon goals + barkada jars</li>
+        <li data-k="bip_live3">✔️ Financial Health Score</li>
+        <li data-k="bip_live4">✔️ Ang Coach (v1)</li>
+      </ul></div>
+      <div class="box"><h3 data-k="bip_soon_h">🔜 Wala pa — sinasadya</h3><ul>
+        <li data-k="bip_soon1">⏳ Automatic bank sync</li>
+        <li data-k="bip_soon2">⏳ Mas malalim na AI Coach</li>
+        <li data-k="bip_soon3">⏳ Paraan para palaguin ang ipon</li>
+        <li style="opacity:.85" data-k="bip_soon4">Gusto naming i-ship ito nang <b>tama</b>, hindi mabilis.</li>
+      </ul></div>
+    </div>
+    <p class="ask" data-k="bip_ask">Sumali ka nang maaga — tulungan mo kaming hubugin ito, sabihin kung ano ang sira, at panagutin kami. 💜</p>
+  </div></div></section>
+
+  <!-- VISION -->
+  <section class="sec" style="padding-top:0"><div class="wrap center">
+    <span class="pill" data-k="vis_pill">Ang pangarap</span>
+    <h2 class="sech2" style="margin-top:12px" data-k="vis_h">Mula sa pag-track → sa tunay na financial health</h2>
+    <p class="sechint" data-k="vis_sub">Ang layunin: hindi lang budget app, kundi kasama mo sa buong journey ng pera mo — <b>Mag-ipon → Magkaroon ng buffer → Palaguin</b>. Parang “Whoop” pero para sa pera. Isang hakbang bawat araw. Sama-sama tayo dito.</p>
+  </div></section>
+
+  <!-- FAQ -->
+  <section class="sec" style="padding-top:0"><div class="wrap">
+    <h2 class="sech2" data-k="faq_h">Mga tanong</h2>
+    <div class="faq">
+      <details><summary data-k="q1">Libre ba talaga?</summary><div class="a" data-k="a1">Oo — 100% libre habang nasa early access kami. Kung may bayad man balang araw, may free version pa rin.</div></details>
+      <details><summary data-k="q2">Safe ba ang data ko?</summary><div class="a" data-k="a2">Oo. Naka-secure at naka-backup ang data mo sa pribadong database, hindi ibinebenta o ibinabahagi. Pwede mong i-export o burahin anytime.</div></details>
+      <details><summary data-k="q3">Kailangan ko bang i-connect ang bank ko?</summary><div class="a" data-k="a3">Hindi. Manual lang ang paglo-log — 10 seconds. Walang bank login, walang password na hinihingi.</div></details>
+      <details><summary data-k="q4">Scam ba 'to?</summary><div class="a" data-k="a4">Hindi. Wala kaming pautang, hindi namin hinahawakan ang pera mo, walang paluwagan, at hindi kami nagbebenta ng credit score sa lenders. Coach lang kami para sa ipon mo.</div></details>
+      <details><summary data-k="q5">Paano kayo kikita?</summary><div class="a" data-k="a5">Honestly, hinahanap pa namin 'yan — kaya kami nagbi-build in public. Ang sigurado: hindi namin ibebenta ang data mo. Balang araw, baka premium coach o pag-refer sa lehitimong ipon/invest partners — pero libre at private lagi ang core.</div></details>
+      <details><summary data-k="q6">Para kanino 'to?</summary><div class="a" data-k="a6">Para sa Pinoy na gustong matutong mag-ipon — sweldo, gig, freelance, estudyante. Kung nahihirapan kang mag-ipon, para sa'yo 'to.</div></details>
+    </div>
+  </div></section>
+
+  <!-- JOIN -->
+  <section class="sec" id="join" style="padding-top:0"><div class="wrap"><div class="nl">
+    <span class="pill" data-k="nl_pill">Early crew</span>
+    <h2 class="sech2" style="font-size:26px;margin-top:10px" data-k="nl_h">Maging una sa mga updates</h2>
+    <p class="muted" style="font-weight:700;max-width:480px;margin:6px auto 0" data-k="nl_sub">I-open na ang app — o mag-subscribe para malaman mo agad ang mga bagong feature habang ginagawa namin.</p>
+    <a class="btn primary appcta" href="https://app.iponpal.com" target="_blank" rel="noopener" style="margin-top:18px" data-k="cta_open2">Open the app →</a>
+    <form onsubmit="subscribe(event)">
+      <input id="nl-email" type="email" placeholder="ikaw@gmail.com" autocomplete="email" required>
+      <button class="btn ghost" type="submit" style="box-shadow:none" data-k="nl_btn">Subscribe</button>
+    </form>
+    <div id="nl-msg"></div>
+    <p class="note" data-k="nl_note">IponPal updates lang. No spam, unsubscribe anytime.</p>
+  </div></div></section>
+
+  <!-- FOOTER -->
+  <footer><div class="wrap">
+    <div style="font-size:30px">🐷</div>
+    <div style="font-family:var(--font-head);font-weight:800;font-size:18px;margin-top:4px">IponPal</div>
+    <div class="links">
+      <a href="https://app.iponpal.com" target="_blank" rel="noopener" class="appcta" data-k="f_open">Open the app</a>
+      <a href="#" data-social="instagram">Instagram</a>
+      <a href="#" data-social="tiktok">TikTok</a>
+      <a href="mailto:hello@iponpal.com" data-k="f_contact">Contact</a>
+    </div>
+    <p class="muted" style="font-size:13px;font-weight:700" data-k="f_legal">Privacy Policy &amp; Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--purple-dk)">Email us.</a></p>
+    <p style="font-size:13px;font-weight:700;margin-top:8px" data-k="f_made">Made with 💜 in the Philippines 🇵🇭 · Built in public by a small PH team</p>
+  </div></footer>
+
+<script>
+  /* ── i18n: Taglish authored inline (single source, SEO-friendly); English overrides below ── */
+  const EN = {
+    badge:'🚧 Early access · Building in public',
+    hero_h1:"Your Taglish budget &amp; savings coach.<br>You've got this! 💪",
+    hero_sub:"Budget, save, and finally understand your money — with a coach that talks like your barkada. Free, private, made in the Philippines.",
+    cta_open:'Open the app →', cta_open2:'Open the app →', cta_join:'Join the early crew',
+    hero_fine:'No download needed · works in your browser · 100% free while we build',
+    see_h:'Take a peek', see_sub:'A real coach — not just a tracker.',
+    see_score:'Financial Health Score',
+    see_coach:'Your ₱2,400 in Wants this month = ~20 milk teas. 🧋 All worth it?',
+    see_chip:'How do I improve? ›',
+    see_jar_sub:'3 friends · saving together', see_note:'*Sample view. This easy in the real app.',
+    why_pill:'The real talk', why_h:'Paycheck in, paycheck gone.',
+    why_sub:"You're not alone — most Filipinos have no emergency fund and struggle to save. Not because you're lazy. You just need a system that's simple and on your side. That's IponPal.",
+    what_h:'One app, three things',
+    p1_h:'Budget', p1_p:'Auto 50-30-20: needs, wants, and savings. Instantly see where your money goes.',
+    p2_h:'Save', p2_p:'Goal jars and barkada jars — save together with your friends.',
+    p3_h:'Coach', p3_p:'A daily Financial Health Score and personal coaching, in Taglish. Like chatting with a money-smart friend.',
+    how_h:'How it works',
+    s1_h:'Log an expense — 10 seconds', s1_p:'Just tap. No bank account to connect.',
+    s2_h:'See your Score', s2_p:'One number (0–100) that tells you how your money is doing right now.',
+    s3_h:'Listen to your Coach', s3_p:"You'll know your next move — never left confused.",
+    trust_h:'Your money is yours alone.',
+    trust_sub:"A finance app that doesn't sell your data. This is our promise — and what we'll never do.",
+    t1:"Private & backed up. Your financial data is secure — never sold, never shared.",
+    t2:'You hold the keys. Export or delete everything, anytime.',
+    t3:'Data Privacy Act (RA 10173). We collect only anonymous usage stats to improve the app.',
+    t_never:"<b>❌ What we'll never do:</b> No <b>lending</b>. We never hold your <b>money</b>. No <b>credit score sold to lenders</b>. No paluwagan. We're a coach — not a bank, not a lending app.",
+    bip_badge:'🚧 Building in public',
+    bip_h:"We're early — and we're open about it.",
+    bip_p:"A small Filipino team, building IponPal in the open with our first users. Instead of overpromising, we'll tell you exactly where we are — and where we're headed.",
+    bip_live_h:'✅ Live now',
+    bip_live1:'✔️ Budget (50-30-20)', bip_live2:'✔️ Savings goals + barkada jars', bip_live3:'✔️ Financial Health Score', bip_live4:'✔️ The Coach (v1)',
+    bip_soon_h:'🔜 Not here yet — on purpose',
+    bip_soon1:'⏳ Automatic bank sync', bip_soon2:'⏳ A deeper AI Coach', bip_soon3:'⏳ A way to grow your savings', bip_soon4:"We'd rather ship these <b>right</b> than fast.",
+    bip_ask:'Join us early — help us shape it, tell us what\'s broken, and hold us accountable. 💜',
+    vis_pill:'The dream', vis_h:'From tracking → to real financial health',
+    vis_sub:'The goal: not just a budget app, but your companion for the whole money journey — <b>Save → Build a buffer → Grow</b>. Like “Whoop,” but for your money. One step a day. Together.',
+    faq_h:'Questions',
+    q1:'Is it really free?', a1:'Yes — 100% free while we\'re in early access. If there\'s ever a paid tier, there will still be a free version.',
+    q2:'Is my data safe?', a2:'Yes. Your data is secured and backed up in a private database, never sold or shared. Export or delete it anytime.',
+    q3:'Do I have to connect my bank?', a3:'No. Logging is manual — 10 seconds. No bank login, no passwords requested.',
+    q4:'Is this a scam?', a4:"No. We don't lend, we don't hold your money, no paluwagan, and we don't sell credit scores to lenders. We're just a coach for your savings.",
+    q5:'How will you make money?', a5:"Honestly, we're still figuring that out — that's why we build in public. What's certain: we won't sell your data. Someday maybe a premium coach or referrals to legit savings/invest partners — but the core stays free and private.",
+    q6:'Who is this for?', a6:'For any Filipino who wants to save — salaried, gig, freelance, student. If saving is hard for you, this is for you.',
+    nl_pill:'Early crew', nl_h:'Be first to know',
+    nl_sub:'Open the app now — or subscribe to hear about new features as we build them.',
+    nl_btn:'Subscribe', nl_note:'IponPal updates only. No spam, unsubscribe anytime.',
+    f_open:'Open the app', f_contact:'Contact',
+    f_legal:'Privacy Policy & Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--purple-dk)">Email us.</a>',
+    f_made:'Made with 💜 in the Philippines 🇵🇭 · Built in public by a small PH team'
+  };
+  function setLang(l){
+    localStorage.setItem('ip_lang', l);
+    document.querySelectorAll('[data-k]').forEach(el=>{
+      const k=el.dataset.k;
+      if(el.getAttribute('data-tl')===null) el.setAttribute('data-tl', el.innerHTML);   // capture TL original once
+      el.innerHTML = (l==='en' && EN[k]!=null) ? EN[k] : el.getAttribute('data-tl');
+    });
+    document.getElementById('lang-tl').classList.toggle('on', l!=='en');
+    document.getElementById('lang-en').classList.toggle('on', l==='en');
+    document.documentElement.lang = (l==='en')?'en':'tl';
+  }
+
+  /* ── landing backend: waitlist + lightweight analytics (see db_waitlist.sql) ── */
+  const SB_URL = 'https://anbmihwvzbazjjufdnse.supabase.co';
+  const SB_KEY = 'sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
+  function track(type){
+    try{ fetch(SB_URL+'/rest/v1/landing_events', { method:'POST', keepalive:true,
+      headers:{ 'apikey':SB_KEY,'authorization':'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal' },
+      body: JSON.stringify({ type, lang: localStorage.getItem('ip_lang')||'tl' }) }); }catch(e){}
+  }
+  function nlMsg(t, ok){ const el=document.getElementById('nl-msg'); el.textContent=t; el.style.color = ok ? '#46A302' : '#C9356E'; }
+  async function subscribe(e){
+    e.preventDefault();
+    const email = (document.getElementById('nl-email').value||'').trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ nlMsg(localStorage.getItem('ip_lang')==='en'?'Enter a valid email 🙂':'Maglagay ng valid na email 🙂', false); return; }
+    try{
+      const r = await fetch(SB_URL + '/rest/v1/waitlist', {
+        method:'POST', headers:{ 'apikey':SB_KEY,'authorization':'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal' },
+        body: JSON.stringify({ email, source:'landing' }) });
+      const en = localStorage.getItem('ip_lang')==='en';
+      if(r.status===201 || r.ok){ nlMsg(en?"You're in! 🎉 Thanks — watch for updates.":"You're in! 🎉 Salamat — abangan ang updates.", true); document.getElementById('nl-email').value=''; track('subscribe'); }
+      else if(r.status===409){ nlMsg(en?"You're already on the list! 💜":"Nasa list ka na! 💜", true); }
+      else { nlMsg(en?'Hmm, try again later.':'Hmm, subukan ulit mamaya.', false); }
+    }catch(err){ nlMsg(localStorage.getItem('ip_lang')==='en'?'Hmm, try again later.':'Hmm, subukan ulit mamaya.', false); }
+  }
+
+  // init
+  setLang(localStorage.getItem('ip_lang') || 'tl');
+  document.querySelectorAll('.appcta').forEach(a=>a.addEventListener('click',()=>track('open_app')));
+  window.addEventListener('load', ()=>track('view'));
+</script>
+</body>
+</html>
