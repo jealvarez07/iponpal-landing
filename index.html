@@ -16,23 +16,29 @@
 <meta name="twitter:title" content="IponPal — Your Taglish budget & ipon coach">
 <meta name="twitter:description" content="Budget, mag-ipon, at unawain ang pera mo. Free, private, made in PH.">
 <meta name="twitter:image" content="https://iponpal.com/og-image.svg">
-<meta name="theme-color" content="#7C5CFC">
+<meta name="theme-color" content="#12A472">
 <link rel="icon" href="https://app.iponpal.com/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* ── shared design tokens (kept in sync with the app) ── */
   :root{
-    --purple:#7C5CFC; --purple-dk:#6547E0; --purple-soft:#EEEAFF;
-    --needs:#1CB0F6; --wants:#FF4B8C; --savings:#58CC02; --savings-dk:#46A302;
-    --orange:#FF9600; --ink:#2E2A3B; --muted:#7d7a8c; --line:#ECEAF4; --bg:#F6F5FB; --card:#fff;
-    --radius:20px; --sh:0 8px 24px rgba(80,60,160,.10);
-    --font-head:'Baloo 2',sans-serif; --font-body:'Nunito',sans-serif;
+    /* Peso Prism — green = money/primary, violet = coach only */
+    --green:#12A472; --green-dk:#0E8A5F; --green-soft:#DCF2E8;
+    --purple:#7C5CFC; --purple-dk:#6847E8; --purple-soft:#EFEAFE;
+    --needs:#12A472; --wants:#B07C13; --savings:#7C5CFC; --savings-dk:#6847E8;
+    --orange:#B07C13; --ink:#16211A; --muted:#68705F; --line:#E8ECE6; --bg:#F5F7F4; --card:#fff;
+    --radius:20px; --sh:0 14px 36px rgba(14,138,95,.10);
+    --grad-score:linear-gradient(90deg,#12A472,#7C5CFC);
+    --font-head:'Onest',sans-serif; --font-body:'Onest',sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(600px 380px at 88% -4%, rgba(20,160,110,.14), transparent 60%), radial-gradient(560px 420px at -8% 22%, rgba(124,92,252,.10), transparent 60%);
+    background-attachment:fixed}
+  .wordmark{background:var(--grad-score);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;letter-spacing:-.02em}
   h1,h2,h3{font-family:var(--font-head);line-height:1.15;letter-spacing:-.01em}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:960px;margin:0 auto;padding:0 20px}
@@ -40,21 +46,21 @@
   .center{text-align:center}
   .muted{color:var(--muted)}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-head);font-weight:800;font-size:16px;padding:14px 24px;border-radius:16px;border:none;cursor:pointer;transition:transform .12s ease}
-  .btn:active{transform:translateY(1px)}
-  .btn.primary{background:var(--purple);color:#fff;box-shadow:0 4px 0 var(--purple-dk)}
-  .btn.ghost{background:#fff;color:var(--purple-dk);border:2px solid var(--purple-soft)}
+  .btn:active{transform:scale(.98)}
+  .btn.primary{background:var(--green);color:#fff;box-shadow:0 10px 24px rgba(14,138,95,.24)}
+  .btn.ghost{background:rgba(255,255,255,.72);color:var(--green-dk);border:1px solid var(--green-soft);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
   .btn.sm{font-size:14px;padding:10px 16px;border-radius:12px}
-  .badge{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--line);color:var(--muted);font-weight:800;font-size:12.5px;padding:7px 14px;border-radius:999px;box-shadow:var(--sh)}
-  .pill{display:inline-block;background:var(--purple-soft);color:var(--purple-dk);font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+  .badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.72);border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:12.5px;padding:7px 14px;border-radius:999px;box-shadow:var(--sh);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .pill{display:inline-block;background:var(--green-soft);color:var(--green-dk);font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
 
   /* header */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(246,245,251,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{position:sticky;top:0;z-index:50;background:rgba(245,247,244,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .nav .in{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
   .nav .brand{font-family:var(--font-head);font-weight:800;font-size:18px;display:flex;align-items:center;gap:6px}
   .nav .spacer{flex:1}
   .seg{display:flex;background:#fff;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
   .seg button{border:none;background:none;font-family:var(--font-head);font-weight:800;font-size:12.5px;padding:7px 12px;cursor:pointer;color:var(--muted)}
-  .seg button.on{background:var(--purple);color:#fff}
+  .seg button.on{background:var(--green);color:#fff}
 
   .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
   @media(max-width:640px){.grid3{grid-template-columns:1fr}}
@@ -63,8 +69,8 @@
   .card h3{font-size:19px;margin:10px 0 6px;font-weight:800}
   .card p{font-size:14.5px;color:#55516a;font-weight:600}
 
-  .hero{background:radial-gradient(1200px 500px at 50% -10%, #efeaff 0%, var(--bg) 60%);padding:34px 0 44px;text-align:center}
-  .hero .logo{font-size:54px;line-height:1}
+  .hero{background:radial-gradient(1200px 520px at 50% -12%, rgba(20,160,110,.12) 0%, rgba(124,92,252,.06) 42%, transparent 70%);padding:34px 0 44px;text-align:center}
+  .hero .logo{font-size:clamp(40px,9vw,60px);line-height:1;font-weight:800}
   .hero h1{font-size:clamp(29px,6vw,46px);margin:12px 0 8px;font-weight:800}
   .hero .sub{font-size:clamp(15px,3.4vw,19px);color:#4a4658;font-weight:700;max-width:620px;margin:0 auto 20px}
   .hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
@@ -80,7 +86,7 @@
   .mcap{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:12px}
   .ring-num{font-family:var(--font-head);font-weight:800;font-size:44px;fill:var(--ink)}
   .coachbub{display:flex;gap:9px;align-items:flex-start;margin-top:6px}
-  .coachbub .av{width:30px;height:30px;border-radius:9px;background:var(--purple);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+  .coachbub .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7C5CFC,#12A472);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
   .coachbub .msg{background:var(--purple-soft);border-radius:14px;border-bottom-left-radius:4px;padding:9px 12px;font-size:13.5px;font-weight:700}
   .chip{display:inline-block;background:var(--purple-soft);color:var(--purple-dk);border:1.5px solid var(--purple);border-radius:14px;padding:5px 11px;font-size:12px;font-weight:800;margin-top:8px}
   .jar .top{display:flex;align-items:center;gap:10px}
@@ -89,7 +95,7 @@
   .jbar>div{height:100%;background:var(--savings)}
 
   .step{display:flex;gap:14px;align-items:flex-start;padding:12px 0}
-  .step .n{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:var(--purple);color:#fff;font-family:var(--font-head);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:18px}
+  .step .n{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;font-family:var(--font-head);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:18px}
   .step h3{font-size:17px;font-weight:800}
   .step p{font-size:14.5px;color:#55516a;font-weight:600}
 
@@ -99,7 +105,7 @@
   .trust .never{background:#FFF1F5;border:1px solid #ffd6e4;border-radius:16px;padding:16px 18px;margin-top:14px}
   .trust .never b{color:#C9356E}
 
-  .bip{background:linear-gradient(135deg,#7C5CFC,#9B7DFF);color:#fff;border-radius:24px;padding:30px;box-shadow:var(--sh)}
+  .bip{background:linear-gradient(135deg,#12A472 0%,#0E8A5F 42%,#7C5CFC 100%);color:#fff;border-radius:24px;padding:30px;box-shadow:0 18px 44px rgba(14,138,95,.22)}
   .bip h2{font-size:clamp(22px,5vw,31px);font-weight:800}
   .bip .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
   @media(max-width:640px){.bip .cols{grid-template-columns:1fr}}
@@ -113,27 +119,27 @@
   .faq details{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);margin-top:12px;overflow:hidden}
   .faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-family:var(--font-head);font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center}
   .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:'+';color:var(--purple);font-size:22px;font-weight:800}
+  .faq summary::after{content:'+';color:var(--green);font-size:22px;font-weight:800}
   .faq details[open] summary::after{content:'–'}
   .faq .a{padding:0 18px 16px;font-size:14.5px;color:#55516a;font-weight:600}
 
-  .nl{background:var(--purple-soft);border-radius:24px;padding:30px;text-align:center}
+  .nl{background:var(--green-soft);border-radius:24px;padding:30px;text-align:center}
   .nl form{display:flex;gap:10px;max-width:460px;margin:16px auto 0;flex-wrap:wrap}
   .nl input{flex:1;min-width:200px;border:2px solid #fff;border-radius:14px;padding:14px 16px;font-family:var(--font-body);font-size:15px;font-weight:700;background:#fff;color:var(--ink)}
-  .nl input:focus{outline:none;border-color:var(--purple)}
-  .nl .note{font-size:12.5px;color:var(--purple-dk);font-weight:700;margin-top:10px}
+  .nl input:focus{outline:none;border-color:var(--green)}
+  .nl .note{font-size:12.5px;color:var(--green-dk);font-weight:700;margin-top:10px}
   #nl-msg{margin-top:10px;font-weight:800;font-size:14px;min-height:20px}
 
   footer{padding:34px 0 46px;text-align:center;color:var(--muted)}
   footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:12px 0;font-weight:800;font-size:14px}
-  footer a{color:var(--purple-dk)}
+  footer a{color:var(--green-dk)}
 </style>
 </head>
 <body>
 
   <!-- NAV -->
   <div class="nav"><div class="in">
-    <div class="brand">🐷 IponPal</div>
+    <div class="brand wordmark">IponPal</div>
     <div class="spacer"></div>
     <div class="seg"><button id="lang-tl" class="on" onclick="setLang('tl')">TL</button><button id="lang-en" onclick="setLang('en')">EN</button></div>
     <a class="btn primary sm appcta" href="https://app.iponpal.com" target="_blank" rel="noopener">Open app →</a>
@@ -142,7 +148,7 @@
   <!-- HERO -->
   <header class="hero"><div class="wrap">
     <span class="badge" data-k="badge">🚧 Early access · Building in public</span>
-    <div class="logo" style="margin-top:16px">🐷</div>
+    <div class="logo wordmark" style="margin-top:16px">IponPal</div>
     <h1 data-k="hero_h1">Your Taglish budget &amp; ipon coach.<br>Kaya mo 'yan! 💪</h1>
     <p class="sub" data-k="hero_sub">Mag-budget, mag-ipon, at unawain ang pera mo — with a coach that talks like your barkada. Libre, private, gawa sa Pilipinas.</p>
     <div class="cta">
@@ -159,8 +165,9 @@
     <div class="mocks">
       <div class="mock center">
         <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
-          <circle cx="66" cy="66" r="54" fill="none" stroke="#EEEAFF" stroke-width="14"/>
-          <circle cx="66" cy="66" r="54" fill="none" stroke="#7C5CFC" stroke-width="14" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="95" transform="rotate(-90 66 66)"/>
+          <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12A472"/><stop offset="1" stop-color="#7C5CFC"/></linearGradient></defs>
+          <circle cx="66" cy="66" r="54" fill="none" stroke="#E8ECE6" stroke-width="14"/>
+          <circle cx="66" cy="66" r="54" fill="none" stroke="url(#ringGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="95" transform="rotate(-90 66 66)"/>
           <text x="66" y="80" text-anchor="middle" class="ring-num">72</text>
         </svg>
         <div class="mcap" data-k="see_score">Financial Health Score</div>
@@ -191,7 +198,7 @@
     <h2 class="sech2" data-k="what_h">Isang app, tatlong bagay</h2>
     <div class="grid3">
       <div class="card"><div class="ic">💰</div><h3 data-k="p1_h">Budget</h3><p data-k="p1_p">Auto 50-30-20: needs, wants, at ipon. Alam mo agad kung saan napupunta ang pera mo.</p></div>
-      <div class="card"><div class="ic">🐷</div><h3 data-k="p2_h">Ipon</h3><p data-k="p2_p">Goal jars at barkada jars — mag-ipon nang sabay-sabay kasama ang mga kaibigan mo.</p></div>
+      <div class="card"><div class="ic">🫙</div><h3 data-k="p2_h">Ipon</h3><p data-k="p2_p">Goal jars at barkada jars — mag-ipon nang sabay-sabay kasama ang mga kaibigan mo.</p></div>
       <div class="card"><div class="ic">🤖</div><h3 data-k="p3_h">Coach</h3><p data-k="p3_p">Isang daily Financial Health Score at personal na coaching, sa Taglish. Parang kausap mong kabarkada.</p></div>
     </div>
   </div></section>
@@ -276,15 +283,14 @@
 
   <!-- FOOTER -->
   <footer><div class="wrap">
-    <div style="font-size:30px">🐷</div>
-    <div style="font-family:var(--font-head);font-weight:800;font-size:18px;margin-top:4px">IponPal</div>
+    <div class="wordmark" style="font-family:var(--font-head);font-weight:800;font-size:22px">IponPal</div>
     <div class="links">
       <a href="https://app.iponpal.com" target="_blank" rel="noopener" class="appcta" data-k="f_open">Open the app</a>
       <a href="#" data-social="instagram">Instagram</a>
       <a href="#" data-social="tiktok">TikTok</a>
       <a href="mailto:hello@iponpal.com" data-k="f_contact">Contact</a>
     </div>
-    <p class="muted" style="font-size:13px;font-weight:700" data-k="f_legal">Privacy Policy &amp; Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--purple-dk)">Email us.</a></p>
+    <p class="muted" style="font-size:13px;font-weight:700" data-k="f_legal">Privacy Policy &amp; Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--green-dk)">Email us.</a></p>
     <p style="font-size:13px;font-weight:700;margin-top:8px" data-k="f_made">Made with 💜 in the Philippines 🇵🇭 · Built in public by a small PH team</p>
   </div></footer>
 
@@ -338,7 +344,7 @@
     nl_sub:'Open the app now — or subscribe to hear about new features as we build them.',
     nl_btn:'Subscribe', nl_note:'IponPal updates only. No spam, unsubscribe anytime.',
     f_open:'Open the app', f_contact:'Contact',
-    f_legal:'Privacy Policy & Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--purple-dk)">Email us.</a>',
+    f_legal:'Privacy Policy & Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--green-dk)">Email us.</a>',
     f_made:'Made with 💜 in the Philippines 🇵🇭 · Built in public by a small PH team'
   };
   function setLang(l){
@@ -361,7 +367,7 @@
       headers:{ 'apikey':SB_KEY,'authorization':'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal' },
       body: JSON.stringify({ type, lang: localStorage.getItem('ip_lang')||'tl' }) }); }catch(e){}
   }
-  function nlMsg(t, ok){ const el=document.getElementById('nl-msg'); el.textContent=t; el.style.color = ok ? '#46A302' : '#C9356E'; }
+  function nlMsg(t, ok){ const el=document.getElementById('nl-msg'); el.textContent=t; el.style.color = ok ? '#0E8A5F' : '#C9356E'; }
   async function subscribe(e){
     e.preventDefault();
     const email = (document.getElementById('nl-email').value||'').trim();

@@ -1,34 +1,42 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Baloo 2','Nunito',sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Onest','Helvetica Neue',sans-serif">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#7C5CFC"/>
-      <stop offset="1" stop-color="#9B7DFF"/>
+      <stop offset="0" stop-color="#12A472"/>
+      <stop offset="0.55" stop-color="#0E8A5F"/>
+      <stop offset="1" stop-color="#7C5CFC"/>
+    </linearGradient>
+    <linearGradient id="wm" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#12A472"/>
+      <stop offset="1" stop-color="#7C5CFC"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#12A472"/>
+      <stop offset="1" stop-color="#7C5CFC"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
   <!-- soft card -->
   <rect x="64" y="64" width="1072" height="502" rx="44" fill="#ffffff"/>
   <!-- badge -->
-  <rect x="112" y="120" width="330" height="52" rx="26" fill="#EEEAFF"/>
-  <text x="277" y="155" text-anchor="middle" font-size="24" font-weight="800" fill="#6547E0">🚧 Building in public</text>
-  <!-- pig + wordmark -->
-  <text x="112" y="290" font-size="112" font-weight="800">🐷</text>
-  <text x="250" y="290" font-size="96" font-weight="800" fill="#2E2A3B">IponPal</text>
+  <rect x="112" y="120" width="330" height="52" rx="26" fill="#DCF2E8"/>
+  <text x="277" y="155" text-anchor="middle" font-size="24" font-weight="700" fill="#0E8A5F">🚧 Building in public</text>
+  <!-- wordmark -->
+  <text x="112" y="290" font-size="104" font-weight="800" letter-spacing="-3" fill="url(#wm)">IponPal</text>
   <!-- tagline -->
-  <text x="112" y="372" font-size="44" font-weight="800" fill="#2E2A3B">Your Taglish budget &amp; ipon coach.</text>
-  <text x="112" y="430" font-size="40" font-weight="700" fill="#7d7a8c">Mag-ipon. Kaya mo 'yan! 💪</text>
+  <text x="112" y="372" font-size="44" font-weight="800" fill="#16211A">Your Taglish budget &amp; ipon coach.</text>
+  <text x="112" y="430" font-size="40" font-weight="600" fill="#68705F">Mag-ipon. Kaya mo 'yan! 💪</text>
   <!-- trust chips -->
-  <g font-size="26" font-weight="800">
-    <rect x="112" y="474" width="230" height="52" rx="26" fill="#E9F8DC"/><text x="227" y="509" text-anchor="middle" fill="#46A302">Libre · Private</text>
-    <rect x="360" y="474" width="250" height="52" rx="26" fill="#EEEAFF"/><text x="485" y="509" text-anchor="middle" fill="#6547E0">Walang pautang</text>
-    <rect x="628" y="474" width="240" height="52" rx="26" fill="#E7F4FF"/><text x="748" y="509" text-anchor="middle" fill="#1CB0F6">Made in PH 🇵🇭</text>
+  <g font-size="26" font-weight="700">
+    <rect x="112" y="474" width="230" height="52" rx="26" fill="#DCF2E8"/><text x="227" y="509" text-anchor="middle" fill="#0B6E4C">Libre · Private</text>
+    <rect x="360" y="474" width="250" height="52" rx="26" fill="#EFEAFE"/><text x="485" y="509" text-anchor="middle" fill="#6847E8">Walang pautang</text>
+    <rect x="628" y="474" width="240" height="52" rx="26" fill="#F5EBD6"/><text x="748" y="509" text-anchor="middle" fill="#8A6410">Made in PH 🇵🇭</text>
   </g>
   <!-- score ring motif -->
   <g transform="translate(1000,300)">
-    <circle r="120" fill="none" stroke="#EEEAFF" stroke-width="26"/>
-    <circle r="120" fill="none" stroke="#7C5CFC" stroke-width="26" stroke-linecap="round"
+    <circle r="120" fill="none" stroke="#E8ECE6" stroke-width="26"/>
+    <circle r="120" fill="none" stroke="url(#ring)" stroke-width="26" stroke-linecap="round"
       stroke-dasharray="754" stroke-dashoffset="210" transform="rotate(-90)"/>
-    <text y="34" text-anchor="middle" font-size="96" font-weight="800" fill="#2E2A3B">72</text>
+    <text y="34" text-anchor="middle" font-size="96" font-weight="800" fill="#16211A">72</text>
   </g>
-  <text x="1000" y="470" text-anchor="middle" font-size="24" font-weight="700" fill="#7d7a8c">Health Score</text>
+  <text x="1000" y="470" text-anchor="middle" font-size="24" font-weight="600" fill="#68705F">Health Score</text>
 </svg>
