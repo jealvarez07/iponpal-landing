@@ -3,352 +3,462 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IponPal — Your Taglish budget & ipon coach</title>
-<meta name="description" content="Budget, mag-ipon, at unawain ang pera mo — with a coach that talks like your barkada. Free, private, made in the Philippines. Early access.">
+<title>IponPal — Your Taglish budget &amp; ipon coach</title>
+<meta name="description" content="A health tracker, but for your money. Mag-budget, mag-ipon, at unawain ang pera mo — with a coach that talks like your barkada. Free, private, made in PH. No download.">
 <link rel="canonical" href="https://iponpal.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IponPal">
-<meta property="og:title" content="IponPal — Your Taglish budget & ipon coach">
-<meta property="og:description" content="Budget, mag-ipon, at unawain ang pera mo. Free, private, made in PH. Kaya mo 'yan! 💪">
+<meta property="og:title" content="IponPal — Your Taglish budget &amp; ipon coach">
+<meta property="og:description" content="A health tracker, but for your money. Budget, save, and understand your pera. Free, private, made in the Philippines.">
 <meta property="og:url" content="https://iponpal.com/">
-<meta property="og:image" content="https://iponpal.com/og-image.svg">
+<meta property="og:image" content="https://iponpal.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IponPal — Your Taglish budget & ipon coach">
-<meta name="twitter:description" content="Budget, mag-ipon, at unawain ang pera mo. Free, private, made in PH.">
-<meta name="twitter:image" content="https://iponpal.com/og-image.svg">
+<meta name="twitter:title" content="IponPal — Your Taglish budget &amp; ipon coach">
+<meta name="twitter:description" content="A health tracker, but for your money. Budget, save, understand your pera.">
+<meta name="twitter:image" content="https://iponpal.com/og-image.png">
 <meta name="theme-color" content="#12A472">
 <link rel="icon" href="https://app.iponpal.com/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js';</script>
 <style>
-  /* ── shared design tokens (kept in sync with the app) ── */
-  :root{
-    /* Peso Prism — green = money/primary, violet = coach only */
-    --green:#12A472; --green-dk:#0E8A5F; --green-soft:#DCF2E8;
-    --purple:#7C5CFC; --purple-dk:#6847E8; --purple-soft:#EFEAFE;
-    --needs:#12A472; --wants:#B07C13; --savings:#7C5CFC; --savings-dk:#6847E8;
-    --orange:#B07C13; --ink:#16211A; --muted:#68705F; --line:#E8ECE6; --bg:#F5F7F4; --card:#fff;
-    --radius:20px; --sh:0 14px 36px rgba(14,138,95,.10);
-    --grad-score:linear-gradient(90deg,#12A472,#7C5CFC);
-    --font-head:'Onest',sans-serif; --font-body:'Onest',sans-serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:var(--font-body);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;
-    background-image:radial-gradient(600px 380px at 88% -4%, rgba(20,160,110,.14), transparent 60%), radial-gradient(560px 420px at -8% 22%, rgba(124,92,252,.10), transparent 60%);
-    background-attachment:fixed}
-  .wordmark{background:var(--grad-score);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;letter-spacing:-.02em}
-  h1,h2,h3{font-family:var(--font-head);line-height:1.15;letter-spacing:-.01em}
-  a{color:inherit;text-decoration:none}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px}
-  .sec{padding:52px 0}
-  .center{text-align:center}
-  .muted{color:var(--muted)}
-  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--font-head);font-weight:800;font-size:16px;padding:14px 24px;border-radius:16px;border:none;cursor:pointer;transition:transform .12s ease}
-  .btn:active{transform:scale(.98)}
-  .btn.primary{background:var(--green);color:#fff;box-shadow:0 10px 24px rgba(14,138,95,.24)}
-  .btn.ghost{background:rgba(255,255,255,.72);color:var(--green-dk);border:1px solid var(--green-soft);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-  .btn.sm{font-size:14px;padding:10px 16px;border-radius:12px}
-  .badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.72);border:1px solid var(--line);color:var(--muted);font-weight:700;font-size:12.5px;padding:7px 14px;border-radius:999px;box-shadow:var(--sh);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-  .pill{display:inline-block;background:var(--green-soft);color:var(--green-dk);font-weight:800;font-size:12px;padding:5px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.5px}
+:root{
+  --bg:#F5F7F4; --ink:#16211A; --ink2:#2A3230; --muted:#68705F; --line:#E8ECE6;
+  --green:#12A472; --green-dk:#0E8A5F; --violet:#7C5CFC; --violet-dk:#6847E8; --gold:#B07C13;
+  --glass:rgba(255,255,255,.62); --glass-strong:rgba(255,255,255,.72); --border-glass:rgba(255,255,255,.9);
+  --grad:linear-gradient(90deg,#12A472,#7C5CFC);
+  --grad-coach:linear-gradient(135deg,#7C5CFC,#12A472);
+  --sh:0 18px 50px rgba(14,138,95,.12); --sh-lg:0 30px 80px rgba(22,33,26,.18);
+  --font:'Onest','Helvetica Neue',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:radial-gradient(700px 460px at 90% -3%, rgba(20,160,110,.16), transparent 60%), radial-gradient(640px 480px at -6% 30%, rgba(124,92,252,.11), transparent 62%), radial-gradient(600px 500px at 50% 110%, rgba(20,160,110,.10), transparent 60%);
+  background-attachment:fixed}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.wordmark{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;letter-spacing:-.03em}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:#fff;font-family:var(--font);font-weight:700;font-size:17px;padding:16px 30px;border-radius:16px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 12px 30px rgba(14,138,95,.28);transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .18s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(14,138,95,.34)}
+.cta:active{transform:scale(.98)}
+.microcopy{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:14px}
 
-  /* header */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(245,247,244,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-  .nav .in{max-width:960px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:12px}
-  .nav .brand{font-family:var(--font-head);font-weight:800;font-size:18px;display:flex;align-items:center;gap:6px}
-  .nav .spacer{flex:1}
-  .seg{display:flex;background:#fff;border:1.5px solid var(--line);border-radius:999px;overflow:hidden}
-  .seg button{border:none;background:none;font-family:var(--font-head);font-weight:800;font-size:12.5px;padding:7px 12px;cursor:pointer;color:var(--muted)}
-  .seg button.on{background:var(--green);color:#fff}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(245,247,244,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:14px}
+.nav .brand{font-size:20px;font-weight:800}
+.nav .sp{flex:1}
+.seg{display:flex;background:#fff;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:none;background:none;font-family:var(--font);font-weight:700;font-size:12.5px;padding:6px 12px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--green);color:#fff}
+.nav .cta{padding:9px 18px;font-size:14px;box-shadow:0 8px 20px rgba(14,138,95,.24)}
 
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-  @media(max-width:640px){.grid3{grid-template-columns:1fr}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:var(--sh)}
-  .card .ic{font-size:32px}
-  .card h3{font-size:19px;margin:10px 0 6px;font-weight:800}
-  .card p{font-size:14.5px;color:#55516a;font-weight:600}
+/* section rhythm */
+section{padding:clamp(72px,13vh,150px) 0}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-dk)}
+.eyebrow.v{color:var(--violet-dk)}
+h1{font-size:clamp(40px,8.5vw,76px);font-weight:800;letter-spacing:-.035em;line-height:1.02}
+h2{font-size:clamp(32px,6vw,62px);font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.lead{font-size:clamp(17px,2.4vw,22px);color:var(--ink2);font-weight:500;max-width:560px;line-height:1.5}
+.center{text-align:center}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.js .reveal.in{opacity:1;transform:none}
 
-  .hero{background:radial-gradient(1200px 520px at 50% -12%, rgba(20,160,110,.12) 0%, rgba(124,92,252,.06) 42%, transparent 70%);padding:34px 0 44px;text-align:center}
-  .hero .logo{font-size:clamp(40px,9vw,60px);line-height:1;font-weight:800}
-  .hero h1{font-size:clamp(29px,6vw,46px);margin:12px 0 8px;font-weight:800}
-  .hero .sub{font-size:clamp(15px,3.4vw,19px);color:#4a4658;font-weight:700;max-width:620px;margin:0 auto 20px}
-  .hero .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-  .hero .fineprint{margin-top:14px;font-size:13px;color:var(--muted);font-weight:700}
+/* hero */
+.hero{padding-top:clamp(40px,7vh,80px);text-align:center;position:relative}
+.hero .badge{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border-glass);backdrop-filter:blur(10px);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;color:var(--muted)}
+.hero h1{margin:22px auto 0}
+.hero .lead{margin:20px auto 0}
+.hero .cta{margin-top:30px}
+.hero .phonewrap{margin:56px auto 0;position:relative;width:322px;max-width:88vw}
 
-  .sech2{font-size:clamp(23px,5vw,33px);font-weight:800;text-align:center}
-  .sechint{text-align:center;color:var(--muted);font-weight:700;max-width:620px;margin:8px auto 0;font-size:15px}
+/* phone */
+.phone{position:relative;width:322px;max-width:88vw;border-radius:42px;background:linear-gradient(165deg,#F5F7F4,#ECF1EC);border:1px solid rgba(255,255,255,.7);box-shadow:var(--sh-lg);overflow:hidden;padding:22px 18px 18px}
+.phone .porb{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
+.phone .porb.g{width:220px;height:220px;background:rgba(20,160,110,.18);top:-70px;right:-60px}
+.phone .porb.v{width:200px;height:200px;background:rgba(124,92,252,.14);bottom:40px;left:-80px}
+.p-hd{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.p-hd .g{font-size:11px;color:var(--muted);font-weight:600}
+.p-hd .n{font-size:16px;font-weight:800}
+.p-av{width:38px;height:38px;border-radius:50%;background:var(--glass-strong);border:1px solid var(--border-glass);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--green-dk);font-size:15px}
+.g-card{position:relative;z-index:1;background:var(--glass);border:1px solid var(--border-glass);backdrop-filter:blur(18px);border-radius:20px;box-shadow:0 12px 30px rgba(14,138,95,.08);padding:15px;margin-top:13px}
+.p-score{display:flex;align-items:center;gap:14px}
+.p-score .lbl{font-size:11px;font-weight:700;color:var(--muted)}
+.p-score .msg{font-size:11.5px;color:var(--ink2);font-weight:500;margin-top:3px;line-height:1.35}
+.p-coach{background:rgba(124,92,252,.08);border:1px solid rgba(124,92,252,.22);display:flex;gap:10px;align-items:flex-start}
+.p-coach .spark{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:var(--grad-coach);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px}
+.p-coach .m{font-size:12px;color:var(--ink2);font-weight:500;line-height:1.4}
+.p-bud .bar{display:flex;height:11px;border-radius:99px;overflow:hidden;background:rgba(22,33,26,.06)}
+.p-bud .leg{display:flex;gap:12px;margin-top:9px;font-size:10.5px;color:var(--muted);font-weight:600}
+.p-bud .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}
+.p-nav{position:relative;z-index:1;display:flex;justify-content:space-around;margin-top:14px;padding:9px 6px;border-radius:999px;background:var(--glass-strong);border:1px solid var(--border-glass);backdrop-filter:blur(20px)}
+.p-nav span{font-size:10px;font-weight:600;color:var(--muted)}
+.p-nav span.on{color:var(--green-dk);font-weight:800}
+.p-nav span.on.c{color:var(--violet-dk)}
 
-  /* app mockups (representative — rebuilt from app components, not pixel clones) */
-  .mocks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
-  @media(max-width:760px){.mocks{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}}
-  .mock{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--sh)}
-  .mcap{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:12px}
-  .ring-num{font-family:var(--font-head);font-weight:800;font-size:44px;fill:var(--ink)}
-  .coachbub{display:flex;gap:9px;align-items:flex-start;margin-top:6px}
-  .coachbub .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#7C5CFC,#12A472);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-  .coachbub .msg{background:var(--purple-soft);border-radius:14px;border-bottom-left-radius:4px;padding:9px 12px;font-size:13.5px;font-weight:700}
-  .chip{display:inline-block;background:var(--purple-soft);color:var(--purple-dk);border:1.5px solid var(--purple);border-radius:14px;padding:5px 11px;font-size:12px;font-weight:800;margin-top:8px}
-  .jar .top{display:flex;align-items:center;gap:10px}
-  .jar .em{font-size:24px}
-  .jbar{height:12px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:10px}
-  .jbar>div{height:100%;background:var(--savings)}
+/* split rows */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.split.r .txt{order:2}
+@media(max-width:820px){.split{grid-template-columns:1fr;gap:36px;text-align:center}.split.r .txt{order:0}.split .lead{margin-left:auto;margin-right:auto}.viz{margin:0 auto}}
+.txt h2{margin-top:14px}
+.txt .lead{margin-top:18px}
+.txt .cta{margin-top:26px}
+.viz{display:flex;justify-content:center;align-items:center}
 
-  .step{display:flex;gap:14px;align-items:flex-start;padding:12px 0}
-  .step .n{flex-shrink:0;width:38px;height:38px;border-radius:12px;background:var(--green);color:#fff;font-family:var(--font-head);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:18px}
-  .step h3{font-size:17px;font-weight:800}
-  .step p{font-size:14.5px;color:#55516a;font-weight:600}
+/* big ring */
+.bigring{width:min(360px,80vw)}
+/* coach bubble big */
+.bubble{max-width:420px;width:100%;background:var(--glass);border:1px solid rgba(124,92,252,.25);border-radius:26px;box-shadow:0 20px 50px rgba(124,92,252,.16);padding:24px;backdrop-filter:blur(18px)}
+.bubble .top{display:flex;gap:13px;align-items:center}
+.bubble .spark{width:44px;height:44px;border-radius:50%;background:var(--grad-coach);display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;flex-shrink:0}
+.bubble .lab{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--violet-dk)}
+.bubble .msg{font-size:19px;font-weight:600;line-height:1.45;margin-top:16px;color:var(--ink)}
+.bubble .chip{display:inline-block;margin-top:16px;font-size:14px;font-weight:800;color:var(--violet-dk)}
 
-  .trust{background:#fff;border-radius:24px;border:1px solid var(--line);box-shadow:var(--sh);padding:28px}
-  .trust .row{display:flex;gap:12px;align-items:flex-start;padding:9px 0}
-  .trust .row .ic{font-size:20px;flex-shrink:0}
-  .trust .never{background:#FFF1F5;border:1px solid #ffd6e4;border-radius:16px;padding:16px 18px;margin-top:14px}
-  .trust .never b{color:#C9356E}
+/* jar */
+.jar{max-width:420px;width:100%;background:var(--glass);border:1px solid var(--border-glass);border-radius:26px;box-shadow:var(--sh);padding:26px;backdrop-filter:blur(18px)}
+.jar .top{display:flex;align-items:center;gap:14px}
+.jar .em{font-size:34px}
+.jar .nm{font-size:19px;font-weight:800}
+.jar .sub{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:2px}
+.jar .prog{height:14px;border-radius:99px;background:rgba(22,33,26,.07);overflow:hidden;margin-top:20px}
+.jar .prog>i{display:block;height:100%;width:62%;border-radius:99px;background:var(--grad)}
+.jar .row{display:flex;justify-content:space-between;margin-top:10px;font-weight:800;font-size:14px}
+.jar .faces{display:flex;margin-top:18px}
+.jar .face{width:34px;height:34px;border-radius:50%;border:2px solid var(--bg);margin-left:-8px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:13px}
+.jar .face:first-child{margin-left:0}
 
-  .bip{background:linear-gradient(135deg,#12A472 0%,#0E8A5F 42%,#7C5CFC 100%);color:#fff;border-radius:24px;padding:30px;box-shadow:0 18px 44px rgba(14,138,95,.22)}
-  .bip h2{font-size:clamp(22px,5vw,31px);font-weight:800}
-  .bip .cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
-  @media(max-width:640px){.bip .cols{grid-template-columns:1fr}}
-  .bip .box{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:16px 18px}
-  .bip .box h3{font-size:14px;text-transform:uppercase;letter-spacing:.6px;font-weight:800}
-  .bip .box ul{list-style:none;margin-top:8px}
-  .bip .box li{font-size:14.5px;font-weight:700;padding:4px 0}
-  .bip .ask{margin-top:18px;font-size:16px;font-weight:800}
+/* budget donut card */
+.bcard{max-width:420px;width:100%;background:var(--glass);border:1px solid var(--border-glass);border-radius:26px;box-shadow:var(--sh);padding:26px;backdrop-filter:blur(18px);display:flex;gap:22px;align-items:center}
+.bcard .dl{flex:1;display:flex;flex-direction:column;gap:11px}
+.bcard .drow{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:600}
+.bcard .dd{width:10px;height:10px;border-radius:50%}
+.bcard .dv{margin-left:auto;font-weight:800}
 
-  /* FAQ */
-  .faq details{background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--sh);margin-top:12px;overflow:hidden}
-  .faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-family:var(--font-head);font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center}
-  .faq summary::-webkit-details-marker{display:none}
-  .faq summary::after{content:'+';color:var(--green);font-size:22px;font-weight:800}
-  .faq details[open] summary::after{content:'–'}
-  .faq .a{padding:0 18px 16px;font-size:14.5px;color:#55516a;font-weight:600}
+/* momentum chips */
+.chips{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:30px}
+.mchip{display:flex;align-items:center;gap:10px;background:var(--glass);border:1px solid var(--border-glass);border-radius:18px;padding:16px 20px;box-shadow:var(--sh);font-weight:800;font-size:15px;backdrop-filter:blur(14px)}
+.mchip .k{font-size:22px}
 
-  .nl{background:var(--green-soft);border-radius:24px;padding:30px;text-align:center}
-  .nl form{display:flex;gap:10px;max-width:460px;margin:16px auto 0;flex-wrap:wrap}
-  .nl input{flex:1;min-width:200px;border:2px solid #fff;border-radius:14px;padding:14px 16px;font-family:var(--font-body);font-size:15px;font-weight:700;background:#fff;color:var(--ink)}
-  .nl input:focus{outline:none;border-color:var(--green)}
-  .nl .note{font-size:12.5px;color:var(--green-dk);font-weight:700;margin-top:10px}
-  #nl-msg{margin-top:10px;font-weight:800;font-size:14px;min-height:20px}
+/* trust — dark cinematic statement */
+.trust{background:linear-gradient(160deg,#0E2A20,#12211A);color:#fff;border-radius:36px;margin:0 24px;padding:clamp(64px,10vw,120px) clamp(28px,6vw,80px);text-align:center;box-shadow:0 40px 90px rgba(14,44,32,.4)}
+.trust .eyebrow{color:#7FE3BE}
+.trust h2{color:#fff;margin-top:18px}
+.trust h2 .dim{color:rgba(255,255,255,.42)}
+.trust p{color:rgba(255,255,255,.7);font-weight:500;max-width:560px;margin:22px auto 0;font-size:16px}
 
-  footer{padding:34px 0 46px;text-align:center;color:var(--muted)}
-  footer .links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:12px 0;font-weight:800;font-size:14px}
-  footer a{color:var(--green-dk)}
+/* building in public */
+.bip{max-width:760px;margin:0 auto;text-align:center}
+.bip .cols{display:flex;gap:16px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.bip .col{flex:1;min-width:240px;background:var(--glass);border:1px solid var(--border-glass);border-radius:20px;padding:20px;text-align:left;backdrop-filter:blur(12px)}
+.bip .col h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:800;color:var(--green-dk)}
+.bip .col.soon h4{color:var(--muted)}
+.bip .col li{list-style:none;font-size:14px;font-weight:600;padding:5px 0;color:var(--ink2)}
+
+/* final */
+.final{text-align:center}
+.final .wm{font-size:clamp(30px,6vw,52px)}
+.final h2{margin-top:10px}
+.final .cta{margin-top:30px;font-size:18px;padding:18px 36px}
+
+/* footer */
+footer{padding:50px 0 60px;text-align:center;color:var(--muted);border-top:1px solid var(--line);margin-top:40px}
+footer .fl{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:14px 0;font-weight:700;font-size:14px}
+footer a{color:var(--green-dk);text-decoration:none}
+.whisper{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:8px}
+/* social proof */
+.stats{display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
+.stat{flex:1;min-width:150px;background:var(--glass);border:1px solid var(--border-glass);border-radius:22px;padding:26px 20px;text-align:center;box-shadow:var(--sh);backdrop-filter:blur(14px)}
+.stat .num{font-size:clamp(34px,5vw,48px);font-weight:800;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .lab{font-size:13px;font-weight:700;color:var(--muted);margin-top:6px}
+/* feature mini-cards */
+.feats{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:34px;text-align:left}
+@media(max-width:720px){.feats{grid-template-columns:1fr}}
+.feat{background:var(--glass);border:1px solid var(--border-glass);border-radius:24px;padding:24px;box-shadow:var(--sh);backdrop-filter:blur(14px)}
+.feat h3{font-size:19px;font-weight:800;margin-top:16px}
+.feat p{font-size:14px;color:var(--muted);font-weight:500;margin-top:6px;line-height:1.5}
+.feat .mini{border-radius:16px;background:rgba(255,255,255,.55);border:1px solid var(--border-glass);padding:13px;display:flex;align-items:center;gap:11px}
+.feat .mini .ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.feat .mini .t{font-weight:800;font-size:13.5px}
+.feat .mini .s{font-size:12px;color:var(--muted);font-weight:600}
+.feat .mini .amt{margin-left:auto;font-weight:800}
+/* roadmap timeline */
+.rmap{display:flex;margin-top:44px;flex-wrap:wrap;text-align:center}
+.rstep{flex:1;min-width:220px;position:relative;padding:0 14px 20px}
+.rstep .dot{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;background:var(--glass);border:1px solid var(--border-glass);box-shadow:var(--sh);margin:0 auto;position:relative;z-index:1}
+.rstep .line{position:absolute;top:28px;left:50%;width:100%;height:2px;background:linear-gradient(90deg,var(--green),var(--violet));opacity:.28}
+.rstep:last-child .line{display:none}
+@media(max-width:720px){.rstep .line{display:none}}
+.rstep .badge2{display:inline-block;margin-top:16px;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 11px;border-radius:99px}
+.rstep .badge2.now{background:var(--green);color:#fff}
+.rstep .badge2.next{background:var(--glass);border:1px solid var(--border-glass);color:var(--muted)}
+.rstep h3{font-size:20px;font-weight:800;margin-top:12px}
+.rstep p{font-size:13.5px;color:var(--muted);font-weight:500;margin-top:6px;line-height:1.5}
+/* newsletter (footer whisper) */
+.nlform{display:flex;gap:8px;max-width:360px;margin:14px auto 0}
+.nlform input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-family:var(--font);font-size:14px;font-weight:600;background:#fff;color:var(--ink)}
+.nlform input:focus{outline:none;border-color:var(--green)}
+.nlform button{border:none;background:var(--green);color:#fff;font-family:var(--font);font-weight:700;font-size:14px;padding:11px 18px;border-radius:12px;cursor:pointer}
+#nl-msg{font-size:13px;font-weight:700;min-height:18px;margin-top:8px}
 </style>
 </head>
 <body>
+<!-- NAV -->
+<div class="nav"><div class="in">
+  <span class="brand wordmark">IponPal</span>
+  <span class="sp"></span>
+  <div class="seg"><button id="lang-tl" class="on" onclick="setLang('tl')">TL</button><button id="lang-en" onclick="setLang('en')">EN</button></div>
+  <a class="cta" href="https://app.iponpal.com" data-k="open">Open app</a>
+</div></div>
 
-  <!-- NAV -->
-  <div class="nav"><div class="in">
-    <div class="brand wordmark">IponPal</div>
-    <div class="spacer"></div>
-    <div class="seg"><button id="lang-tl" class="on" onclick="setLang('tl')">TL</button><button id="lang-en" onclick="setLang('en')">EN</button></div>
-    <a class="btn primary sm appcta" href="https://app.iponpal.com" target="_blank" rel="noopener">Open app →</a>
-  </div></div>
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <span class="badge reveal" data-k="badge">🇵🇭 Gawa sa Pilipinas · building in public</span>
+  <h1 class="reveal" data-k="h1">Kaya mo 'yan.</h1>
+  <p class="lead reveal" data-k="hero_sub">Your Taglish budget &amp; ipon coach. Mag-budget, mag-ipon, at unawain ang pera mo — libre, private, walang download.</p>
+  <a class="cta reveal" href="https://app.iponpal.com" data-k="open_hero">Open IponPal →</a>
+  <div class="microcopy reveal" data-k="hero_fine">No download · gumagana sa browser mo · 100% libre</div>
 
-  <!-- HERO -->
-  <header class="hero"><div class="wrap">
-    <span class="badge" data-k="badge">🚧 Early access · Building in public</span>
-    <div class="logo wordmark" style="margin-top:16px">IponPal</div>
-    <h1 data-k="hero_h1">Your Taglish budget &amp; ipon coach.<br>Kaya mo 'yan! 💪</h1>
-    <p class="sub" data-k="hero_sub">Mag-budget, mag-ipon, at unawain ang pera mo — with a coach that talks like your barkada. Libre, private, gawa sa Pilipinas.</p>
-    <div class="cta">
-      <a class="btn primary appcta" href="https://app.iponpal.com" target="_blank" rel="noopener" data-k="cta_open">Open the app →</a>
-      <a class="btn ghost" href="#join" data-k="cta_join">Sumali sa early crew</a>
-    </div>
-    <p class="fineprint" data-k="hero_fine">No download needed · gumagana sa browser mo · 100% libre habang ginagawa namin</p>
-  </div></header>
-
-  <!-- SEE IT (mockups) -->
-  <section class="sec" style="padding-top:0"><div class="wrap">
-    <h2 class="sech2" data-k="see_h">Silipin mo</h2>
-    <p class="sechint" data-k="see_sub">Isang tunay na coach — hindi lang tracker.</p>
-    <div class="mocks">
-      <div class="mock center">
-        <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
-          <defs><linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12A472"/><stop offset="1" stop-color="#7C5CFC"/></linearGradient></defs>
-          <circle cx="66" cy="66" r="54" fill="none" stroke="#E8ECE6" stroke-width="14"/>
-          <circle cx="66" cy="66" r="54" fill="none" stroke="url(#ringGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="339.3" stroke-dashoffset="95" transform="rotate(-90 66 66)"/>
-          <text x="66" y="80" text-anchor="middle" class="ring-num">72</text>
-        </svg>
-        <div class="mcap" data-k="see_score">Financial Health Score</div>
+  <div class="phonewrap reveal">
+    <div class="phone">
+      <div class="porb g"></div><div class="porb v"></div>
+      <div class="p-hd"><div><div class="g">Magandang umaga ☀️</div><div class="n">Jerome</div></div><div class="p-av">J</div></div>
+      <div class="g-card">
+        <div class="p-score">
+          <svg width="70" height="70" viewBox="0 0 70 70" style="flex-shrink:0">
+            <defs><linearGradient id="r1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12A472"/><stop offset="1" stop-color="#7C5CFC"/></linearGradient></defs>
+            <circle cx="35" cy="35" r="28" fill="none" stroke="rgba(22,33,26,.08)" stroke-width="8"/>
+            <circle cx="35" cy="35" r="28" fill="none" stroke="url(#r1)" stroke-width="8" stroke-linecap="round" stroke-dasharray="176" stroke-dashoffset="53" transform="rotate(-90 35 35)"/>
+            <text x="35" y="42" text-anchor="middle" font-size="21" font-weight="800" fill="#16211A">72</text>
+          </svg>
+          <div><b style="font-size:14px">Solid 💪</b><div class="lbl">Financial Health Score</div><div class="msg">Goods ang pace mo. Konting push pa sa ipon.</div></div>
+        </div>
       </div>
-      <div class="mock">
-        <div class="mcap" style="margin-top:0">Coach</div>
-        <div class="coachbub"><div class="av">✦</div><div class="msg" data-k="see_coach">Ang ₱2,400 Wants mo this month = ~20 milk teas. 🧋 Sulit ba lahat?</div></div>
-        <span class="chip" data-k="see_chip">Paano gumaling? ›</span>
+      <div class="g-card p-coach">
+        <div class="spark">✦</div>
+        <div><div class="m">Ang ₱720 mo sa milk tea this month = ~6 cups. Sulit ba?</div></div>
       </div>
-      <div class="mock jar">
-        <div class="top"><span class="em">🏖️</span><div style="flex:1"><div style="font-family:var(--font-head);font-weight:800">Boracay 2027</div><div style="font-size:12.5px;color:var(--muted);font-weight:700" data-k="see_jar_sub">3 kabarkada · sama-samang ipon</div></div></div>
-        <div class="jbar"><div style="width:62%"></div></div>
-        <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:12.5px;font-weight:800"><span style="color:var(--savings-dk)">₱12,400</span><span class="muted">₱20,000</span></div>
+      <div class="g-card p-bud">
+        <div class="bar"><div style="width:52%;background:var(--green)"></div><div style="width:31%;background:var(--gold)"></div><div style="width:17%;background:var(--violet)"></div></div>
+        <div class="leg"><span><span class="dot" style="background:var(--green)"></span>Needs</span><span><span class="dot" style="background:var(--gold)"></span>Wants</span><span><span class="dot" style="background:var(--violet)"></span>Ipon</span></div>
+      </div>
+      <div class="p-nav"><span class="on">Home</span><span class="on c">Coach</span><span>Save</span><span>Ako</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- SCORE -->
+<section><div class="wrap"><div class="split">
+  <div class="txt reveal">
+    <span class="eyebrow" data-k="s_eye">Financial Health Score</span>
+    <h2 data-k="s_h">Isang numero.</h2>
+    <p class="lead" data-k="s_p">Alam mo agad kung kumusta ang pera mo — 0 hanggang 100, in-uupdate araw-araw. Parang health check, pero para sa ipon mo.</p>
+  </div>
+  <div class="viz reveal">
+    <svg class="bigring" viewBox="0 0 240 240">
+      <defs><linearGradient id="r2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#12A472"/><stop offset="1" stop-color="#7C5CFC"/></linearGradient></defs>
+      <circle cx="120" cy="120" r="96" fill="none" stroke="rgba(22,33,26,.07)" stroke-width="20"/>
+      <circle cx="120" cy="120" r="96" fill="none" stroke="url(#r2)" stroke-width="20" stroke-linecap="round" stroke-dasharray="603" stroke-dashoffset="169" transform="rotate(-90 120 120)"/>
+      <text x="120" y="130" text-anchor="middle" font-size="72" font-weight="800" fill="#16211A">72</text>
+      <text x="120" y="162" text-anchor="middle" font-size="15" font-weight="700" fill="#68705F">On Track</text>
+    </svg>
+  </div>
+</div></div></section>
+
+<!-- COACH -->
+<section><div class="wrap"><div class="split r">
+  <div class="txt reveal">
+    <span class="eyebrow v" data-k="c_eye">Ang Coach</span>
+    <h2 data-k="c_h">Coach na kausap mo.</h2>
+    <p class="lead" data-k="c_p">Hindi app na tinititigan — kausap. Personalized, sa Taglish, at alam ang susunod mong hakbang.</p>
+  </div>
+  <div class="viz reveal">
+    <div class="bubble">
+      <div class="top"><div class="spark">✦</div><div class="lab">Coach</div></div>
+      <div class="msg" data-k="c_msg">Ang ₱2,400 Wants mo this month = ~20 milk teas. 🧋 Sulit ba lahat? Kung i-tipid mo ang kalahati, +₱1,200 agad sa ipon.</div>
+      <div class="chip" data-k="c_chip">Paano gumaling? →</div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- IPON -->
+<section><div class="wrap"><div class="split">
+  <div class="txt reveal">
+    <span class="eyebrow" data-k="i_eye">Ipon</span>
+    <h2 data-k="i_h">Piso-piso,<br>natupad din.</h2>
+    <p class="lead" data-k="i_p">Goal jars para sa pangarap mo. Barkada jars para sabay-sabay kayong mag-ipon. Ito ang puso ng IponPal.</p>
+    <a class="cta" href="https://app.iponpal.com" data-k="open_ipon">Open the app →</a>
+  </div>
+  <div class="viz reveal">
+    <div class="jar">
+      <div class="top"><span class="em">🏖️</span><div><div class="nm">Boracay 2027</div><div class="sub" data-k="i_jarsub">barkada jar · 3 kasama</div></div></div>
+      <div class="prog"><i></i></div>
+      <div class="row"><span style="color:var(--green-dk)">₱12,400</span><span style="color:var(--muted)">₱20,000</span></div>
+      <div class="faces"><div class="face" style="background:#12A472">J</div><div class="face" style="background:#7C5CFC">M</div><div class="face" style="background:#B07C13">R</div></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- BUDGET / TRACK -->
+<section><div class="wrap"><div class="split r">
+  <div class="txt reveal">
+    <span class="eyebrow" data-k="b_eye">Budget &amp; Track</span>
+    <h2 data-k="b_h">Alam mo agad<br>saan napunta.</h2>
+    <p class="lead" data-k="b_p">Auto 50-30-20: needs, wants, ipon. I-log ang gastos in 10 seconds — walang bank account na kailangan.</p>
+  </div>
+  <div class="viz reveal">
+    <div class="bcard">
+      <svg width="120" height="120" viewBox="0 0 120 120" style="flex-shrink:0">
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--green)" stroke-width="22" stroke-dasharray="150 289" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--gold)" stroke-width="22" stroke-dasharray="87 289" stroke-dashoffset="-150" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="46" fill="none" stroke="var(--violet)" stroke-width="22" stroke-dasharray="52 289" stroke-dashoffset="-237" transform="rotate(-90 60 60)"/>
+        <circle cx="60" cy="60" r="35" fill="var(--bg)"/>
+        <text x="60" y="58" text-anchor="middle" font-size="17" font-weight="800" fill="#16211A">₱25.5k</text>
+        <text x="60" y="72" text-anchor="middle" font-size="9" font-weight="700" fill="#68705F" data-k="b_spent">gastos</text>
+      </svg>
+      <div class="dl">
+        <div class="drow"><span class="dd" style="background:var(--green)"></span>Needs<span class="dv">₱9,000</span></div>
+        <div class="drow"><span class="dd" style="background:var(--gold)"></span>Wants<span class="dv">₱5,400</span></div>
+        <div class="drow"><span class="dd" style="background:var(--violet)"></span>Ipon<span class="dv">₱3,600</span></div>
       </div>
     </div>
-    <p class="center" style="margin-top:8px;font-size:12px;color:var(--muted);font-weight:700" data-k="see_note">*Sample view. Ganito kadali sa totoong app.</p>
-  </div></section>
+  </div>
+</div></div></section>
 
-  <!-- WHY -->
-  <section class="sec" style="padding-top:0"><div class="wrap center">
-    <span class="pill" data-k="why_pill">Ang totoo</span>
-    <h2 class="sech2" style="margin-top:12px" data-k="why_h">Sweldo, ubos. Ipon, wala.</h2>
-    <p class="sechint" data-k="why_sub">Hindi ka nag-iisa — karamihan ng Pinoy, walang emergency fund at nahihirapang mag-ipon. Hindi dahil tamad ka. Kailangan mo lang ng system na simple at kakampi mo. Yun ang IponPal.</p>
-  </div></section>
+<!-- MOMENTUM -->
+<section class="center"><div class="wrap">
+  <span class="eyebrow reveal" data-k="m_eye">Momentum</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="m_h">Piso-piso,<br>araw-araw.</h2>
+  <p class="lead reveal" style="margin:18px auto 0" data-k="m_p">Streaks para hindi maputol. Ranks habang nag-iipon. Barkada leaderboard para masaya.</p>
+  <div class="chips">
+    <div class="mchip reveal" data-k="m_c1"><span class="k">🔥</span> 12-day streak</div>
+    <div class="mchip reveal" data-k="m_c2"><span class="k">⭐</span> Lv 6 · Matipid</div>
+    <div class="mchip reveal" data-k="m_c3"><span class="k">🏆</span> #2 sa barkada</div>
+  </div>
+</div></section>
 
-  <!-- WHAT -->
-  <section class="sec" style="padding-top:0"><div class="wrap">
-    <h2 class="sech2" data-k="what_h">Isang app, tatlong bagay</h2>
-    <div class="grid3">
-      <div class="card"><div class="ic">💰</div><h3 data-k="p1_h">Budget</h3><p data-k="p1_p">Auto 50-30-20: needs, wants, at ipon. Alam mo agad kung saan napupunta ang pera mo.</p></div>
-      <div class="card"><div class="ic">🫙</div><h3 data-k="p2_h">Ipon</h3><p data-k="p2_p">Goal jars at barkada jars — mag-ipon nang sabay-sabay kasama ang mga kaibigan mo.</p></div>
-      <div class="card"><div class="ic">🤖</div><h3 data-k="p3_h">Coach</h3><p data-k="p3_p">Isang daily Financial Health Score at personal na coaching, sa Taglish. Parang kausap mong kabarkada.</p></div>
+<!-- MORE FEATURES -->
+<section class="center"><div class="wrap">
+  <span class="eyebrow reveal" data-k="mf_eye">Marami pang kaya</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="mf_h">At marami pang iba.</h2>
+  <div class="feats">
+    <div class="feat reveal">
+      <div class="mini"><span class="ic" style="background:rgba(124,92,252,.12)">💰</span><div><div class="t">13th Month 🎁</div><div class="s" data-k="mf_1s">Smart-split suggestion</div></div><span class="amt" style="color:var(--violet-dk)">+₱15,000</span></div>
+      <h3 data-k="mf_1h">Extra kita, tama ang split</h3><p data-k="mf_1p">Bonus, 13th month, raket — i-log at bibigyan ka ng smart split para hindi maubos agad.</p>
     </div>
-  </div></section>
-
-  <!-- HOW -->
-  <section class="sec" style="padding-top:0"><div class="wrap">
-    <div class="card" style="max-width:640px;margin:0 auto">
-      <h2 class="sech2" style="font-size:24px;margin-bottom:6px" data-k="how_h">Paano gumagana</h2>
-      <div class="step"><div class="n">1</div><div><h3 data-k="s1_h">I-log ang gastos — 10 seconds lang</h3><p data-k="s1_p">Tap lang. Walang kailangang i-connect na bank account.</p></div></div>
-      <div class="step"><div class="n">2</div><div><h3 data-k="s2_h">Tingnan ang Score mo</h3><p data-k="s2_p">Isang numero (0–100) na nagsasabi kung kumusta ang pera mo ngayon.</p></div></div>
-      <div class="step"><div class="n">3</div><div><h3 data-k="s3_h">Makinig sa Coach</h3><p data-k="s3_p">Malalaman mo ang susunod na hakbang — hindi ka iiwang naguguluhan.</p></div></div>
+    <div class="feat reveal">
+      <div class="mini"><span class="ic" style="background:rgba(20,160,110,.12)">📊</span><div><div class="t" data-k="mf_2t">This week</div><div class="s">Spent ₱1,685 · Saved ₱600</div></div></div>
+      <h3 data-k="mf_2h">Weekly recap ritual</h3><p data-k="mf_2p">Tuwing linggo, isang maikling balik-tanaw — para alam mo kung saan ka mahina at malakas.</p>
     </div>
-  </div></section>
-
-  <!-- TRUST -->
-  <section class="sec" style="padding-top:0"><div class="wrap">
-    <h2 class="sech2" data-k="trust_h">Ang pera mo, sa'yo lang.</h2>
-    <p class="sechint" data-k="trust_sub">Isang finance app na hindi nagbebenta ng data mo. Ito ang pangako namin — at kung ano ang hindi namin gagawin, kailanman.</p>
-    <div class="trust" style="margin-top:22px">
-      <div class="row"><span class="ic">🔒</span><div data-k="t1">Private &amp; naka-backup. Secure ang financial data mo — hindi ibinebenta, hindi ibinabahagi kahit kanino.</div></div>
-      <div class="row"><span class="ic">📤</span><div data-k="t2">Ikaw ang may hawak. Pwede mong i-export o burahin ang lahat, anytime.</div></div>
-      <div class="row"><span class="ic">🇵🇭</span><div data-k="t3">Data Privacy Act (RA 10173). Anonymous usage stats lang ang kinokolekta para mapaganda ang app.</div></div>
-      <div class="never" data-k="t_never"><b>❌ Ang hindi namin gagawin:</b> Walang <b>pautang</b>. Hindi namin hinahawakan ang <b>pera</b> mo. Walang <b>credit score na ibinebenta sa lenders</b>. Walang paluwagan. Coach kami — hindi bangko, hindi lending app.</div>
+    <div class="feat reveal">
+      <div class="mini"><span class="ic" style="background:rgba(176,124,19,.12)">🎉</span><div><div class="t" data-k="mf_3t">Score: 72 · Solid</div><div class="s" data-k="mf_3s">Share card ready</div></div></div>
+      <h3 data-k="mf_3h">Shareable moments</h3><p data-k="mf_3p">Natupad ang goal? Umangat ang score? May magandang share card agad para sa barkada mo.</p>
     </div>
-  </div></section>
-
-  <!-- BUILDING IN PUBLIC -->
-  <section class="sec" style="padding-top:0"><div class="wrap"><div class="bip">
-    <span class="badge" style="background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.3);color:#fff" data-k="bip_badge">🚧 Building in public</span>
-    <h2 style="margin-top:14px" data-k="bip_h">Nasa maaga pa kami — at bukas kami tungkol dito.</h2>
-    <p style="margin-top:10px;font-size:15.5px;font-weight:700;opacity:.96" data-k="bip_p">Isang maliit na Pinoy team, ginagawa ang IponPal nang hayag, kasama ang mga unang users. Rather na mangako ng kung ano-ano, sasabihin namin sa'yo kung nasaan kami — at kung saan kami pupunta.</p>
-    <div class="cols">
-      <div class="box"><h3 data-k="bip_live_h">✅ Live na ngayon</h3><ul>
-        <li data-k="bip_live1">✔️ Budget (50-30-20)</li>
-        <li data-k="bip_live2">✔️ Ipon goals + barkada jars</li>
-        <li data-k="bip_live3">✔️ Financial Health Score</li>
-        <li data-k="bip_live4">✔️ Ang Coach (v1)</li>
-      </ul></div>
-      <div class="box"><h3 data-k="bip_soon_h">🔜 Wala pa — sinasadya</h3><ul>
-        <li data-k="bip_soon1">⏳ Automatic bank sync</li>
-        <li data-k="bip_soon2">⏳ Mas malalim na AI Coach</li>
-        <li data-k="bip_soon3">⏳ Paraan para palaguin ang ipon</li>
-        <li style="opacity:.85" data-k="bip_soon4">Gusto naming i-ship ito nang <b>tama</b>, hindi mabilis.</li>
-      </ul></div>
+    <div class="feat reveal">
+      <div class="mini"><span class="ic" style="background:rgba(20,160,110,.12)">🔒</span><div><div class="t" data-k="mf_4t">Your data, your rules</div><div class="s" data-k="mf_4s">Export / delete anytime</div></div></div>
+      <h3 data-k="mf_4h">Private by design</h3><p data-k="mf_4p">Naka-backup at secure. Hindi ibinebenta. Pwede mong i-export o burahin lahat, anytime.</p>
     </div>
-    <p class="ask" data-k="bip_ask">Sumali ka nang maaga — tulungan mo kaming hubugin ito, sabihin kung ano ang sira, at panagutin kami. 💜</p>
-  </div></div></section>
+  </div>
+</div></section>
 
-  <!-- VISION -->
-  <section class="sec" style="padding-top:0"><div class="wrap center">
-    <span class="pill" data-k="vis_pill">Ang pangarap</span>
-    <h2 class="sech2" style="margin-top:12px" data-k="vis_h">Mula sa pag-track → sa tunay na financial health</h2>
-    <p class="sechint" data-k="vis_sub">Ang layunin: hindi lang budget app, kundi kasama mo sa buong journey ng pera mo — <b>Mag-ipon → Magkaroon ng buffer → Palaguin</b>. Parang “Whoop” pero para sa pera. Isang hakbang bawat araw. Sama-sama tayo dito.</p>
-  </div></section>
+<!-- SOCIAL PROOF -->
+<section class="center"><div class="wrap">
+  <span class="eyebrow reveal" data-k="sp_eye">Growing, in public</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="sp_h">Piso-piso, sama-sama.</h2>
+  <div class="stats reveal" id="stats" style="margin-top:36px">
+    <div class="stat"><div class="num" id="st-savers">—</div><div class="lab" data-k="sp_savers">Filipinos nag-iipon</div></div>
+    <div class="stat"><div class="num" id="st-ipon">—</div><div class="lab" data-k="sp_ipon">Total na-ipon</div></div>
+    <div class="stat"><div class="num" id="st-deposits">—</div><div class="lab" data-k="sp_deposits">Deposits</div></div>
+    <div class="stat"><div class="num" id="st-days">—</div><div class="lab" data-k="sp_days">Araw na building</div></div>
+  </div>
+  <p class="microcopy reveal" data-k="sp_note">*Live mula sa app · nagba-build in public kami</p>
+</div></section>
 
-  <!-- FAQ -->
-  <section class="sec" style="padding-top:0"><div class="wrap">
-    <h2 class="sech2" data-k="faq_h">Mga tanong</h2>
-    <div class="faq">
-      <details><summary data-k="q1">Libre ba talaga?</summary><div class="a" data-k="a1">Oo — 100% libre habang nasa early access kami. Kung may bayad man balang araw, may free version pa rin.</div></details>
-      <details><summary data-k="q2">Safe ba ang data ko?</summary><div class="a" data-k="a2">Oo. Naka-secure at naka-backup ang data mo sa pribadong database, hindi ibinebenta o ibinabahagi. Pwede mong i-export o burahin anytime.</div></details>
-      <details><summary data-k="q3">Kailangan ko bang i-connect ang bank ko?</summary><div class="a" data-k="a3">Hindi. Manual lang ang paglo-log — 10 seconds. Walang bank login, walang password na hinihingi.</div></details>
-      <details><summary data-k="q4">Scam ba 'to?</summary><div class="a" data-k="a4">Hindi. Wala kaming pautang, hindi namin hinahawakan ang pera mo, walang paluwagan, at hindi kami nagbebenta ng credit score sa lenders. Coach lang kami para sa ipon mo.</div></details>
-      <details><summary data-k="q5">Paano kayo kikita?</summary><div class="a" data-k="a5">Honestly, hinahanap pa namin 'yan — kaya kami nagbi-build in public. Ang sigurado: hindi namin ibebenta ang data mo. Balang araw, baka premium coach o pag-refer sa lehitimong ipon/invest partners — pero libre at private lagi ang core.</div></details>
-      <details><summary data-k="q6">Para kanino 'to?</summary><div class="a" data-k="a6">Para sa Pinoy na gustong matutong mag-ipon — sweldo, gig, freelance, estudyante. Kung nahihirapan kang mag-ipon, para sa'yo 'to.</div></details>
-    </div>
-  </div></section>
+<!-- TRUST -->
+<section style="padding-left:0;padding-right:0"><div class="trust reveal">
+  <span class="eyebrow" data-k="t_eye">Ang pangako namin</span>
+  <h2 data-k="t_h">Hindi bangko.<br>Hindi lending app.<br><span class="dim">Coach ka lang namin.</span></h2>
+  <p data-k="t_p">Hindi kami nagpapautang. Hindi namin hinahawakan ang pera mo. Hindi ibinebenta ang data mo. Walang paluwagan. Ikaw ang may hawak — pwede mong i-export o burahin anytime.</p>
+</div></section>
 
-  <!-- JOIN -->
-  <section class="sec" id="join" style="padding-top:0"><div class="wrap"><div class="nl">
-    <span class="pill" data-k="nl_pill">Early crew</span>
-    <h2 class="sech2" style="font-size:26px;margin-top:10px" data-k="nl_h">Maging una sa mga updates</h2>
-    <p class="muted" style="font-weight:700;max-width:480px;margin:6px auto 0" data-k="nl_sub">I-open na ang app — o mag-subscribe para malaman mo agad ang mga bagong feature habang ginagawa namin.</p>
-    <a class="btn primary appcta" href="https://app.iponpal.com" target="_blank" rel="noopener" style="margin-top:18px" data-k="cta_open2">Open the app →</a>
-    <form onsubmit="subscribe(event)">
-      <input id="nl-email" type="email" placeholder="ikaw@gmail.com" autocomplete="email" required>
-      <button class="btn ghost" type="submit" style="box-shadow:none" data-k="nl_btn">Subscribe</button>
-    </form>
-    <div id="nl-msg"></div>
-    <p class="note" data-k="nl_note">IponPal updates lang. No spam, unsubscribe anytime.</p>
-  </div></div></section>
+<!-- ROADMAP -->
+<section><div class="wrap"><div class="bip">
+  <span class="eyebrow reveal" data-k="rm_eye">Ang roadmap</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="rm_h">Mula sa pag-track → sa tunay na financial health.</h2>
+  <p class="lead reveal" style="margin:16px auto 0" data-k="rm_p">Parang health tracker, pero para sa pera mo. Mula “sweldo-ubos” hanggang “lumalago” — isang hakbang bawat araw, sama-sama.</p>
+  <div class="rmap">
+    <div class="rstep reveal"><div class="line"></div><div class="dot">🎯</div><div class="badge2 now" data-k="rm_now">Live na</div><h3 data-k="rm_1h">Ipon</h3><p data-k="rm_1p">Budget, mag-ipon, Financial Health Score, at ang Coach. Lahat ito, ngayon na.</p></div>
+    <div class="rstep reveal"><div class="line"></div><div class="dot">🛟</div><div class="badge2 next" data-k="rm_next">Susunod</div><h3 data-k="rm_2h">Buffer</h3><p data-k="rm_2p">Emergency fund na abot-kaya, mas malalim na AI Coach, at mga milestone.</p></div>
+    <div class="rstep reveal"><div class="dot">📈</div><div class="badge2 next" data-k="rm_later">Paparating</div><h3 data-k="rm_3h">Grow</h3><p data-k="rm_3p">Paraan para palaguin ang ipon mo — sa pamamagitan ng lehitimong partners, hindi utang.</p></div>
+  </div>
+</div></div></section>
 
-  <!-- FOOTER -->
-  <footer><div class="wrap">
-    <div class="wordmark" style="font-family:var(--font-head);font-weight:800;font-size:22px">IponPal</div>
-    <div class="links">
-      <a href="https://app.iponpal.com" target="_blank" rel="noopener" class="appcta" data-k="f_open">Open the app</a>
-      <a href="#" data-social="instagram">Instagram</a>
-      <a href="#" data-social="tiktok">TikTok</a>
-      <a href="mailto:hello@iponpal.com" data-k="f_contact">Contact</a>
-    </div>
-    <p class="muted" style="font-size:13px;font-weight:700" data-k="f_legal">Privacy Policy &amp; Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--green-dk)">Email us.</a></p>
-    <p style="font-size:13px;font-weight:700;margin-top:8px" data-k="f_made">Made with 💜 in the Philippines 🇵🇭 · Built in public by a small PH team</p>
-  </div></footer>
+<!-- FINAL CTA -->
+<section class="final"><div class="wrap">
+  <div class="wm wordmark reveal">IponPal</div>
+  <h2 class="reveal" data-k="f_h">Simulan ang ipon mo ngayon.</h2>
+  <a class="cta reveal" href="https://app.iponpal.com" data-k="open_final">Open IponPal →</a>
+  <div class="microcopy reveal" data-k="f_fine">Libre habang ginagawa namin · walang download</div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="wordmark" style="font-size:22px;font-weight:800">IponPal</div>
+  <div class="fl"><a href="https://app.iponpal.com" data-k="open_foot">Open the app</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#" data-k="contact">Contact</a></div>
+  <form class="nlform" onsubmit="subscribe(event)"><input id="nl-email" type="email" placeholder="ikaw@gmail.com" autocomplete="email" required><button type="submit" data-k="nl_btn">Subscribe</button></form>
+  <div id="nl-msg"></div>
+  <p class="whisper" data-k="whisper">IponPal updates lang · no spam, unsubscribe anytime.</p>
+  <p class="whisper" style="margin-top:10px" data-k="made">Made with 💚 in the Philippines 🇵🇭 · Built in public by a small PH team</p>
+</div></footer>
 
 <script>
-  /* ── i18n: Taglish authored inline (single source, SEO-friendly); English overrides below ── */
   const EN = {
-    badge:'🚧 Early access · Building in public',
-    hero_h1:"Your Taglish budget &amp; savings coach.<br>You've got this! 💪",
-    hero_sub:"Budget, save, and finally understand your money — with a coach that talks like your barkada. Free, private, made in the Philippines.",
-    cta_open:'Open the app →', cta_open2:'Open the app →', cta_join:'Join the early crew',
-    hero_fine:'No download needed · works in your browser · 100% free while we build',
-    see_h:'Take a peek', see_sub:'A real coach — not just a tracker.',
-    see_score:'Financial Health Score',
-    see_coach:'Your ₱2,400 in Wants this month = ~20 milk teas. 🧋 All worth it?',
-    see_chip:'How do I improve? ›',
-    see_jar_sub:'3 friends · saving together', see_note:'*Sample view. This easy in the real app.',
-    why_pill:'The real talk', why_h:'Paycheck in, paycheck gone.',
-    why_sub:"You're not alone — most Filipinos have no emergency fund and struggle to save. Not because you're lazy. You just need a system that's simple and on your side. That's IponPal.",
-    what_h:'One app, three things',
-    p1_h:'Budget', p1_p:'Auto 50-30-20: needs, wants, and savings. Instantly see where your money goes.',
-    p2_h:'Save', p2_p:'Goal jars and barkada jars — save together with your friends.',
-    p3_h:'Coach', p3_p:'A daily Financial Health Score and personal coaching, in Taglish. Like chatting with a money-smart friend.',
-    how_h:'How it works',
-    s1_h:'Log an expense — 10 seconds', s1_p:'Just tap. No bank account to connect.',
-    s2_h:'See your Score', s2_p:'One number (0–100) that tells you how your money is doing right now.',
-    s3_h:'Listen to your Coach', s3_p:"You'll know your next move — never left confused.",
-    trust_h:'Your money is yours alone.',
-    trust_sub:"A finance app that doesn't sell your data. This is our promise — and what we'll never do.",
-    t1:"Private & backed up. Your financial data is secure — never sold, never shared.",
-    t2:'You hold the keys. Export or delete everything, anytime.',
-    t3:'Data Privacy Act (RA 10173). We collect only anonymous usage stats to improve the app.',
-    t_never:"<b>❌ What we'll never do:</b> No <b>lending</b>. We never hold your <b>money</b>. No <b>credit score sold to lenders</b>. No paluwagan. We're a coach — not a bank, not a lending app.",
-    bip_badge:'🚧 Building in public',
-    bip_h:"We're early — and we're open about it.",
-    bip_p:"A small Filipino team, building IponPal in the open with our first users. Instead of overpromising, we'll tell you exactly where we are — and where we're headed.",
-    bip_live_h:'✅ Live now',
-    bip_live1:'✔️ Budget (50-30-20)', bip_live2:'✔️ Savings goals + barkada jars', bip_live3:'✔️ Financial Health Score', bip_live4:'✔️ The Coach (v1)',
-    bip_soon_h:'🔜 Not here yet — on purpose',
-    bip_soon1:'⏳ Automatic bank sync', bip_soon2:'⏳ A deeper AI Coach', bip_soon3:'⏳ A way to grow your savings', bip_soon4:"We'd rather ship these <b>right</b> than fast.",
-    bip_ask:'Join us early — help us shape it, tell us what\'s broken, and hold us accountable. 💜',
-    vis_pill:'The dream', vis_h:'From tracking → to real financial health',
-    vis_sub:'The goal: not just a budget app, but your companion for the whole money journey — <b>Save → Build a buffer → Grow</b>. Like “Whoop,” but for your money. One step a day. Together.',
-    faq_h:'Questions',
-    q1:'Is it really free?', a1:'Yes — 100% free while we\'re in early access. If there\'s ever a paid tier, there will still be a free version.',
-    q2:'Is my data safe?', a2:'Yes. Your data is secured and backed up in a private database, never sold or shared. Export or delete it anytime.',
-    q3:'Do I have to connect my bank?', a3:'No. Logging is manual — 10 seconds. No bank login, no passwords requested.',
-    q4:'Is this a scam?', a4:"No. We don't lend, we don't hold your money, no paluwagan, and we don't sell credit scores to lenders. We're just a coach for your savings.",
-    q5:'How will you make money?', a5:"Honestly, we're still figuring that out — that's why we build in public. What's certain: we won't sell your data. Someday maybe a premium coach or referrals to legit savings/invest partners — but the core stays free and private.",
-    q6:'Who is this for?', a6:'For any Filipino who wants to save — salaried, gig, freelance, student. If saving is hard for you, this is for you.',
-    nl_pill:'Early crew', nl_h:'Be first to know',
-    nl_sub:'Open the app now — or subscribe to hear about new features as we build them.',
-    nl_btn:'Subscribe', nl_note:'IponPal updates only. No spam, unsubscribe anytime.',
-    f_open:'Open the app', f_contact:'Contact',
-    f_legal:'Privacy Policy & Terms — in progress. Questions? <a href="mailto:hello@iponpal.com" style="color:var(--green-dk)">Email us.</a>',
-    f_made:'Made with 💜 in the Philippines 🇵🇭 · Built in public by a small PH team'
+    open:'Open app', open_hero:'Open IponPal →', open_ipon:'Open the app →', open_final:'Open IponPal →', open_foot:'Open the app',
+    badge:'🇵🇭 Made in the Philippines · building in public',
+    h1:"You've got this.",
+    hero_sub:'Your Taglish budget &amp; ipon coach. Budget, save, and finally understand your money — free, private, no download.',
+    hero_fine:'No download · works in your browser · 100% free',
+    s_eye:'Financial Health Score', s_h:'One number.',
+    s_p:'Know exactly how your money is doing — 0 to 100, updated daily. Like a health check, but for your savings.',
+    c_eye:'Your Coach', c_h:'A coach you talk to.',
+    c_p:"Not an app you stare at — a coach you chat with. Personalized, in Taglish, and it always knows your next move.",
+    c_msg:'Your ₱2,400 in Wants this month = ~20 milk teas. 🧋 All worth it? Trim half and that\'s +₱1,200 straight to savings.',
+    c_chip:'How do I improve? →',
+    i_eye:'Save', i_h:'One peso<br>at a time.',
+    i_p:'Goal jars for your dream. Barkada jars to save together with friends. This is the heart of IponPal.',
+    i_jarsub:'barkada jar · 3 friends',
+    b_eye:'Budget &amp; Track', b_h:'Know instantly<br>where it went.',
+    b_p:'Auto 50-30-20: needs, wants, savings. Log an expense in 10 seconds — no bank account needed.',
+    b_spent:'spent',
+    m_eye:'Momentum', m_h:'One peso,<br>every day.',
+    m_p:'Streaks so you never break the habit. Ranks as you save. A barkada leaderboard to keep it fun.',
+    m_c1:'<span class="k">🔥</span> 12-day streak', m_c2:'<span class="k">⭐</span> Lv 6 · Thrifty', m_c3:'<span class="k">🏆</span> #2 in your barkada',
+    t_eye:'Our promise',
+    t_h:'Not a bank.<br>Not a lending app.<br><span class="dim">Just your coach.</span>',
+    t_p:"We never lend. We never touch your money. We never sell your data. No paluwagan. You hold the keys — export or delete anytime.",
+    bip_eye:'Building in public', bip_h:"We're early — and open about it.",
+    bip_p:"A small Filipino team, building IponPal in the open. We'll tell you exactly where we are — and where we're headed.",
+    bip_live:'✅ Live now', bip_l2:'✔️ Savings + barkada jars', bip_l4:'✔️ The Coach',
+    bip_soon:'🔜 Coming', bip_s1:'⏳ A deeper AI Coach', bip_s2:'⏳ A way to grow your savings', bip_s3:'⏳ Auto bank sync',
+    mf_eye:'It does more', mf_h:'And plenty more.',
+    mf_1s:'Smart-split suggestion', mf_1h:'Extra income, split right', mf_1p:"Bonus, 13th month, side gigs — log it and get a smart split so it doesn't vanish.",
+    mf_2t:'This week', mf_2h:'Weekly recap ritual', mf_2p:"Every week, a short look back — so you know where you're weak and where you're strong.",
+    mf_3t:'Score: 72 · Solid', mf_3s:'Share card ready', mf_3h:'Shareable moments', mf_3p:'Hit a goal? Score jumped? A beautiful share card is ready for your barkada.',
+    mf_4t:'Your data, your rules', mf_4s:'Export / delete anytime', mf_4h:'Private by design', mf_4p:'Backed up and secure. Never sold. Export or delete everything, anytime.',
+    sp_eye:'Growing, in public', sp_h:'One peso, together.',
+    sp_savers:'Filipinos saving', sp_ipon:'Total saved', sp_deposits:'Deposits', sp_days:'Days building',
+    sp_note:'*Illustrative — wires to live public_stats() in production',
+    rm_eye:'The roadmap', rm_h:'From tracking → to real financial health.',
+    rm_p:'Like a health tracker, but for your money. From “payday-broke” to “growing” — one step a day, together.',
+    rm_now:'Live now', rm_next:'Next', rm_later:'Coming',
+    rm_1h:'Save', rm_1p:'Budget, save, the Financial Health Score, and the Coach. All of it, today.',
+    rm_2h:'Buffer', rm_2p:'An affordable emergency fund, a deeper AI Coach, and milestones.',
+    rm_3h:'Grow', rm_3p:'A way to grow your savings — through legit partners, not loans.',
+    f_h:'Start your ipon today.', f_fine:'Free while we build · no download',
+    contact:'Contact', nl_btn:'Subscribe', whisper:'IponPal updates only · no spam, unsubscribe anytime.',
+    made:'Made with 💚 in the Philippines 🇵🇭 · Built in public by a small PH team'
   };
   function setLang(l){
-    localStorage.setItem('ip_lang', l);
     document.querySelectorAll('[data-k]').forEach(el=>{
       const k=el.dataset.k;
       if(el.getAttribute('data-tl')===null) el.setAttribute('data-tl', el.innerHTML);   // capture TL original once
@@ -356,37 +466,54 @@
     });
     document.getElementById('lang-tl').classList.toggle('on', l!=='en');
     document.getElementById('lang-en').classList.toggle('on', l==='en');
-    document.documentElement.lang = (l==='en')?'en':'tl';
+    document.documentElement.lang = (l==='en') ? 'en' : 'tl';
   }
+  setLang('tl');
 
-  /* ── landing backend: waitlist + lightweight analytics (see db_waitlist.sql) ── */
-  const SB_URL = 'https://anbmihwvzbazjjufdnse.supabase.co';
-  const SB_KEY = 'sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
-  function track(type){
-    try{ fetch(SB_URL+'/rest/v1/landing_events', { method:'POST', keepalive:true,
-      headers:{ 'apikey':SB_KEY,'authorization':'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal' },
-      body: JSON.stringify({ type, lang: localStorage.getItem('ip_lang')||'tl' }) }); }catch(e){}
+  // Live social proof — fetches the safe public_stats() RPC; falls back to the illustrative
+  // placeholders here, and to an honest 'building in public' line if the numbers are still tiny.
+  const SB_URL='https://anbmihwvzbazjjufdnse.supabase.co', SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
+  const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,'')+'M':n>=1e3?(n/1e3).toFixed(1).replace(/\.0$/,'')+'k':(''+n);
+  const fmtP=n=>'₱'+(n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,'')+'M':n>=1e3?Math.round(n/1e3)+'k':(''+Math.round(n)));
+  function statsFallback(days){
+    const el=document.getElementById('stats'); if(!el) return;
+    const en=document.documentElement.lang==='en';
+    el.innerHTML='<p class="lead" style="margin:0 auto">'+(en
+      ? 'We\'re new — <b>'+(days||1)+' days</b> building in public. Join us early. 🌱'
+      : 'Bago pa lang kami — <b>'+(days||1)+' araw</b> building in public. Sumali ka nang maaga. 🌱')+'</p>';
   }
-  function nlMsg(t, ok){ const el=document.getElementById('nl-msg'); el.textContent=t; el.style.color = ok ? '#0E8A5F' : '#C9356E'; }
+  (async function(){
+    try{
+      const r=await fetch(SB_URL+'/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json'},body:'{}'});
+      const s=await r.json();
+      if(s && s.savers!=null && s.savers>=50){          // only show real numbers once they're real
+        document.getElementById('st-savers').textContent=fmtN(s.savers)+'+';
+        document.getElementById('st-ipon').textContent=fmtP(s.ipon_total);
+        document.getElementById('st-deposits').textContent=fmtN(s.deposits)+'+';
+        document.getElementById('st-days').textContent=s.days_public;
+      } else { statsFallback(s && s.days_public); }      // too early → honest 'building in public' line
+    }catch(e){ statsFallback(); }                        // RPC missing / offline → same honest line
+  })();
+
+  // ── analytics + waitlist (see db_waitlist.sql) ──
+  function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({type,lang:document.documentElement.lang||'tl'})}); }catch(e){} }
+  function nlMsg(t,ok){ const el=document.getElementById('nl-msg'); if(!el)return; el.textContent=t; el.style.color=ok?'var(--green-dk)':'#C4485E'; }
   async function subscribe(e){
     e.preventDefault();
-    const email = (document.getElementById('nl-email').value||'').trim();
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ nlMsg(localStorage.getItem('ip_lang')==='en'?'Enter a valid email 🙂':'Maglagay ng valid na email 🙂', false); return; }
+    const email=(document.getElementById('nl-email').value||'').trim(), en=document.documentElement.lang==='en';
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ nlMsg(en?'Enter a valid email 🙂':'Maglagay ng valid na email 🙂',false); return; }
     try{
-      const r = await fetch(SB_URL + '/rest/v1/waitlist', {
-        method:'POST', headers:{ 'apikey':SB_KEY,'authorization':'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal' },
-        body: JSON.stringify({ email, source:'landing' }) });
-      const en = localStorage.getItem('ip_lang')==='en';
-      if(r.status===201 || r.ok){ nlMsg(en?"You're in! 🎉 Thanks — watch for updates.":"You're in! 🎉 Salamat — abangan ang updates.", true); document.getElementById('nl-email').value=''; track('subscribe'); }
-      else if(r.status===409){ nlMsg(en?"You're already on the list! 💜":"Nasa list ka na! 💜", true); }
-      else { nlMsg(en?'Hmm, try again later.':'Hmm, subukan ulit mamaya.', false); }
-    }catch(err){ nlMsg(localStorage.getItem('ip_lang')==='en'?'Hmm, try again later.':'Hmm, subukan ulit mamaya.', false); }
+      const r=await fetch(SB_URL+'/rest/v1/waitlist',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({email,source:'landing'})});
+      if(r.status===201||r.ok){ nlMsg(en?"You're in! 🎉 Thanks.":"You're in! 🎉 Salamat!",true); document.getElementById('nl-email').value=''; track('subscribe'); }
+      else if(r.status===409){ nlMsg(en?"You're already on the list! 💚":"Nasa list ka na! 💚",true); }
+      else { nlMsg(en?'Hmm, try again later.':'Subukan ulit mamaya.',false); }
+    }catch(err){ nlMsg(en?'Hmm, try again later.':'Subukan ulit mamaya.',false); }
   }
+  window.addEventListener('load',()=>track('view'));
+  document.querySelectorAll('a[href*="app.iponpal.com"]').forEach(a=>a.addEventListener('click',()=>track('open_app')));
 
-  // init
-  setLang(localStorage.getItem('ip_lang') || 'tl');
-  document.querySelectorAll('.appcta').forEach(a=>a.addEventListener('click',()=>track('open_app')));
-  window.addEventListener('load', ()=>track('view'));
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.14});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%3*70)+'ms'; io.observe(el); });
 </script>
 </body>
 </html>
