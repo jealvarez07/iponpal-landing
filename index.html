@@ -499,8 +499,10 @@ footer a{color:var(--green-dk);text-decoration:none}
   })();
   setLang('tl');
 
-  // ── analytics + waitlist (see db_waitlist.sql) ──
-  function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({type,lang:document.documentElement.lang||'tl'})}); }catch(e){} }
+  // ── analytics + attribution + waitlist (see db_waitlist.sql / db_landing_metrics.sql) ──
+  const _q=new URLSearchParams(location.search);
+  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||null, utm_campaign:_q.get('utm_campaign')||null, referrer:document.referrer||null, path:location.pathname||'/', variant:_q.get('v')||null };
+  function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(Object.assign({type,lang:document.documentElement.lang||'tl'},_acq))}); }catch(e){} }
   function nlMsg(t,ok){ const el=document.getElementById('nl-msg'); if(!el)return; el.textContent=t; el.style.color=ok?'var(--green-dk)':'#C4485E'; }
   async function subscribe(e){
     e.preventDefault();
@@ -514,7 +516,15 @@ footer a{color:var(--green-dk);text-decoration:none}
     }catch(err){ nlMsg(en?'Hmm, try again later.':'Subukan ulit mamaya.',false); }
   }
   window.addEventListener('load',()=>track('view'));
-  document.querySelectorAll('a[href*="app.iponpal.com"]').forEach(a=>a.addEventListener('click',()=>track('open_app')));
+  // tag every Open-app CTA so the app can attribute the install back to this landing/campaign
+  document.querySelectorAll('a[href*="app.iponpal.com"]').forEach(a=>{
+    try{ const u=new URL(a.href); u.searchParams.set('ref','landing');
+      if(_acq.utm_source) u.searchParams.set('utm_source',_acq.utm_source);
+      if(_acq.utm_campaign) u.searchParams.set('utm_campaign',_acq.utm_campaign);
+      a.href=u.toString();
+    }catch(e){}
+    a.addEventListener('click',()=>track('open_app'));
+  });
 
   const reveals=[...document.querySelectorAll('.reveal')];
   const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.12});
