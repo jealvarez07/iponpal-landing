@@ -372,7 +372,8 @@ footer a{color:var(--green-dk);text-decoration:none}
     <div class="stat"><div class="num" id="st-deposits">—</div><div class="lab" data-k="sp_deposits">Deposits</div></div>
     <div class="stat"><div class="num" id="st-days">—</div><div class="lab" data-k="sp_days">Araw na building</div></div>
   </div>
-  <p class="microcopy reveal" data-k="sp_note">*Live mula sa app · nagba-build in public kami</p>
+  <p class="lead reveal" id="stats-fallback" style="display:none;margin:14px auto 0"></p>
+  <p class="microcopy reveal" id="sp-note" data-k="sp_note">*Live mula sa app · nagba-build in public kami</p>
 </div></section>
 
 <!-- TRUST -->
@@ -436,10 +437,6 @@ footer a{color:var(--green-dk);text-decoration:none}
     t_eye:'Our promise',
     t_h:'Not a bank.<br>Not a lending app.<br><span class="dim">Just your coach.</span>',
     t_p:"We never lend. We never touch your money. We never sell your data. No paluwagan. You hold the keys — export or delete anytime.",
-    bip_eye:'Building in public', bip_h:"We're early — and open about it.",
-    bip_p:"A small Filipino team, building IponPal in the open. We'll tell you exactly where we are — and where we're headed.",
-    bip_live:'✅ Live now', bip_l2:'✔️ Savings + barkada jars', bip_l4:'✔️ The Coach',
-    bip_soon:'🔜 Coming', bip_s1:'⏳ A deeper AI Coach', bip_s2:'⏳ A way to grow your savings', bip_s3:'⏳ Auto bank sync',
     mf_eye:'It does more', mf_h:'And plenty more.',
     mf_1s:'Smart-split suggestion', mf_1h:'Extra income, split right', mf_1p:"Bonus, 13th month, side gigs — log it and get a smart split so it doesn't vanish.",
     mf_2t:'This week', mf_2h:'Weekly recap ritual', mf_2p:"Every week, a short look back — so you know where you're weak and where you're strong.",
@@ -447,7 +444,7 @@ footer a{color:var(--green-dk);text-decoration:none}
     mf_4t:'Your data, your rules', mf_4s:'Export / delete anytime', mf_4h:'Private by design', mf_4p:'Backed up and secure. Never sold. Export or delete everything, anytime.',
     sp_eye:'Growing, in public', sp_h:'One peso, together.',
     sp_savers:'Filipinos saving', sp_ipon:'Total saved', sp_deposits:'Deposits', sp_days:'Days building',
-    sp_note:'*Illustrative — wires to live public_stats() in production',
+    sp_note:'*Live from the app · we\'re building in public',
     rm_eye:'The roadmap', rm_h:'From tracking → to real financial health.',
     rm_p:'Like a health tracker, but for your money. From “payday-broke” to “growing” — one step a day, together.',
     rm_now:'Live now', rm_next:'Next', rm_later:'Coming',
@@ -467,33 +464,40 @@ footer a{color:var(--green-dk);text-decoration:none}
     document.getElementById('lang-tl').classList.toggle('on', l!=='en');
     document.getElementById('lang-en').classList.toggle('on', l==='en');
     document.documentElement.lang = (l==='en') ? 'en' : 'tl';
+    renderStats();   // keep the live-stats block in the current language
   }
-  setLang('tl');
 
-  // Live social proof — fetches the safe public_stats() RPC; falls back to the illustrative
-  // placeholders here, and to an honest 'building in public' line if the numbers are still tiny.
+  // ── live social proof (safe public_stats() RPC) ──
   const SB_URL='https://anbmihwvzbazjjufdnse.supabase.co', SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
   const fmtN=n=>n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,'')+'M':n>=1e3?(n/1e3).toFixed(1).replace(/\.0$/,'')+'k':(''+n);
   const fmtP=n=>'₱'+(n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,'')+'M':n>=1e3?Math.round(n/1e3)+'k':(''+Math.round(n)));
-  function statsFallback(days){
-    const el=document.getElementById('stats'); if(!el) return;
+  let _stats=null, _statsErr=false;
+  function renderStats(){
+    const grid=document.getElementById('stats'), fb=document.getElementById('stats-fallback'), note=document.getElementById('sp-note');
+    if(!grid) return;
     const en=document.documentElement.lang==='en';
-    el.innerHTML='<p class="lead" style="margin:0 auto">'+(en
-      ? 'We\'re new — <b>'+(days||1)+' days</b> building in public. Join us early. 🌱'
-      : 'Bago pa lang kami — <b>'+(days||1)+' araw</b> building in public. Sumali ka nang maaga. 🌱')+'</p>';
+    if(_stats && _stats.savers){                 // real activity → show the numbers
+      document.getElementById('st-savers').textContent=fmtN(_stats.savers);
+      document.getElementById('st-ipon').textContent=fmtP(_stats.ipon_total);
+      document.getElementById('st-deposits').textContent=fmtN(_stats.deposits);
+      document.getElementById('st-days').textContent=_stats.days_public;
+      grid.style.display=''; if(fb) fb.style.display='none'; if(note) note.style.display='';
+    } else if(_statsErr || _stats){              // resolved but no savers yet → honest, language-reactive line
+      const days=(_stats&&_stats.days_public)||1;
+      if(fb){ fb.innerHTML = en
+        ? 'We\'re new — <b>'+days+' days</b> building in public. Join us early. 🌱'
+        : 'Bago pa lang kami — <b>'+days+' araw</b> building in public. Sumali ka nang maaga. 🌱';
+        fb.style.display=''; }
+      grid.style.display='none'; if(note) note.style.display='none';
+    }
+    // else: not loaded yet → keep the "—" placeholders
   }
   (async function(){
-    try{
-      const r=await fetch(SB_URL+'/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json'},body:'{}'});
-      const s=await r.json();
-      if(s && s.savers!=null && s.savers>=50){          // only show real numbers once they're real
-        document.getElementById('st-savers').textContent=fmtN(s.savers)+'+';
-        document.getElementById('st-ipon').textContent=fmtP(s.ipon_total);
-        document.getElementById('st-deposits').textContent=fmtN(s.deposits)+'+';
-        document.getElementById('st-days').textContent=s.days_public;
-      } else { statsFallback(s && s.days_public); }      // too early → honest 'building in public' line
-    }catch(e){ statsFallback(); }                        // RPC missing / offline → same honest line
+    try{ const r=await fetch(SB_URL+'/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json'},body:'{}'}); _stats=await r.json(); }
+    catch(e){ _statsErr=true; }
+    renderStats();
   })();
+  setLang('tl');
 
   // ── analytics + waitlist (see db_waitlist.sql) ──
   function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({type,lang:document.documentElement.lang||'tl'})}); }catch(e){} }
