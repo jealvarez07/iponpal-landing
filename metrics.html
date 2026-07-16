@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>IponPal — Founder Metrics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#F4F3FA; --card:#FFFFFF; --line:#EAE8F2; --text:#2E2A3B; --muted:#8E8AA3;
+  --money:#58CC02; --money-dk:#46A302; --premium:#7C5CFC; --celebrate:#FF9600;
+  --info:#1CB0F6; --wants:#FF4B8C; --danger:#FF4B4B;
+  --font-head:'Baloo 2','Segoe UI Rounded',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --sh-sm:0 1px 2px rgba(46,42,59,.04),0 2px 8px rgba(46,42,59,.06);
+  --sh-md:0 2px 6px rgba(46,42,59,.06),0 10px 28px rgba(46,42,59,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:var(--font-body);color:var(--text);padding:20px 16px 60px;max-width:1040px;margin:0 auto}
+h1{font-family:var(--font-head);font-size:26px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.sub{color:var(--muted);font-size:12px;margin-top:2px}
+.topbar{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.refresh{background:var(--card);color:var(--premium);font-family:var(--font-head);font-weight:800;font-size:13px;padding:9px 16px;border-radius:12px;border:1px solid var(--line);cursor:pointer;box-shadow:var(--sh-sm)}
+.refresh:active{transform:translateY(1px)}
+
+/* section headers */
+.sec{margin-top:26px}
+.sechd{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.sechd h2{font-family:var(--font-head);font-size:14px;font-weight:800;color:var(--premium);text-transform:uppercase;letter-spacing:.6px}
+.info{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--muted);font-size:12px;font-weight:800;cursor:pointer;line-height:1;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.info:hover{border-color:var(--premium);color:var(--premium)}
+.infobox{display:none;background:#F6F4FF;border:1px solid #E4DEFF;border-radius:12px;padding:11px 13px;font-size:12.5px;line-height:1.6;margin-bottom:10px;color:#4A4066}
+.infobox.open{display:block;animation:fade .2s ease}
+.infobox b{color:var(--text)}
+.infobox .good{color:var(--money-dk);font-weight:800}
+.infobox .bad{color:var(--danger);font-weight:800}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--sh-sm)}
+.nsband{border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px;background:linear-gradient(180deg,rgba(18,164,114,.05),rgba(124,92,252,.05))}
+.nshd{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#7C5CFC;margin-bottom:12px}
+.nsgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:720px){.nsgrid{grid-template-columns:repeat(2,1fr)}}
+.nstile{text-align:center}
+.nsv{font-size:26px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#12A472,#7C5CFC);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nsl{font-size:11px;font-weight:700;color:var(--muted);margin-top:2px}
+.tabs{display:flex;gap:8px;margin-bottom:22px}
+.tab{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 16px;font-weight:800;font-size:14px;cursor:pointer;color:var(--muted)}
+.tab.on{background:#12A472;color:#fff;border-color:#12A472}
+.chartwrap{position:relative;height:260px}
+.chartwrap.short{height:200px}
+/* activity heatmap (day × hour) */
+.heat{overflow-x:auto;padding-bottom:4px}
+.heatgrid{display:grid;grid-template-columns:34px repeat(24,minmax(14px,1fr));gap:3px;min-width:520px}
+.hcell{aspect-ratio:1/1;border-radius:3px;background:var(--line)}
+.hhead{font-size:9px;color:var(--muted);text-align:center;font-weight:700;align-self:end}
+.hlbl{font-size:10px;color:var(--muted);font-weight:800;display:flex;align-items:center;background:none;aspect-ratio:auto}
+.heatleg{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:10px;color:var(--muted);font-weight:700}
+.heatleg .sw{width:13px;height:13px;border-radius:3px}
+
+/* verdict banner */
+.verdict{border-radius:22px;padding:22px;color:#fff;box-shadow:var(--sh-md);margin-bottom:6px;position:relative;overflow:hidden}
+.verdict .vlabel{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;opacity:.85}
+.verdict .vhead{font-family:var(--font-head);font-size:30px;font-weight:800;letter-spacing:-.4px;margin:6px 0 2px;line-height:1.15}
+.verdict .vsub{font-size:13.5px;line-height:1.55;opacity:.95;max-width:640px}
+.vmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:16px}
+.vmeta .m .mv{font-family:var(--font-head);font-size:22px;font-weight:800}
+.vmeta .m .ml{font-size:11px;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.5px}
+.vprog{height:10px;background:rgba(255,255,255,.28);border-radius:99px;overflow:hidden;margin-top:14px;max-width:520px}
+.vprog>div{height:100%;background:#fff;border-radius:99px;transition:width .6s ease}
+
+/* KPI grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--sh-sm);position:relative}
+.kpi .info{position:absolute;top:12px;right:12px}
+.kpi .n{font-family:var(--font-head);font-size:30px;font-weight:800;letter-spacing:-.5px;line-height:1.1}
+.kpi .l{font-size:11.5px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.4px;margin-top:3px;padding-right:22px}
+.kpi .infobox{margin-top:10px;margin-bottom:0}
+
+/* login */
+input{background:#F1F0F8;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:15px;width:100%;margin-top:8px;font-family:inherit}
+.loginbtn{background:var(--money);color:#fff;font-family:var(--font-head);font-weight:800;font-size:15px;padding:13px;border-radius:12px;width:100%;margin-top:12px;border:none;cursor:pointer;box-shadow:0 3px 0 var(--money-dk)}
+.loginbtn:active{transform:translateY(2px);box-shadow:0 1px 0 var(--money-dk)}
+label{font-size:12px;color:var(--muted);font-weight:700;display:block;margin-top:12px}
+.warn{background:#FFF6DE;border:1px solid #F5DE9B;border-radius:12px;padding:10px 12px;font-size:12.5px;font-weight:600;margin-top:12px}
+.card.login{max-width:420px;margin:40px auto}
+
+/* mini table (retention detail) */
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px}
+th{text-align:left;color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;padding:7px 8px;border-bottom:1.5px solid var(--line)}
+td{padding:8px;border-bottom:1px solid var(--line);font-weight:700}
+td .chip{display:inline-block;padding:2px 8px;border-radius:8px;font-size:12px;font-weight:800}
+#board{display:none}
+.empty{color:var(--muted);font-size:13px;text-align:center;padding:26px 0;font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <h1>🐷 IponPal — Founder Metrics</h1>
+    <p class="sub">Aggregates only · gated to the founder account · <span id="gen"></span></p>
+  </div>
+  <button class="refresh" id="refreshBtn" style="display:none" onclick="load()">↻ Refresh</button>
+</div>
+
+<div class="card login" id="login">
+  <label>Founder email</label>
+  <input id="em" type="email" placeholder="you@gmail.com">
+  <div id="step2" style="display:none">
+    <label>Login code (from email)</label>
+    <input id="code" inputmode="numeric" maxlength="10" placeholder="6–8 digit code">
+  </div>
+  <button class="loginbtn" id="go" onclick="doAuth()">Send code</button>
+  <div class="warn" id="msg" style="display:none"></div>
+</div>
+
+<div id="board">
+
+  <div id="northstar" class="nsband"></div>
+
+  <div class="tabs">
+    <button id="tb-product" class="tab on" onclick="showTab('product')">📊 Product</button>
+    <button id="tb-acq" class="tab" onclick="showTab('acq')">📣 Acquisition</button>
+  </div>
+  <div id="tab-product">
+
+  <!-- NORTH STAR VERDICT -->
+  <div class="verdict" id="verdict"></div>
+
+  <!-- TOPLINE -->
+  <div class="sec">
+    <div class="sechd"><h2>Topline</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox">These are your <b>size &amp; momentum</b> numbers — how many people, how much they do, and how much they spread the app. They tell you the app is <b>alive</b>, but not whether it's <b>sticky</b> — that's the retention section below, which matters far more this early.</div>
+    <div class="grid" id="kpis"></div>
+  </div>
+
+  <!-- ENGAGEMENT QUALITY / OUTLIERS -->
+  <div class="sec">
+    <div class="sechd"><h2>Engagement quality — outlier check</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> how the total events spread across people. <b>Mean vs median is the tell:</b> if the mean sits well above the median, a few power users inflate your averages and the <i>typical</i> user does far less. <b>How to read it:</b> trust the <span class="good">median</span> as the everyday user; watch <b>top user's share</b> and the <b>"drop the top user"</b> number to see how fragile the headline is.</div>
+    <div class="card">
+      <div class="grid" id="engStats"></div>
+      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin:18px 0 8px">Events-per-user distribution</div>
+      <div class="chartwrap short"><canvas id="epuHist"></canvas></div>
+      <p id="engNote" style="margin-top:14px;font-size:13px;line-height:1.65;font-weight:600"></p>
+    </div>
+  </div>
+
+  <!-- EVENT MIX -->
+  <div class="sec">
+    <div class="sechd"><h2>Event mix — what's in the total</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> the event count split by type. <b>Why it matters:</b> some events are <b>auto-generated</b> (opening the app, recomputing the score) and can <b>bloat "events" without real effort</b>. The high-signal actions — logging expenses, deposits, shares — are the ones that mean engagement.</div>
+    <div class="card"><div class="chartwrap short"><canvas id="typeChart"></canvas></div></div>
+  </div>
+
+  <!-- DAU -->
+  <div class="sec">
+    <div class="sechd"><h2>Daily active users · 14 days</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> unique people who opened the app each day. <b>How to read it:</b> watch the <b>shape</b>, not any single day — a new tester wave spikes it, so a flat-to-rising line <i>after</i> the spike is the real signal. <b>Healthy:</b> <span class="good">line holding up or climbing</span> once your wave-1 testers are in; <span class="bad">a steady slide toward zero</span> means people tried it and left.</div>
+    <div class="card"><div class="chartwrap"><canvas id="dauChart"></canvas></div></div>
+  </div>
+
+  <!-- ACTIVITY TIMING -->
+  <div class="sec">
+    <div class="sechd"><h2>When users are active · PH time</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> when people use the app, in Philippine time — distinct users by hour and weekday, split two ways: <b><span style="color:#1CB0F6">Present</span></b> = anyone active (includes the daily open — when they're <i>around</i>), <b><span style="color:#58CC02">Doing</span></b> = users who took a real action like logging or depositing (when they're <i>engaged</i>). <b>Why it matters:</b> the gap between the two tells you whether a time slot is just eyeballs or actual work — <b>time your nudges to the "Doing" peaks, top-of-funnel messaging to "Present."</b> Unique users per bucket, so one power user can't skew the shape.</div>
+    <div class="card"><div style="font-size:12px;font-weight:800;color:#1CB0F6;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Present · any activity <span style="color:var(--muted)">(day × hour, PH)</span></div><div id="heatPresent" class="heat"></div><div class="heatleg"><span>fewer</span><span class="sw" style="background:rgba(28,176,246,.16)"></span><span class="sw" style="background:rgba(28,176,246,.5)"></span><span class="sw" style="background:rgba(28,176,246,1)"></span><span>more users</span></div></div>
+    <div class="card" style="margin-top:12px"><div style="font-size:12px;font-weight:800;color:#58CC02;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Doing · real actions <span style="color:var(--muted)">(day × hour, PH)</span></div><div id="heatDoing" class="heat"></div><div class="heatleg"><span>fewer</span><span class="sw" style="background:rgba(88,204,2,.16)"></span><span class="sw" style="background:rgba(88,204,2,.5)"></span><span class="sw" style="background:rgba(88,204,2,1)"></span><span>more users</span></div></div>
+  </div>
+
+  <!-- SESSIONS -->
+  <div class="sec">
+    <div class="sechd"><h2>Sessions — depth &amp; quality</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> bursts of activity grouped with a 30-minute idle gap. <b>Depth</b> = events per session; <b>quality</b> = share of sessions with a real action (log, deposit, share) rather than a quick peek. <b>Caveat:</b> app-opens are throttled to once/day, so session length leans on action timestamps — read it as <i>directional</i>, not stopwatch. <b>Watch:</b> rising <span class="good">productive %</span> and events/session = deeper habit; a high <span class="bad">single-event %</span> = peek-and-leave.</div>
+    <div class="card"><div class="grid" id="sessStats"></div><p id="sessNote" style="margin-top:14px;font-size:13px;line-height:1.65;font-weight:600"></p></div>
+  </div>
+
+  <!-- RETENTION -->
+  <div class="sec">
+    <div class="sechd"><h2>Retention cohorts — the North Star</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> of everyone who joined in a given week, the % still active later. <b>D1</b> = came back 1–2 days after first use · <b>D7</b> = active in days 7–13 · <b>D30</b> = days 28–34. <b>The gate (PRD §2): D30 ≥ 10%.</b> That's the one number that says "this is worth building." <b>How to read it:</b> follow a single cohort's line down — retention always falls, but where it <b>flattens</b> is your true core. Faded points aren't mature yet (a fresh cohort simply hasn't lived 30 days). <b>Trustworthy only on cohorts ≥ ~300 users</b> — below that it's directional.</div>
+    <div class="card">
+      <div class="chartwrap"><canvas id="cohortChart"></canvas></div>
+      <table id="cohortTable"></table>
+    </div>
+  </div>
+
+  <!-- PAYWALL -->
+  <div class="sec">
+    <div class="sechd"><h2>Plus fake-door funnel — by price</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> how many people <i>saw</i> the Plus offer vs. <i>reserved</i> it, split by the price they were shown. <b>Intent conversion = reservers ÷ viewers.</b> <b>How to read it:</b> this is a <b>ranking tool, not a revenue forecast</b> — clicking "reserve" costs nothing, so it overstates real purchase by roughly <b>3–10×</b>. Use it only to see <b>which price gets relatively more interest</b>, never to project earnings.</div>
+    <div class="card">
+      <div class="chartwrap short"><canvas id="paywallChart"></canvas></div>
+      <table id="paywallTable"></table>
+    </div>
+  </div>
+
+  <!-- VOTES + LESSONS -->
+  <div class="sec">
+    <div class="sechd"><h2>Feature votes</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> which roadmap features testers asked for most. <b>How to read it:</b> a <b>prioritization signal, not a promise</b> — it tells you what to build <i>next</i>, but votes are cheap, so pair the top item with actual retention before committing real effort.</div>
+    <div class="card"><div class="chartwrap short"><canvas id="voteChart"></canvas></div></div>
+  </div>
+
+  <div class="sec">
+    <div class="sechd"><h2>Lessons completed</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> unique users who finished each 2-minute lesson. <b>How to read it:</b> high completion = a lesson that <b>hooks</b>; a sharp drop-off at one lesson flags it as <span class="bad">too long, boring, or confusing</span> — a cheap thing to fix.</div>
+    <div class="card"><div class="chartwrap short"><canvas id="lessonChart"></canvas></div></div>
+  </div>
+
+  <!-- CATEGORY INSIGHTS -->
+  <div class="sec">
+    <div class="sechd"><h2>Category insights</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> which categories people actually log (validates the expanded picker), and how often they <b>override your Need/Want default</b>. <b>Why it matters:</b> a high override count on a category means your default is likely wrong for Filipinos — the <b>direction (→Need vs →Want)</b> tells you which way to fix it. The mix bar shows how the whole base splits their spending.</div>
+    <div class="card"><div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Most-used categories</div><div class="chartwrap short"><canvas id="catChart"></canvas></div></div>
+    <div class="card" style="margin-top:12px"><div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Need/Want overrides</div><table id="reclassTable"></table></div>
+    <div class="card" style="margin-top:12px"><div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Population Need/Want mix (logged)</div><div id="envMix"></div></div>
+    <div class="card" style="margin-top:12px"><div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Custom-category signals — promote to default?</div><p class="muted" style="font-size:11.5px;font-weight:600;margin-bottom:4px">Names users created themselves. <b>≥3–5 users on the same name = candidate to add as an official category</b> (review weekly/monthly).</p><table id="customCatsTable"></table></div>
+  </div>
+
+  <!-- FEATURE ADOPTION -->
+  <div class="sec">
+    <div class="sechd"><h2>New-feature adoption</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> uptake of the retention features — auto-share prompts, weekly recaps, and Coach deep-dives. <b>How to read it:</b> compare <b>share prompts vs shares</b> (are the peaks well-timed?), and watch <b>recap / coach reach</b> to see if the coaching actually lands. Format: <b>count · users</b>.</div>
+    <div class="grid" id="featKpis"></div>
+  </div>
+
+  <!-- INCOME LOGGING -->
+  <div class="sec">
+    <div class="sechd"><h2>Extra-income logging</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> uptake of the bonus / 13th-month / side-gig logging feature, and which income sources people log. <b>Why it matters:</b> Filipino income is lumpy — usage validates the feature, and the source mix (e.g. lots of "side gig") tells you <b>who your users are</b> (gig workers vs salaried). "Split prompts" = the smart-split coaching shown after a bonus/13th-month.</div>
+    <div class="grid" id="incomeKpis"></div>
+    <div class="card" style="margin-top:12px"><div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">By source</div><div class="chartwrap short"><canvas id="incSrcChart"></canvas></div></div>
+  </div>
+
+  <!-- BARKADA -->
+  <div class="sec">
+    <div class="sechd"><h2>Barkada (social savings)</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> usage of shared savings jars — jars created, people who joined, deposits made, and total pooled. <b>Why it matters:</b> social features are a <b>retention lever</b> — a user saving <i>with friends</i> has a reason to come back that a solo user doesn't. Rising memberships and deposits are an early sign the loop works.</div>
+    <div class="grid" id="bk"></div>
+  </div>
+  </div><!-- /tab-product -->
+
+  <!-- ===== ACQUISITION (LANDING) ===== -->
+  <div id="tab-acq" style="display:none">
+    <div class="sec">
+      <div class="sechd"><h2>Acquisition funnel · landing</h2><button class="info" onclick="tog(this)">i</button></div>
+      <div class="infobox">Top of funnel from <b>iponpal.com</b>: who lands, who taps <b>Open app</b>, who subscribes. <b>Open rate</b> = open_app ÷ views. <b>Attributed installs</b> ties landing visits to real in-app activations via the <code>?ref=landing</code> tag on every CTA.</div>
+      <div class="grid" id="acq-kpis"></div>
+    </div>
+    <div class="sec">
+      <div class="sechd"><h2>Daily funnel · 30 days</h2><button class="info" onclick="tog(this)">i</button></div>
+      <div class="card"><div class="chartwrap"><canvas id="acqDaily"></canvas></div></div>
+    </div>
+    <div class="sec">
+      <div class="sechd"><h2>By channel / source</h2><button class="info" onclick="tog(this)">i</button></div>
+      <div class="infobox">Where visitors come from (<code>utm_source</code>, or <code>ref</code>; blank = <b>direct</b>). When you run campaigns, tag links like <code>iponpal.com/?utm_source=tiktok&amp;utm_campaign=launch</code> and they'll split out here.</div>
+      <div class="card" style="margin-top:12px"><table id="acqSourceTable"></table></div>
+    </div>
+    <div class="sec">
+      <div class="sechd"><h2>Language split</h2><button class="info" onclick="tog(this)">i</button></div>
+      <div class="grid" id="acq-lang"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SB_URL = 'https://anbmihwvzbazjjufdnse.supabase.co';
+const SB_KEY = 'sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
+let sb = null, em = '';
+const C = { money:'#58CC02', premium:'#7C5CFC', celebrate:'#FF9600', info:'#1CB0F6', wants:'#FF4B8C', danger:'#FF4B4B', muted:'#8E8AA3', line:'#EAE8F2' };
+const CATLABEL = { food:'Food', grocery:'Groceries', commute:'Transport', rent:'Rent', utils:'Utilities', bills:'Bills', load:'Load/Internet', health:'Health', educ:'Education', family:'Family', loan:'Loan', contrib:'Contributions', house:'Household', fuel:'Fuel', dining:'Dining Out', mtea:'Milk Tea/Coffee', shop:'Shopping', fun:'Fun', subs:'Subscriptions', beauty:'Beauty', inuman:'Drinks', vice:'Cigs/Vape', gift:'Gifts', travel:'Travel', pets:'Pets', other:'Others', custom:'Custom (user-made)', giving:'Church/Donation', ent:'Entertainment', gadget:'Gadgets', gym:'Fitness', hobby:'Hobbies', insurance:'Insurance', baby:'Baby/Kids', laundry:'Laundry' };
+const catL = id => CATLABEL[id] || id || '—';
+const SRCLABEL = { '13th':'13th Month', bonus:'Bonus', raket:'Side gig', padala:'Gift/Padala', refund:'Refund', other:'Other' };
+const srcL = id => SRCLABEL[id] || id || '—';
+const charts = {};
+
+async function client(){
+  if(sb) return sb;
+  const m = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+  sb = m.createClient(SB_URL, SB_KEY);
+  return sb;
+}
+function msg(t){ const el=document.getElementById('msg'); el.style.display='block'; el.textContent=t; }
+function tog(btn){ const box = btn.closest('.sechd').nextElementSibling; box.classList.toggle('open'); }
+function togKpi(btn){ btn.closest('.kpi').querySelector('.infobox').classList.toggle('open'); }
+
+async function doAuth(){
+  const c = await client();
+  const codeEl = document.getElementById('code');
+  if(document.getElementById('step2').style.display==='none'){
+    em = document.getElementById('em').value.trim();
+    if(!em.includes('@')){ msg('Valid email please'); return; }
+    const { error } = await c.auth.signInWithOtp({ email: em, options:{ shouldCreateUser:false } });
+    if(error){ msg(error.message); return; }
+    document.getElementById('step2').style.display='block';
+    document.getElementById('go').textContent = 'Verify & load metrics';
+    msg('Code sent — check your inbox.');
+  } else {
+    const { error } = await c.auth.verifyOtp({ email: em, token: codeEl.value.trim(), type:'email' });
+    if(error){ msg('Wrong code — try again.'); return; }
+    load();
+  }
+}
+async function load(){
+  const c = await client();
+  const { data, error } = await c.rpc('admin_metrics');
+  if(error){ msg(error.message); return; }
+  if(data && data.error){ msg('Forbidden — this dashboard only answers to the founder account.'); return; }
+  document.getElementById('login').style.display='none';
+  document.getElementById('refreshBtn').style.display='block';
+  renderMetrics(data);
+  window._prod = data;
+  loadAcq();
+}
+function showTab(t){
+  document.getElementById('tab-product').style.display = t==='acq'?'none':'';
+  document.getElementById('tab-acq').style.display     = t==='acq'?'':'none';
+  document.getElementById('tb-product').classList.toggle('on', t!=='acq');
+  document.getElementById('tb-acq').classList.toggle('on', t==='acq');
+}
+const escH = s => String(s==null?'—':s).replace(/[<>&"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+const fmtShort = n => n>=1e6?(n/1e6).toFixed(1).replace(/\.0$/,'')+'M':n>=1e3?Math.round(n/1e3)+'k':Math.round(n||0);
+function renderNorthStar(prod, acq, pub){
+  prod=prod||{}; acq=acq||{}; pub=pub||{};
+  const savers = pub.savers!=null ? pub.savers : (prod.total_users||0);
+  const ipon   = pub.ipon_total||0;
+  let d30='building';
+  const co=(prod.cohorts||[]).slice().sort((a,b)=>new Date(b.wk)-new Date(a.wk));
+  const mature=co.find(c=>ageDays(c.wk)>=34 && c.users>0);
+  if(mature) d30=Math.round(100*mature.d30/mature.users)+'%';
+  const conv=(acq.conv&&acq.conv.open_rate!=null)?acq.conv.open_rate+'%':'—';
+  const refs=prod.referrals||0, K=savers>0?(refs/savers).toFixed(2):'0';
+  const tiles=[
+    ['Savers', Number(savers).toLocaleString('en-PH')],
+    ['Total ipon', '₱'+fmtShort(ipon)],
+    ['D30 retention', d30],
+    ['Landing → open', conv],
+    ['Viral coeff (K)', K]
+  ];
+  document.getElementById('northstar').innerHTML =
+    '<div class="nshd">★ North Star — the numbers that matter</div><div class="nsgrid">'
+    + tiles.map(x=>'<div class="nstile"><div class="nsv">'+x[1]+'</div><div class="nsl">'+x[0]+'</div></div>').join('')
+    + '</div>';
+}
+async function loadAcq(){
+  const c = await client();
+  let a={}, pub={};
+  try{ const r=await c.rpc('landing_metrics'); if(!r.error && r.data && !r.data.error) a=r.data; }catch(e){}
+  try{ const r=await c.rpc('public_stats');   if(!r.error && r.data) pub=r.data; }catch(e){}
+  renderNorthStar(window._prod, a, pub);
+  if(!a.totals) return;   // acquisition RPC empty/forbidden → north star still renders, skip acq cards
+  {
+    const t=a.totals||{}, cv=a.conv||{}, at=a.attributed||{};
+    document.getElementById('acq-kpis').innerHTML =
+      kpi(Number(t.views||0).toLocaleString('en-PH'),'Landing views') +
+      kpi(Number(t.opens||0).toLocaleString('en-PH'),'Open-app clicks') +
+      kpi((cv.open_rate||0)+'%','Open rate') +
+      kpi(Number(t.subs||0).toLocaleString('en-PH'),'Subscribers') +
+      kpi((cv.sub_rate||0)+'%','Sub rate') +
+      kpi(Number(at.landing||0).toLocaleString('en-PH'),'Attributed installs');
+    const dl=a.daily||[];
+    mkChart('acqDaily',{ type:'line',
+      data:{ labels:dl.map(x=>String(x.d).slice(5)), datasets:[
+        { label:'Views', data:dl.map(x=>x.views), borderColor:C.info, backgroundColor:'rgba(28,176,246,.12)', fill:true, tension:.35, borderWidth:3, pointRadius:2 },
+        { label:'Open app', data:dl.map(x=>x.opens), borderColor:C.money, tension:.35, borderWidth:3, pointRadius:2 },
+        { label:'Subscribe', data:dl.map(x=>x.subs), borderColor:C.premium, tension:.35, borderWidth:3, pointRadius:2 }
+      ]},
+      options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:true,labels:{color:C.muted,font:{size:11}}}}, scales:{ x:noGrid(), y:yAxis() } }
+    });
+    const src=a.by_source||[];
+    document.getElementById('acqSourceTable').innerHTML =
+      '<tr><th>Source</th><th>Views</th><th>Open app</th><th>Subs</th><th>Open %</th></tr>' +
+      (src.length ? src.map(s=>{ const or=s.views>0?Math.round(100*s.opens/s.views):0;
+        return '<tr><td>'+escH(s.source)+'</td><td>'+s.views+'</td><td>'+s.opens+'</td><td>'+s.subs+'</td><td>'+or+'%</td></tr>'; }).join('')
+        : '<tr><td colspan="5" style="color:var(--muted)">No landing traffic yet.</td></tr>');
+    const bl=a.by_lang||[];
+    document.getElementById('acq-lang').innerHTML = bl.length
+      ? bl.map(l=>kpi(Number(l.views||0).toLocaleString('en-PH'),(l.lang==='en'?'English':l.lang==='tl'?'Taglish':escH(l.lang))+' views')).join('')
+      : kpi('—','No data');
+  }
+}
+function pct(a,b){ return b>0 ? Math.round(a/b*100) : null; }
+function pctS(a,b){ return b>0 ? Math.round(a/b*100)+'%' : '—'; }
+function ageDays(wk){ return (Date.now() - new Date(wk).getTime())/86400000; }
+
+/* ---------- NORTH STAR VERDICT ---------- */
+function computeVerdict(d){
+  const co = (d.cohorts||[]).slice().sort((a,b)=> new Date(a.wk)-new Date(b.wk));
+  const matureD30 = co.filter(r=> ageDays(r.wk) >= 34 && r.users>0);
+  const matureD7  = co.filter(r=> ageDays(r.wk) >= 13 && r.users>0);
+  const wAvg = (rows, key)=>{ const u=rows.reduce((a,r)=>a+r.users,0); const n=rows.reduce((a,r)=>a+ (r[key]||0),0); return u>0? n/u*100 : null; };
+  const d30 = wAvg(matureD30,'d30');
+  const d7  = wAvg(matureD7,'d7');
+
+  // WoW: avg daily active, last 7 vs prior 7
+  const dau = d.dau_14d||[];
+  const last7 = dau.slice(-7), prev7 = dau.slice(-14,-7);
+  const avg = a=> a.length? a.reduce((s,x)=>s+x.users,0)/a.length : 0;
+  const a1=avg(last7), a0=avg(prev7);
+  const wow = a0>0 ? Math.round((a1-a0)/a0*100) : null;
+
+  let grad, label, head, sub, gateVal=d30, prog=0;
+  if(d30!=null){
+    prog = Math.min(100, Math.round(d30/10*100));
+    if(d30>=10){ grad='linear-gradient(135deg,#58CC02,#46A302)'; label='North Star · D30 gate'; head='✅ Passing the gate — D30 '+Math.round(d30)+'%';
+      sub='Mature cohorts retain at or above the 10% D30 bar (PRD §2). This is the signal that IponPal is worth building on. Keep the experience stable and pour energy into distribution — every new tester now compounds.'; }
+    else if(d30>=6){ grad='linear-gradient(135deg,#FF9600,#E07E00)'; label='North Star · D30 gate'; head='🟠 Close — D30 '+Math.round(d30)+'% (gate 10%)';
+      sub='You’re in striking distance. Focus on the drop-off point in the retention curve below and your lowest-completion lesson — small habit-loop wins here move D30 the most. Don’t scale spend yet.'; }
+    else { grad='linear-gradient(135deg,#FF4B8C,#C9356E)'; label='North Star · D30 gate'; head='🔴 Below gate — D30 '+Math.round(d30)+'%';
+      sub='Under the 10% bar on mature cohorts. Before recruiting more testers, fix why people leave: interview churned users, watch where the DAU line falls, and tighten the first-week habit loop. Distribution can’t save weak retention.'; }
+  } else if(d7!=null){
+    grad='linear-gradient(135deg,#7C5CFC,#6547E0)'; label='North Star · early read';
+    head='D7 '+Math.round(d7)+'% · D30 not ready yet';
+    sub='No cohort has lived a full 30 days, so the real gate can’t be read. D7 is your early proxy — a healthy D7 is a good omen, but decisions wait for D30 (~week 5–6). Keep recruiting so cohorts reach a readable size (≥300).';
+    prog = Math.min(100, Math.round((d7/25)*100));
+  } else {
+    grad='linear-gradient(135deg,#7C5CFC,#9B7DFF)'; label='North Star · gathering data';
+    head='Not enough data yet';
+    sub='Retention needs time to exist: your first D7 read lands ~2 weeks after wave-1 testers join, and the D30 gate verdict around week 5–6. Right now, focus entirely on getting those first 20–30 testers active.';
+    prog = 6;
+  }
+
+  const wowChip = wow==null ? '' :
+    '<div class="m"><div class="mv">'+(wow>=0?'+':'')+wow+'%</div><div class="ml">Avg DAU · wk-over-wk</div></div>';
+  const d7Chip = d7!=null ? '<div class="m"><div class="mv">'+Math.round(d7)+'%</div><div class="ml">D7 (mature)</div></div>' : '';
+  const usersChip = '<div class="m"><div class="mv">'+(d.total_users||0)+'</div><div class="ml">Total users</div></div>';
+
+  document.getElementById('verdict').style.background = grad;
+  document.getElementById('verdict').innerHTML =
+    '<div class="vlabel">'+label+'</div>'+
+    '<div class="vhead">'+head+'</div>'+
+    '<div class="vsub">'+sub+'</div>'+
+    '<div class="vprog"><div style="width:'+prog+'%"></div></div>'+
+    '<div class="vmeta">'+usersChip+d7Chip+wowChip+'</div>';
+}
+
+/* ---------- KPI CARDS ---------- */
+const KINFO = {
+  users:'Total accounts created. <b>Wave-1 target:</b> 20–30 BPO-network testers. Growth here only matters if retention holds.',
+  events:'Every action users log — the size of the event-sourced "memory brain." <b>More events per user = deeper engagement</b> and a smarter coach.',
+  shares:'Total share cards created (any type). <b>Your cheapest growth channel</b> — but this is a raw count, so one enthusiast sharing 20× counts as 20.',
+  ushare:'<b>Distinct people</b> who shared at least once. This is the honest reach number — compare it to total shares: if shares ≫ unique sharers, your sharing is <b>concentrated in a few fans</b>, not broad.',
+  prod:'Share of sessions with at least one real action (log, deposit, lesson, share) vs a passive peek. <b>Higher = stickier habit.</b>',
+  bounce:'Share of sessions with just a single event — opened and left. <b>High = peek-and-leave</b>, a target for a stronger first-screen hook.',
+  referrals:'Users who joined via someone else’s referral. A direct read on <b>word-of-mouth (K-factor)</b>.',
+  votes:'Total votes cast on the Plus fake-door. A <b>willingness/interest signal</b> — not revenue, and capped at 2 per user.'
+};
+function kpi(n,l,key){
+  return '<div class="kpi">'+(key?'<button class="info" onclick="togKpi(this)">i</button>':'')+
+    '<div class="n">'+n+'</div><div class="l">'+l+'</div>'+
+    (key?'<div class="infobox">'+KINFO[key]+'</div>':'')+'</div>';
+}
+/* outlier verdict for the engagement section */
+function engVerdict(e){
+  if(!e || e.active_users==null) return 'Not enough data yet — needs users with logged events.';
+  const mean=+e.epu_mean||0, med=+e.epu_median||0, top=Math.round((+e.top_user_share||0)*100),
+        exTop=+e.epu_mean_ex_top||0, od=+e.one_and_done||0, au=+e.active_users||0;
+  const bits=[];
+  if(med>0 && mean>=1.5*med) bits.push('<b class="bad">Right-skewed:</b> the mean ('+mean+') sits well above the median ('+med+') — a few power users inflate the average, so trust the <b>median</b> as your typical user.');
+  else bits.push('<b class="good">Healthy spread:</b> mean ('+mean+') and median ('+med+') are close — engagement isn\'t just a couple of whales.');
+  bits.push('The busiest user is <b>'+top+'%</b> of all events; drop them and events/user goes '+mean+' → <b>'+exTop+'</b>.');
+  if(au>0) bits.push('<b>'+Math.round(od/au*100)+'%</b> of active users are one-and-done (active a single day only).');
+  return bits.join(' ');
+}
+/* which event types count as an intentional "action" (vs auto/passive) */
+const ACTION = new Set(['expense_logged','expense_edited','goal_created','goal_deposit','goal_joined',
+  'goal_shared','lesson_completed','share_created','income_updated','plus_feature_vote','plus_reserved',
+  'plus_feedback','referral_completed']);
+/* day × hour activity heatmap → HTML grid (no plugin needed) */
+function renderHeat(elId, grid, field, rgb){
+  const el = document.getElementById(elId); if(!el) return;
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const at={}; let max=0;
+  (grid||[]).forEach(x=>{ const v=Number(x[field])||0; at[x.dow+'_'+x.h]=v; if(v>max)max=v; });
+  let h='<div class="heatgrid"><div class="hcell hlbl"></div>';
+  for(let hr=0;hr<24;hr++) h+='<div class="hhead">'+(hr%6===0?hr:'')+'</div>';
+  for(let d=0;d<7;d++){
+    h+='<div class="hcell hlbl">'+days[d]+'</div>';
+    for(let hr=0;hr<24;hr++){
+      const v=at[d+'_'+hr]||0;
+      const a=(max>0&&v>0)?(0.14+0.86*(v/max)):0;
+      const bg=v>0?('rgba('+rgb+','+a.toFixed(3)+')'):'var(--line)';
+      h+='<div class="hcell" title="'+days[d]+' '+String(hr).padStart(2,'0')+':00 — '+v+' user'+(v===1?'':'s')+'" style="background:'+bg+'"></div>';
+    }
+  }
+  el.innerHTML=h+'</div>';
+}
+/* session depth/quality summary */
+function sessNote(s){
+  if(!s || s.total_sessions==null) return 'Not enough data yet — needs users with logged actions.';
+  return '<b>'+(s.total_sessions||0)+'</b> sessions total (~<b>'+(s.sessions_per_user||0)+'</b> per user). '+
+    '<b>'+(s.pct_productive||0)+'%</b> include a real action — the rest are quick check-ins. '+
+    'Typical depth: <b>'+(s.avg_events||0)+'</b> events (of which <b>'+(s.avg_actions||0)+'</b> actions) per session.';
+}
+
+/* ---------- CHART HELPERS ---------- */
+function mkChart(id, cfg){ if(charts[id]) charts[id].destroy(); const el=document.getElementById(id); if(!el) return; charts[id]=new Chart(el.getContext('2d'), cfg); }
+// factories return fresh objects each call — never share a scale config across charts
+const noGrid = () => ({ grid:{display:false}, border:{display:false}, ticks:{color:C.muted, font:{size:11}} });
+const yAxis  = (t={}, a={}) => Object.assign({ grid:{color:C.line}, border:{display:false}, beginAtZero:true, ticks:Object.assign({color:C.muted, font:{size:11}, precision:0}, t) }, a);
+
+/* ---------- MAIN RENDER ---------- */
+function renderMetrics(d){
+  document.getElementById('board').style.display='block';
+  document.getElementById('gen').textContent = 'generated ' + new Date(d.generated_at).toLocaleString('en-PH');
+
+  computeVerdict(d);
+
+  // Topline KPIs
+  const shr = d.sharing || {};
+  document.getElementById('kpis').innerHTML =
+    kpi(d.total_users,'Total users','users') +
+    kpi(Number(d.events_total).toLocaleString('en-PH'),'Events','events') +
+    kpi(d.shares,'Share cards','shares') +
+    kpi(shr.unique_sharers!=null?shr.unique_sharers:'—','Unique sharers','ushare') +
+    kpi(d.referrals,'Referrals','referrals') +
+    kpi(d.plus_votes_n,'Plus votes','votes');
+
+  // Engagement quality / outlier check
+  const eng = d.engagement || {};
+  document.getElementById('engStats').innerHTML =
+    kpi(eng.epu_mean!=null?eng.epu_mean:'—','Mean events/user') +
+    kpi(eng.epu_median!=null?eng.epu_median:'—','Median events/user') +
+    kpi(eng.epu_p90!=null?eng.epu_p90:'—','P90 events/user') +
+    kpi(eng.epu_max!=null?eng.epu_max:'—','Max (top user)');
+  document.getElementById('engNote').innerHTML = engVerdict(eng);
+
+  // Event mix (horizontal bar) — green = real actions, grey = auto/passive (bloat)
+  const et = (d.events_by_type||[]).slice().sort((a,b)=>b.n-a.n);
+  mkChart('typeChart', {
+    type:'bar',
+    data:{ labels: et.map(x=>x.type), datasets:[{ label:'Events', data:et.map(x=>x.n),
+      backgroundColor: et.map(x=>ACTION.has(x.type)?C.money:'#C9C6D6'), borderRadius:6 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false},
+        tooltip:{ callbacks:{ afterLabel:(it)=> ACTION.has(et[it.dataIndex].type)?'real action':'auto / passive' } } },
+      scales:{ x:yAxis(), y:noGrid() } }
+  });
+
+  // Events-per-user distribution (histogram) — see the long tail
+  const eh = d.epu_hist||[];
+  mkChart('epuHist', {
+    type:'bar',
+    data:{ labels: eh.map(x=>x.label), datasets:[{ label:'Users', data:eh.map(x=>x.users), backgroundColor:C.premium, borderRadius:6 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false},
+        tooltip:{ callbacks:{ title:(it)=>it[0].label+' events', label:(it)=>it.raw+' user'+(it.raw===1?'':'s') } } },
+      scales:{ x:Object.assign(noGrid(),{ title:{display:true,text:'events per user',color:C.muted,font:{size:10}} }),
+               y:yAxis({}, { title:{display:true,text:'# users',color:C.muted,font:{size:10}} }) } }
+  });
+
+  // Activity heatmaps (weekday × hour, PH) — Present (any) vs Doing (actions)
+  const grid = d.activity_grid||[];
+  renderHeat('heatPresent', grid, 'users',        '28,176,246');
+  renderHeat('heatDoing',   grid, 'action_users', '88,204,2');
+
+  // Sessions — depth & quality
+  const ss = d.session||{};
+  const u = (v,suf)=> v!=null ? (v+(suf||'')) : '—';
+  document.getElementById('sessStats').innerHTML =
+    kpi(u(ss.sessions_per_user),'Sessions / user') +
+    kpi(u(ss.avg_dur_min,'m'),'Avg length') +
+    kpi(u(ss.median_dur_min,'m'),'Median length') +
+    kpi(u(ss.avg_events),'Events / session') +
+    kpi(u(ss.pct_productive,'%'),'Productive','prod') +
+    kpi(u(ss.pct_single,'%'),'Single-event','bounce');
+  document.getElementById('sessNote').innerHTML = sessNote(ss);
+
+  // DAU area
+  const dau = d.dau_14d||[];
+  mkChart('dauChart', {
+    type:'line',
+    data:{ labels: dau.map(x=>String(x.d).slice(5)), datasets:[{
+      label:'Active users', data:dau.map(x=>x.users), borderColor:C.premium, backgroundColor:'rgba(124,92,252,.14)',
+      fill:true, tension:.35, borderWidth:3, pointRadius:3, pointBackgroundColor:C.premium }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:noGrid(), y:yAxis() } }
+  });
+
+  // Retention curves (last up to 4 cohorts) + table
+  const co = (d.cohorts||[]).slice().sort((a,b)=> new Date(a.wk)-new Date(b.wk));
+  const recent = co.slice(-4);
+  const palette=[C.info, C.premium, C.celebrate, C.money];
+  const cohortSets = recent.map((r,i)=>({
+    label: String(r.wk).slice(0,10),
+    data: [ pct(r.d1,r.users), ageDays(r.wk)>=13?pct(r.d7,r.users):null, ageDays(r.wk)>=34?pct(r.d30,r.users):null ],
+    borderColor: palette[i%palette.length], backgroundColor:palette[i%palette.length],
+    borderWidth:3, tension:.25, pointRadius:4, spanGaps:false
+  }));
+  mkChart('cohortChart', {
+    type:'line',
+    data:{ labels:['D1','D7','D30'], datasets: cohortSets.length?cohortSets:[{label:'—',data:[null,null,null]}] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'bottom', labels:{color:C.muted, font:{size:11}, boxWidth:12, boxHeight:12}} },
+      scales:{ x:noGrid(), y:yAxis({callback:v=>v+'%'}, {max:100}) } }
+  });
+  const chip = v => v==null ? '<span class="chip" style="background:#F1F0F8;color:#8E8AA3">—</span>'
+    : '<span class="chip" style="background:'+(v>=10?'#E9F8DC;color:#46A302':v>=6?'#FFF1DC;color:#E07E00':'#FFE7F0;color:#C9356E')+'">'+v+'%</span>';
+  document.getElementById('cohortTable').innerHTML =
+    '<tr><th>Cohort week</th><th>Users</th><th>D1</th><th>D7</th><th>D30</th></tr>' +
+    (co.length ? co.slice().reverse().map(r=>'<tr><td>'+String(r.wk).slice(0,10)+'</td><td>'+r.users+'</td><td>'+chip(pct(r.d1,r.users))+'</td><td>'+chip(ageDays(r.wk)>=13?pct(r.d7,r.users):null)+'</td><td>'+chip(ageDays(r.wk)>=34?pct(r.d30,r.users):null)+'</td></tr>').join('')
+      : '<tr><td colspan="5" class="empty">No cohorts yet — your first rows appear a week after testers join.</td></tr>');
+
+  // Paywall funnel (grouped bars) + table
+  const pw = d.paywall||[];
+  mkChart('paywallChart', {
+    type:'bar',
+    data:{ labels: pw.map(p=>'₱'+p.price), datasets:[
+      { label:'Viewers', data:pw.map(p=>p.viewers), backgroundColor:C.info, borderRadius:6 },
+      { label:'Reservers', data:pw.map(p=>p.reservers), backgroundColor:C.money, borderRadius:6 } ] },
+    options:{ responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{position:'bottom', labels:{color:C.muted, font:{size:11}, boxWidth:12}} },
+      scales:{ x:noGrid(), y:yAxis() } }
+  });
+  document.getElementById('paywallTable').innerHTML =
+    '<tr><th>Price</th><th>Views</th><th>Viewers</th><th>Reservers</th><th>Intent conv.</th></tr>' +
+    (pw.length ? pw.map(p=>'<tr><td>₱'+p.price+'</td><td>'+p.views+'</td><td>'+p.viewers+'</td><td>'+p.reservers+'</td><td><b style="color:'+C.premium+'">'+pctS(p.reservers,p.viewers)+'</b></td></tr>').join('')
+      : '<tr><td colspan="5" class="empty">No paywall views yet.</td></tr>');
+
+  // Feature votes (horizontal bar)
+  const fv = (d.feature_votes||[]).slice().sort((a,b)=>b.votes-a.votes);
+  mkChart('voteChart', {
+    type:'bar',
+    data:{ labels: fv.map(v=>v.feature), datasets:[{ label:'Votes', data:fv.map(v=>v.votes), backgroundColor:C.celebrate, borderRadius:6 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:yAxis(), y:noGrid() } }
+  });
+
+  // Lessons (horizontal bar)
+  const ls = (d.lessons||[]).slice().sort((a,b)=>b.completions-a.completions);
+  mkChart('lessonChart', {
+    type:'bar',
+    data:{ labels: ls.map(l=>l.lesson), datasets:[{ label:'Completions', data:ls.map(l=>l.completions), backgroundColor:C.info, borderRadius:6 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:yAxis(), y:noGrid() } }
+  });
+
+  // Category insights — most-used categories (horizontal bar)
+  const cats = (d.categories||[]).slice(0,12);
+  mkChart('catChart', {
+    type:'bar',
+    data:{ labels: cats.map(c=>catL(c.category)), datasets:[{ label:'Uses', data:cats.map(c=>c.uses), backgroundColor:C.premium, borderRadius:6 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:yAxis(), y:noGrid() } }
+  });
+  // override rate per category
+  const rc = d.reclass||[];
+  document.getElementById('reclassTable').innerHTML =
+    '<tr><th>Category</th><th>Users</th><th>→ Need</th><th>→ Want</th></tr>' +
+    (rc.length ? rc.map(r=>'<tr><td>'+catL(r.category)+'</td><td>'+r.users+'</td><td><b style="color:'+C.money+'">'+r.to_need+'</b></td><td><b style="color:'+C.wants+'">'+r.to_want+'</b></td></tr>').join('')
+      : '<tr><td colspan="4" class="empty">No overrides yet — defaults are sticking (or it\'s early).</td></tr>');
+  // population Need/Want mix
+  const emx = d.envelope_mix||{needs:0,wants:0}, emt=(emx.needs||0)+(emx.wants||0);
+  const nP = emt?Math.round(emx.needs/emt*100):0, wP = emt?100-nP:0;
+  document.getElementById('envMix').innerHTML = emt
+    ? '<div style="display:flex;height:14px;border-radius:7px;overflow:hidden"><div style="width:'+nP+'%;background:'+C.money+'"></div><div style="width:'+wP+'%;background:'+C.wants+'"></div></div>'
+      +'<div class="vmeta" style="margin-top:8px"><div class="m"><div class="mv" style="color:'+C.money+'">'+nP+'%</div><div class="ml">Needs ('+emx.needs+')</div></div><div class="m"><div class="mv" style="color:'+C.wants+'">'+wP+'%</div><div class="ml">Wants ('+emx.wants+')</div></div></div>'
+    : '<p class="empty">No expenses logged yet.</p>';
+
+  // New-feature adoption
+  const f = d.features||{};
+  document.getElementById('featKpis').innerHTML =
+    kpi(f.share_prompts||0,'Share prompts') +
+    kpi(f.shares||0,'Shares total') +
+    kpi((f.recaps||0)+' · '+(f.recap_users||0)+'u','Weekly recaps') +
+    kpi((f.coach_details||0)+' · '+(f.coach_users||0)+'u','Coach deep-dives');
+
+  // Custom-category trend signal (which user-made names recur → promote to official)
+  const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const cc = d.custom_cats||[];
+  document.getElementById('customCatsTable').innerHTML =
+    '<tr><th>Custom name</th><th>Users</th><th>Times</th></tr>' +
+    (cc.length ? cc.slice(0,15).map(r=>'<tr><td>'+esc(r.name)+'</td><td><b'+(r.users>=3?' style="color:'+C.money+'"':'')+'>'+r.users+'</b></td><td>'+r.n+'</td></tr>').join('')
+      : '<tr><td colspan="3" class="empty">No custom categories yet — the escape hatch is unused (defaults are covering people).</td></tr>');
+
+  // Extra-income logging
+  const iv = d.income || {};
+  document.getElementById('incomeKpis').innerHTML =
+    kpi(iv.events||0,'Income logs') +
+    kpi(iv.users||0,'Users logging') +
+    kpi('₱'+Number(iv.total||0).toLocaleString('en-PH'),'Total extra income') +
+    kpi(iv.split_prompts||0,'Split prompts shown');
+  const src = (iv.by_source||[]).slice().sort((a,b)=>b.n-a.n);
+  mkChart('incSrcChart', {
+    type:'bar',
+    data:{ labels: src.map(s=>srcL(s.source)), datasets:[{ label:'Logs', data:src.map(s=>s.n), backgroundColor:C.money, borderRadius:6 }] },
+    options:{ indexAxis:'y', responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ x:yAxis(), y:noGrid() } }
+  });
+
+  // Barkada KPIs
+  const b = d.barkada || {};
+  document.getElementById('bk').innerHTML =
+    kpi(b.goals||0,'Shared jars') + kpi(b.memberships||0,'Memberships') +
+    kpi(b.deposits||0,'Deposits') + kpi('₱'+Number(b.deposit_total||0).toLocaleString('en-PH'),'Total in jars');
+}
+
+// auto-load if already signed in
+(async()=>{ try{ const c=await client(); const {data}=await c.auth.getSession(); if(data.session) load(); }catch(e){} })();
+</script>
+</body>
+</html>
