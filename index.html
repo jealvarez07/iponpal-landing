@@ -501,7 +501,7 @@ footer a{color:var(--green-dk);text-decoration:none}
 
   // ── analytics + attribution + waitlist (see db_waitlist.sql / db_landing_metrics.sql) ──
   const _q=new URLSearchParams(location.search);
-  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||null, utm_campaign:_q.get('utm_campaign')||null, referrer:document.referrer||null, path:location.pathname||'/', variant:_q.get('v')||null };
+  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||_q.get('m')||null, utm_campaign:_q.get('utm_campaign')||_q.get('c')||null, referrer:document.referrer||null, path:location.pathname||'/', variant:_q.get('v')||null };
   function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(Object.assign({type,lang:document.documentElement.lang||'tl'},_acq))}); }catch(e){} }
   function nlMsg(t,ok){ const el=document.getElementById('nl-msg'); if(!el)return; el.textContent=t; el.style.color=ok?'var(--green-dk)':'#C4485E'; }
   async function subscribe(e){
