@@ -157,6 +157,12 @@ h2{font-size:clamp(32px,6vw,62px);font-weight:800;letter-spacing:-.03em;line-hei
 .bip .col li{list-style:none;font-size:14px;font-weight:600;padding:5px 0;color:var(--ink2)}
 
 /* final */
+.faq details{background:var(--glass);border:1px solid var(--border-glass);border-radius:16px;box-shadow:var(--sh);margin-top:12px;overflow:hidden;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--green-dk);font-size:22px;font-weight:800;flex-shrink:0}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 18px 16px;font-size:14.5px;color:var(--muted);font-weight:500;line-height:1.55}
 .final{text-align:center}
 .final .wm{font-size:clamp(30px,6vw,52px)}
 .final h2{margin-top:10px}
@@ -395,6 +401,19 @@ footer a{color:var(--green-dk);text-decoration:none}
   </div>
 </div></div></section>
 
+<!-- FAQ -->
+<section><div class="wrap" style="max-width:720px">
+  <span class="eyebrow reveal" style="display:block;text-align:center" data-k="faq_eye">Mga tanong</span>
+  <h2 class="reveal" style="margin-top:14px;text-align:center" data-k="faq_h">Bago ka pa magtanong.</h2>
+  <div class="faq" style="margin-top:30px">
+    <details class="reveal"><summary data-k="faq_q1">Libre ba talaga?</summary><p data-k="faq_a1">Oo — 100% libre habang nasa early access kami. Kung may premium man balang araw, may libreng version pa rin.</p></details>
+    <details class="reveal"><summary data-k="faq_q2">Scam ba 'to?</summary><p data-k="faq_a2">Hindi. Walang pautang, hindi namin hinahawakan ang pera mo, walang paluwagan, at hindi namin ibinebenta ang data mo. Coach lang kami para sa ipon mo.</p></details>
+    <details class="reveal"><summary data-k="faq_q3">Kailangan i-connect ang bank ko?</summary><p data-k="faq_a3">Hindi. Manu-mano ang paglo-log — 10 seconds lang. Walang bank login, walang password na hinihingi.</p></details>
+    <details class="reveal"><summary data-k="faq_q4">Safe ba ang data ko?</summary><p data-k="faq_a4">Oo. Naka-secure at naka-backup sa pribadong database, hindi ibinebenta. Pwede mong i-export o burahin lahat anytime.</p></details>
+    <details class="reveal"><summary data-k="faq_q5">Para kanino 'to?</summary><p data-k="faq_a5">Para sa Pinoy na gustong matutong mag-ipon — sweldo, gig, freelance, o estudyante. Kung nahihirapan kang mag-ipon, para sa'yo 'to.</p></details>
+  </div>
+</div></section>
+
 <!-- FINAL CTA -->
 <section class="final"><div class="wrap">
   <div class="wm wordmark reveal">IponPal</div>
@@ -413,6 +432,11 @@ footer a{color:var(--green-dk);text-decoration:none}
 </div></footer>
 
 <script>
+  // hero A/B: sticky per-visitor variant (or forced via ?v=). Logged on every event.
+  const _q=new URLSearchParams(location.search);
+  const _variant=_q.get('v')||(function(){try{return localStorage.getItem('ip_var');}catch(e){return null;}})()||(Math.random()<0.5?'a':'b');
+  try{ localStorage.setItem('ip_var',_variant); }catch(e){}
+  const HERO_B={ tl:"Mag-ipon nang hindi nahihirapan.", en:"Save without the struggle." };
   const EN = {
     open:'Open app', open_hero:'Open IponPal →', open_ipon:'Open the app →', open_final:'Open IponPal →', open_foot:'Open the app',
     badge:'🇵🇭 Made in the Philippines · building in public',
@@ -451,6 +475,12 @@ footer a{color:var(--green-dk);text-decoration:none}
     rm_1h:'Save', rm_1p:'Budget, save, the Financial Health Score, and the Coach. All of it, today.',
     rm_2h:'Buffer', rm_2p:'An affordable emergency fund, a deeper AI Coach, and milestones.',
     rm_3h:'Grow', rm_3p:'A way to grow your savings — through legit partners, not loans.',
+    faq_eye:'Questions', faq_h:'Before you even ask.',
+    faq_q1:'Is it really free?', faq_a1:"Yes — 100% free while we're in early access. If there's ever a premium tier, there'll still be a free version.",
+    faq_q2:'Is this a scam?', faq_a2:"No. No lending, we never hold your money, no paluwagan, and we don't sell your data. We're just a coach for your savings.",
+    faq_q3:'Do I have to connect my bank?', faq_a3:'No. Logging is manual — 10 seconds. No bank login, no passwords requested.',
+    faq_q4:'Is my data safe?', faq_a4:'Yes. Secured and backed up in a private database, never sold. Export or delete everything anytime.',
+    faq_q5:'Who is this for?', faq_a5:'For any Filipino who wants to save — salaried, gig, freelance, or student. If saving is hard for you, this is for you.',
     f_h:'Start your ipon today.', f_fine:'Free while we build · no download',
     contact:'Contact', nl_btn:'Subscribe', whisper:'IponPal updates only · no spam, unsubscribe anytime.',
     made:'Made with 💚 in the Philippines 🇵🇭 · Built in public by a small PH team'
@@ -464,6 +494,7 @@ footer a{color:var(--green-dk);text-decoration:none}
     document.getElementById('lang-tl').classList.toggle('on', l!=='en');
     document.getElementById('lang-en').classList.toggle('on', l==='en');
     document.documentElement.lang = (l==='en') ? 'en' : 'tl';
+    if(_variant==='b'){ const hh=document.querySelector('[data-k="h1"]'); if(hh) hh.innerHTML = (l==='en'?HERO_B.en:HERO_B.tl); }   // A/B hero
     renderStats();   // keep the live-stats block in the current language
   }
 
@@ -500,8 +531,7 @@ footer a{color:var(--green-dk);text-decoration:none}
   setLang('tl');
 
   // ── analytics + attribution + waitlist (see db_waitlist.sql / db_landing_metrics.sql) ──
-  const _q=new URLSearchParams(location.search);
-  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||_q.get('m')||null, utm_campaign:_q.get('utm_campaign')||_q.get('c')||null, referrer:document.referrer||null, path:location.pathname||'/', variant:_q.get('v')||null };
+  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||_q.get('m')||null, utm_campaign:_q.get('utm_campaign')||_q.get('c')||null, referrer:document.referrer||null, path:location.pathname||'/', variant:_variant };
   function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(Object.assign({type,lang:document.documentElement.lang||'tl'},_acq))}); }catch(e){} }
   function nlMsg(t,ok){ const el=document.getElementById('nl-msg'); if(!el)return; el.textContent=t; el.style.color=ok?'var(--green-dk)':'#C4485E'; }
   async function subscribe(e){
