@@ -507,7 +507,7 @@ footer a{color:var(--green-dk);text-decoration:none}
     const grid=document.getElementById('stats'), fb=document.getElementById('stats-fallback'), note=document.getElementById('sp-note');
     if(!grid) return;
     const en=document.documentElement.lang==='en';
-    if(_stats && _stats.savers){                 // real activity → show the numbers
+    if(_stats && _stats.savers >= 25){           // show numbers only once they're credible proof (honest > weak)
       document.getElementById('st-savers').textContent=fmtN(_stats.savers);
       document.getElementById('st-ipon').textContent=fmtP(_stats.ipon_total);
       document.getElementById('st-deposits').textContent=fmtN(_stats.deposits);
