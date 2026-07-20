@@ -424,10 +424,11 @@ footer a{color:var(--green-dk);text-decoration:none}
 
 <footer><div class="wrap">
   <div class="wordmark" style="font-size:22px;font-weight:800">IponPal</div>
-  <div class="fl"><a href="https://app.iponpal.com" data-k="open_foot">Open the app</a><a href="#">Instagram</a><a href="#">TikTok</a><a href="#" data-k="contact">Contact</a></div>
+  <div class="fl"><a href="https://app.iponpal.com" data-k="open_foot">Open the app</a><a href="https://instagram.com/iponpal" rel="noopener">Instagram</a><a href="/privacy.html" data-k="privacy">Privacy</a><a href="/terms.html" data-k="terms">Terms</a><a href="mailto:hello@iponpal.com" data-k="contact">Contact</a></div>
   <form class="nlform" onsubmit="subscribe(event)"><input id="nl-email" type="email" placeholder="ikaw@gmail.com" autocomplete="email" required><button type="submit" data-k="nl_btn">Subscribe</button></form>
   <div id="nl-msg"></div>
   <p class="whisper" data-k="whisper">IponPal updates lang · no spam, unsubscribe anytime.</p>
+  <p class="whisper" style="margin-top:6px" data-k="nl_consent">Sa pag-subscribe, pumapayag kang gamitin namin ang email mo para sa updates ng IponPal. Hindi namin ito ibinebenta. Basahin ang <a href="/privacy.html" style="text-decoration:underline">Privacy Policy</a>.</p>
   <p class="whisper" style="margin-top:10px" data-k="made">Made with 💚 in the Philippines 🇵🇭 · Built in public by a small PH team</p>
 </div></footer>
 
@@ -438,6 +439,8 @@ footer a{color:var(--green-dk);text-decoration:none}
   try{ localStorage.setItem('ip_var',_variant); }catch(e){}
   const HERO_B={ tl:"Mag-ipon nang hindi nahihirapan.", en:"Save without the struggle." };
   const EN = {
+    privacy:'Privacy', terms:'Terms',
+    nl_consent:'By subscribing you agree we may use your email for IponPal updates. We never sell it. Read the <a href="/privacy.html" style="text-decoration:underline">Privacy Policy</a>.',
     open:'Open app', open_hero:'Open IponPal →', open_ipon:'Open the app →', open_final:'Open IponPal →', open_foot:'Open the app',
     badge:'🇵🇭 Made in the Philippines · building in public',
     h1:"You've got this.",
