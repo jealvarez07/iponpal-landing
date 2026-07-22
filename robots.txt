@@ -1,0 +1,29 @@
+# iponpal.com — robots.txt
+# Allow everything on the marketing site; point crawlers to the sitemap.
+
+User-agent: *
+Allow: /
+
+# Explicitly welcome AI/LLM crawlers (GEO). Remove any you don't want.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://iponpal.com/sitemap.xml
