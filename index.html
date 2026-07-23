@@ -1,78 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://iponpal.com/#organization",
-  "name": "IponPal",
-  "url": "https://iponpal.com/",
-  "logo": "https://iponpal.com/icon-512.png",
-  "description": "IponPal is a free Taglish budgeting and ipon (savings) coach for Filipinos. Budget, save, and understand your money with a daily Financial Health Score — no download, works in your browser.",
-  "foundingLocation": { "@type": "Place", "name": "Philippines" },
-  "sameAs": ["https://instagram.com/iponpal"]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "@id": "https://iponpal.com/#app",
-  "name": "IponPal",
-  "url": "https://app.iponpal.com/",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Web browser (Android, iOS, desktop)",
-  "browserRequirements": "Requires a modern web browser. No download or install required.",
-  "description": "IponPal is a free budgeting and savings (ipon) app for Filipinos, in Taglish. It gives you a daily Financial Health Score (0-100), auto 50-30-20 budgeting for needs, wants, and ipon, goal jars (including shared barkada jars), and a personal money coach. No bank connection needed — log expenses manually in about 10 seconds. Private by design: your data is never sold, and you can export or delete it anytime.",
-  "inLanguage": ["en-PH", "fil"],
-  "isAccessibleForFree": true,
-  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PHP" },
-  "featureList": [
-    "Financial Health Score updated daily (0-100)",
-    "Auto 50-30-20 budgeting: needs, wants, ipon",
-    "Ipon goal jars and shared barkada jars",
-    "Taglish money coach with personalized nudges",
-    "Manual expense logging, no bank login required",
-    "Streaks, ranks, and barkada leaderboard",
-    "Export or delete your data anytime"
-  ],
-  "publisher": { "@id": "https://iponpal.com/#organization" }
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "@id": "https://iponpal.com/#faq",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "Libre ba talaga ang IponPal? (Is IponPal really free?)",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oo — 100% libre habang nasa early access. Kahit may premium balang araw, may libreng version pa rin. IponPal is 100% free during early access, and a free version will always remain." }
-    },
-    {
-      "@type": "Question",
-      "name": "Scam ba ang IponPal?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Hindi. Walang pautang, hindi namin hinahawakan ang pera mo, walang paluwagan, at hindi namin ibinebenta ang data mo. IponPal is not a lending app and not a paluwagan. It does not hold your money and does not sell your data — it is only a savings coach." }
-    },
-    {
-      "@type": "Question",
-      "name": "Kailangan bang i-connect ang bank ko? (Do I need to connect my bank?)",
-      "acceptedAnswer": { "@type": "Answer", "text": "Hindi. Manu-mano ang paglo-log, mga 10 segundo lang. Walang bank login o password na hinihingi. No bank connection is required — you log expenses manually in about 10 seconds." }
-    },
-    {
-      "@type": "Question",
-      "name": "Safe ba ang data ko? (Is my data safe?)",
-      "acceptedAnswer": { "@type": "Answer", "text": "Oo. Naka-secure at naka-backup sa pribadong database, hindi ibinebenta. Pwede mong i-export o burahin lahat anytime. Your data is secured and backed up in a private database, never sold, and you can export or delete all of it at any time." }
-    },
-    {
-      "@type": "Question",
-      "name": "Para kanino ang IponPal? (Who is IponPal for?)",
-      "acceptedAnswer": { "@type": "Answer", "text": "Para sa Pinoy na gustong matutong mag-ipon — sweldo, gig, freelance, o estudyante. IponPal is for any Filipino who wants to learn to save, whether salaried, gig worker, freelancer, or student." }
-    }
-  ]
-}
-</script>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,6 +17,76 @@
 <meta name="twitter:description" content="A health tracker, but for your money. Budget, save, understand your pera.">
 <meta name="twitter:image" content="https://iponpal.com/og-image.png">
 <meta name="theme-color" content="#12A472">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<!-- Structured data: helps Google rich results AND gives AI engines clean, factual entity info -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://iponpal.com/#org",
+      "name": "IponPal",
+      "url": "https://iponpal.com/",
+      "logo": "https://app.iponpal.com/icon-512.png",
+      "description": "A free, bilingual (Taglish/English) personal-finance coaching app for Filipinos. Budget, save, and understand your money with a friendly Coach.",
+      "foundingLocation": { "@type": "Country", "name": "Philippines" },
+      "areaServed": { "@type": "Country", "name": "Philippines" },
+      "email": "hello@iponpal.com",
+      "sameAs": ["https://instagram.com/iponpal"]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://iponpal.com/#app",
+      "name": "IponPal",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web (Progressive Web App)",
+      "url": "https://app.iponpal.com",
+      "description": "IponPal is a free Taglish budgeting and savings (ipon) coach for Filipinos. Manual expense logging (no bank connection), Needs/Wants/Ipon budgeting, savings goals, a conversational money Coach, and a Financial Health Score. No download, no ads, never sells data.",
+      "inLanguage": ["en", "fil"],
+      "publisher": { "@id": "https://iponpal.com/#org" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "PHP",
+        "description": "Free during early access; a free tier always remains."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://iponpal.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is IponPal really free? (Libre ba talaga?)",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — 100% free while we're in early access. If there's ever a premium tier, a free version will still remain." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is IponPal a scam? (Scam ba 'to?)",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. There's no lending, we never hold your money, there's no paluwagan, and we do not sell your data. We're just a coach for your ipon (savings)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to connect my bank?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Logging is manual and takes about 10 seconds. There's no bank login and we never ask for a password." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data safe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your data is secured and backed up in a private database, never sold. You can export or delete everything anytime." }
+        },
+        {
+          "@type": "Question",
+          "name": "Who is IponPal for?",
+          "acceptedAnswer": { "@type": "Answer", "text": "For any Filipino who wants to learn to save — whether salaried, gig, freelance, or a student. If saving is hard for you, IponPal is for you." }
+        }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="icon" href="https://app.iponpal.com/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

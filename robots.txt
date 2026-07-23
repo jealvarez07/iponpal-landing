@@ -1,10 +1,11 @@
-# iponpal.com — robots.txt
-# Allow everything on the marketing site; point crawlers to the sitemap.
+# IponPal — robots.txt
+# Everyone is welcome, including AI crawlers. AI discovery matters as much as Google now.
 
 User-agent: *
 Allow: /
 
-# Explicitly welcome AI/LLM crawlers (GEO). Remove any you don't want.
+# --- AI / LLM crawlers: explicitly allowed ---
+# (Being cited by ChatGPT, Claude, Perplexity, and Google AI Overviews is a core goal.)
 User-agent: GPTBot
 Allow: /
 
@@ -14,16 +15,19 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: PerplexityBot
-Allow: /
-
 User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
+User-agent: PerplexityBot
+Allow: /
+
 User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
 Allow: /
 
 Sitemap: https://iponpal.com/sitemap.xml
