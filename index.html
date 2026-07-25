@@ -442,14 +442,19 @@ footer a{color:var(--green-dk);text-decoration:none}
 <section class="center"><div class="wrap">
   <span class="eyebrow reveal" data-k="sp_eye">Growing, in public</span>
   <h2 class="reveal" style="margin-top:14px" data-k="sp_h">Piso-piso, sama-sama.</h2>
-  <div class="stats reveal" id="stats" style="margin-top:36px">
+  <!-- Default state is the honest "building in public" line, NOT the number grid.
+       Why: crawlers, LLMs (GPTBot/ClaudeBot/PerplexityBot) and no-JS visitors never run
+       renderStats(), so whatever is hardcoded here is what gets indexed and quoted. It
+       used to be four "—" characters, which read as broken/empty. The grid below is
+       revealed by JS only once savers >= 25 (see renderStats). Dashes are unreachable. -->
+  <div class="stats reveal" id="stats" style="margin-top:36px;display:none">
     <div class="stat"><div class="num" id="st-savers">—</div><div class="lab" data-k="sp_savers">Filipinos nag-iipon</div></div>
     <div class="stat"><div class="num" id="st-ipon">—</div><div class="lab" data-k="sp_ipon">Total na-ipon</div></div>
     <div class="stat"><div class="num" id="st-deposits">—</div><div class="lab" data-k="sp_deposits">Deposits</div></div>
     <div class="stat"><div class="num" id="st-days">—</div><div class="lab" data-k="sp_days">Araw na building</div></div>
   </div>
-  <p class="lead reveal" id="stats-fallback" style="display:none;margin:14px auto 0"></p>
-  <p class="microcopy reveal" id="sp-note" data-k="sp_note">*Live mula sa app · nagba-build in public kami</p>
+  <p class="lead reveal" id="stats-fallback" style="margin:14px auto 0;max-width:560px">Bago pa lang kami — nagba-<b>build in public</b> at bukás ang lahat ng numero. Sumali ka sa unang <b>300 na Pilipinong nag-iipon</b>. 🌱</p>
+  <p class="microcopy reveal" id="sp-note" data-k="sp_note" style="display:none">*Live mula sa app · nagba-build in public kami</p>
 </div></section>
 
 <!-- TRUST -->
@@ -584,24 +589,35 @@ footer a{color:var(--green-dk);text-decoration:none}
     const grid=document.getElementById('stats'), fb=document.getElementById('stats-fallback'), note=document.getElementById('sp-note');
     if(!grid) return;
     const en=document.documentElement.lang==='en';
-    if(_stats && _stats.savers >= 25){           // show numbers only once they're credible proof (honest > weak)
-      document.getElementById('st-savers').textContent=fmtN(_stats.savers);
-      document.getElementById('st-ipon').textContent=fmtP(_stats.ipon_total);
-      document.getElementById('st-deposits').textContent=fmtN(_stats.deposits);
-      document.getElementById('st-days').textContent=_stats.days_public;
+    // credible-proof floor: show real numbers only once they're worth showing.
+    const savers = (_stats && _stats.savers!=null) ? Number(_stats.savers) : null;
+    if(savers!=null && savers>=25){
+      document.getElementById('st-savers').textContent=fmtN(savers);
+      document.getElementById('st-ipon').textContent=fmtP(_stats.ipon_total||0);
+      document.getElementById('st-deposits').textContent=fmtN(_stats.deposits||0);
+      document.getElementById('st-days').textContent=_stats.days_public||1;
       grid.style.display=''; if(fb) fb.style.display='none'; if(note) note.style.display='';
-    } else if(_statsErr || _stats){              // resolved but no savers yet → honest, language-reactive line
-      const days=(_stats&&_stats.days_public)||1;
-      if(fb){ fb.innerHTML = en
-        ? 'We\'re new — <b>'+days+' days</b> building in public. Join us early. 🌱'
-        : 'Bago pa lang kami — <b>'+days+' araw</b> building in public. Sumali ka nang maaga. 🌱';
-        fb.style.display=''; }
-      grid.style.display='none'; if(note) note.style.display='none';
+      return;
     }
-    // else: not loaded yet → keep the "—" placeholders
+    /* EVERY other path lands here — below the floor, RPC errored, RPC returned null, or
+       still loading. Previously a null response matched neither branch and the "—"
+       placeholders persisted forever. Now the honest line is the guaranteed default. */
+    const days=(_stats&&_stats.days_public)||null;
+    if(fb){
+      fb.innerHTML = en
+        ? 'We\u2019re new' + (days ? ' — <b>'+days+' days</b> building in public' : ' and building in public')
+          + '. Be one of the first <b>300 Filipinos saving</b>. \uD83C\uDF31'
+        : 'Bago pa lang kami' + (days ? ' — <b>'+days+' araw</b> building in public' : ' at nagba-<b>build in public</b>')
+          + '. Sumali ka sa unang <b>300 na Pilipinong nag-iipon</b>. \uD83C\uDF31';
+      fb.style.display='';
+    }
+    grid.style.display='none'; if(note) note.style.display='none';
   }
   (async function(){
-    try{ const r=await fetch(SB_URL+'/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json'},body:'{}'}); _stats=await r.json(); }
+    try{
+      const r=await fetch(SB_URL+'/rest/v1/rpc/public_stats',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json'},body:'{}'});
+      if(r.ok){ _stats=await r.json(); } else { _statsErr=true; }   // 401/403/404 → treat as error, not as data
+    }
     catch(e){ _statsErr=true; }
     renderStats();
   })();
