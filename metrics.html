@@ -48,6 +48,45 @@ h1{font-family:var(--font-head);font-size:26px;font-weight:800;letter-spacing:-.
 .nstile{text-align:center}
 .nsv{font-size:26px;font-weight:800;letter-spacing:-.02em;background:linear-gradient(90deg,#12A472,#7C5CFC);-webkit-background-clip:text;background-clip:text;color:transparent}
 .nsl{font-size:11px;font-weight:700;color:var(--muted);margin-top:2px}
+/* launch-week scoreboard */
+.sbband{margin-bottom:16px}
+.sbhd{display:flex;align-items:center;gap:8px;margin-bottom:3px}
+.sbhd h2{font-family:var(--font-head);font-size:13px;font-weight:800;letter-spacing:.6px;color:var(--premium);text-transform:uppercase}
+.sbsub{font-size:11.5px;color:var(--muted);margin-bottom:12px}
+.sbgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media(max-width:720px){.sbgrid{grid-template-columns:1fr 1fr}}
+.sbcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:12px;padding:12px 14px}
+.sbcard.vanity{background:#FAFAFC;border-style:dashed;border-left-style:solid}
+.sbtop{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;gap:6px}
+.sbrank{font-size:10.5px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.sbtag{font-size:8.5px;font-weight:800;padding:2px 7px;border-radius:20px;letter-spacing:.05em;white-space:nowrap}
+.sbtag.sig{color:#0F6E56;background:#E1F5EE}
+.sbtag.van{color:#5F5E5A;background:#F1EFE8}
+.sbv{font-size:25px;font-weight:800;letter-spacing:-.02em;line-height:1.1}
+.sbvs{font-size:11px;font-weight:700;color:var(--muted)}
+.sbl{font-size:10.5px;color:var(--muted);margin-top:1px}
+.sbq{font-size:10px;color:#B4B2C4;margin-top:5px}
+.sbwarn{font-size:9.5px;color:var(--celebrate);font-weight:700;margin-top:5px}
+/* goal banner + progress bars */
+.sbgoal{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin-bottom:12px}
+.sbgoal-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.sbgoal-lbl{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.sbgoal-num{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.02em}
+.sbgoal-of{font-size:13px;color:var(--muted);font-weight:700}
+.sbgoal-pct{font-size:13px;color:var(--premium);font-weight:800;margin-left:4px}
+.sbgoal-sub{font-size:11px;color:var(--muted);margin-top:7px}
+.sbgoal-sub b{color:var(--money-dk)}
+.sbgoal-gate{margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+.sbgate{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:20px;letter-spacing:.02em}
+.sbgate.pend{color:#5F5E5A;background:#F1EFE8}
+.sbgate.pass{color:#0F6E56;background:#E1F5EE}
+.sbgate.fail{color:#854F0B;background:#FAEEDA}
+.sbbar{height:6px;background:#EFEDF6;border-radius:20px;overflow:hidden;margin-top:8px}
+.sbbar.big{height:9px;margin-top:0}
+.sbbar-fill{height:100%;border-radius:20px;transition:width .4s ease}
+.sbtgt{display:flex;justify-content:space-between;align-items:center;font-size:9.5px;color:var(--muted);margin-top:4px}
+.sbtgt-none{justify-content:flex-start;font-style:italic}
+.sbflag{font-size:8.5px;font-weight:800;padding:1px 6px;border-radius:20px;letter-spacing:.03em}
 .tabs{display:flex;gap:8px;margin-bottom:22px}
 .tab{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 16px;font-weight:800;font-size:14px;cursor:pointer;color:var(--muted)}
 .tab.on{background:#12A472;color:#fff;border-color:#12A472}
@@ -122,6 +161,8 @@ td .chip{display:inline-block;padding:2px 8px;border-radius:8px;font-size:12px;f
 <div id="board">
 
   <div id="northstar" class="nsband"></div>
+
+  <div id="scoreboard" class="sbband"></div>
 
   <div class="tabs">
     <button id="tb-product" class="tab on" onclick="showTab('product')">📊 Product</button>
@@ -244,6 +285,49 @@ td .chip{display:inline-block;padding:2px 8px;border-radius:8px;font-size:12px;f
     <div class="infobox"><b>What it is:</b> usage of shared savings jars — jars created, people who joined, deposits made, and total pooled. <b>Why it matters:</b> social features are a <b>retention lever</b> — a user saving <i>with friends</i> has a reason to come back that a solo user doesn't. Rising memberships and deposits are an early sign the loop works.</div>
     <div class="grid" id="bk"></div>
   </div>
+
+  <!-- NOTES / MERCHANTS -->
+  <div class="sec">
+    <div class="sechd"><h2>Notes — what people actually name</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> the free-text note on each expense. <b>Why it matters:</b> "₱1,506 Milk Tea" is a fact any bank app has; "₱1,506 at Chatime across 12 visits" is coaching only you can do. <b>Fill rate is the gate</b> — below ~30%, note-level coaching will feel sparse and random, and we should not lean on it. <b>Privacy:</b> a note only appears below if <b>3+ separate users</b> typed it, and anything with digits or @ is filtered out — so this shows merchants, never someone's private reminder.</div>
+    <div class="grid" id="note-kpis"></div>
+    <div id="note-warn" style="margin-top:12px"></div>
+    <div class="card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Most-named things (3+ users)</div>
+      <p class="muted" style="font-size:11.5px;font-weight:600;margin-bottom:4px">Candidates for default categories, quick-log presets, and Coach vocabulary.</p>
+      <table id="noteTable"></table>
+    </div>
+  </div>
+
+  <!-- ACTIVATION / COACH FRONT DOOR -->
+  <div class="sec">
+    <div class="sechd"><h2>Activation — Coach as front door</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> new users are routed to Coach (not an empty Home) and asked how their money <i>feels</i> before any numbers. <b>The A/B:</b> <code>skip</code> shows an exit; <code>must</code> holds the nav until one exchange. <b>Read it as:</b> does the mandatory variant actually produce more <i>logged</i> and <i>deposited</i> users, or just more forced taps? A higher <b>shared_feeling</b> with flat <b>logged</b> means we bought compliance, not activation. <b>Caution:</b> with current volume this needs weeks before the split means anything.</div>
+    <div class="grid" id="act-kpis"></div>
+    <div class="card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">First-run A/B funnel</div>
+      <table id="actTable"></table>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">How money feels</div>
+      <p class="muted" style="font-size:11.5px;font-weight:600;margin-bottom:4px">Self-reported overall state. Not in any competitor's dataset.</p>
+      <div class="chartwrap short"><canvas id="feelChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- MONEY MOOD -->
+  <div class="sec">
+    <div class="sechd"><h2>Money Mood — how spending feels</h2><button class="info" onclick="tog(this)">i</button></div>
+    <div class="infobox"><b>What it is:</b> the optional one-tap feeling attached to a logged expense (sulit / guilty / kailangan / treat). <b>Why it matters:</b> spending data is commoditized — <b>how people feel about their money isn't</b>. It's the raw material for coaching that no tracker can copy. <b>Tag rate</b> tells you if the prompt is working; <b>"guilt" categories</b> are the highest-value coaching targets — that's where someone actually wants help.</div>
+    <div class="grid" id="mood-kpis"></div>
+    <div id="mood-warn" style="margin-top:12px"></div>
+    <div class="card" style="margin-top:12px"><div class="chartwrap short"><canvas id="moodChart"></canvas></div></div>
+    <div class="card" style="margin-top:12px">
+      <div style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Guilt spending — top categories</div>
+      <p class="muted" style="font-size:11.5px;font-weight:600;margin-bottom:4px">Where people feel worst about their money. <b>Coach these first.</b></p>
+      <table id="guiltTable"></table>
+    </div>
+  </div>
   </div><!-- /tab-product -->
 
   <!-- ===== ACQUISITION (LANDING) ===== -->
@@ -275,7 +359,7 @@ const SB_URL = 'https://anbmihwvzbazjjufdnse.supabase.co';
 const SB_KEY = 'sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
 let sb = null, em = '';
 const C = { money:'#58CC02', premium:'#7C5CFC', celebrate:'#FF9600', info:'#1CB0F6', wants:'#FF4B8C', danger:'#FF4B4B', muted:'#8E8AA3', line:'#EAE8F2' };
-const CATLABEL = { food:'Food', grocery:'Groceries', commute:'Transport', rent:'Rent', utils:'Utilities', bills:'Bills', load:'Load/Internet', health:'Health', educ:'Education', family:'Family', loan:'Loan', contrib:'Contributions', house:'Household', fuel:'Fuel', dining:'Dining Out', mtea:'Milk Tea/Coffee', shop:'Shopping', fun:'Fun', subs:'Subscriptions', beauty:'Beauty', inuman:'Drinks', vice:'Cigs/Vape', gift:'Gifts', travel:'Travel', pets:'Pets', other:'Others', custom:'Custom (user-made)', giving:'Church/Donation', ent:'Entertainment', gadget:'Gadgets', gym:'Fitness', hobby:'Hobbies', insurance:'Insurance', baby:'Baby/Kids', laundry:'Laundry' };
+const CATLABEL = { food:'Food (home)', grocery:'Groceries', palengke:'Wet Market', commute:'Transport', parking:'Parking/Toll', rent:'Rent', utils:'Electricity', water:'Water', bills:'Other Bills', load:'Mobile Load', wifi:'Internet/WiFi', health:'Doctor/Hospital', gamot:'Medicine', educ:'Education', family:'Family', loan:'Loan', contrib:'Contributions', house:'Household', kasambahay:'Helper/Yaya', bankfee:'Bank/Fees', fuel:'Fuel', dining:'Dining Out', mtea:'Milk Tea', kape:'Coffee', shop:'Shopping', damit:'Clothing', fun:'Going Out', subs:'Subscriptions', beauty:'Beauty', inuman:'Drinks', vice:'Cigs/Vape', gift:'Gifts', travel:'Travel', pets:'Pets', other:'Others', custom:'Custom (user-made)', giving:'Church/Donation', ent:'Movies/Concerts', gadget:'Gadgets', gym:'Fitness', hobby:'Hobbies', insurance:'Insurance', baby:'Baby/Kids', laundry:'Laundry' };
 const catL = id => CATLABEL[id] || id || '—';
 const SRCLABEL = { '13th':'13th Month', bonus:'Bonus', raket:'Side gig', padala:'Gift/Padala', refund:'Refund', other:'Other' };
 const srcL = id => SRCLABEL[id] || id || '—';
@@ -349,12 +433,142 @@ function renderNorthStar(prod, acq, pub){
     + tiles.map(x=>'<div class="nstile"><div class="nsv">'+x[1]+'</div><div class="nsl">'+x[0]+'</div></div>').join('')
     + '</div>';
 }
+function renderScoreboard(prod, acq, chan){
+  prod=prod||{}; acq=acq||{}; chan=chan||{};
+  const C2={sig:'#12A472',info:'#1CB0F6',prem:'#7C5CFC',cel:'#FF9600',van:'#B4B2A9'};
+
+  // ── TARGETS — edit freely. null = baseline pending (set after launch data). ──
+  const GOAL_USERS = 300;          // PRD cohort-readability threshold
+  const WEEK_TARGET = 50;          // sub-goal: net-new savers this week
+  const TGT = {
+    activation: null, // BASELINE PENDING — read live rate post-launch, set ~1.4× it
+    d1: 25,           // % D1 retention — from real 18% baseline, realistic next rung
+    d7: 12,           // % D7 — math bridge between D1 and the D30 gate
+    d30: 10,          // % D30 — YOUR PRD GATE (prove-retention bar). Not arbitrary.
+    K: null           // BASELINE PENDING — K is noise pre-PMF; watch, don't target yet
+  };
+  // pct-to-target, capped 0..100; flag ≥100 on-track, ≥70 watch, else behind
+  const prog=(v,t)=> t>0 ? Math.max(0,Math.min(100, Math.round(100*v/t))) : 0;
+  // returns [label, barColor, bgColor, textColor]
+  const flag=p=> p>=100?['on track','#12A472','#E1F5EE','#0F6E56']
+              : p>=70 ?['watch','#BA7517','#FAEEDA','#854F0B']
+              :        ['behind','#E24B4A','#FCEBEB','#A32D2D'];
+  const flagPending=['baseline pending','#B4B2A9','#F1EFE8','#5F5E5A'];
+
+  // #1 Activation
+  const av=(prod.activation&&prod.activation.by_variant)||[];
+  const sum=k=>av.reduce((s,x)=>s+Number(x[k]||0),0);
+  const au=sum('users'), aLog=sum('logged_first_day');
+  const actN = au>=5 ? Math.round(100*aLog/au) : null;
+  const actPct = actN!=null ? actN+'%' : '—';
+  // #2 Retention (min sample 5 to avoid noise from tiny cohorts)
+  const co=(prod.cohorts||[]).slice().sort((a,b)=>new Date(b.wk)-new Date(a.wk));
+  const recent=co.find(c=>c.users>=5) || co.find(c=>c.users>0);
+  const enoughN = recent && recent.users>=5;
+  const d1N = enoughN ? Math.round(100*recent.d1/recent.users) : null;
+  const d7N = enoughN&&ageDays(recent.wk)>=13 ? Math.round(100*recent.d7/recent.users) : null;
+  const d1 = d1N!=null ? d1N+'%' : '—';
+  const d7 = d7N!=null ? d7N+'%' : '—';
+  // #3 Best channel
+  const byCh=(chan.by_channel)||[];
+  const best=chan.best_by_d1||null;
+  let chVal='—', chSub='best D1-retained cohort', chWarn='';
+  if(best && best.channel){ chVal=String(best.channel); chSub=best.d1_pct+'% D1 · n='+best.users; }
+  if(byCh.length<=1){ chWarn='⚠ one channel so far — use tagged links (?ref=reddit) so this splits'; }
+  // #4 A/B winner
+  let abVal='—', abSub='feelings-first onboarding';
+  if(av.length){
+    const scored=av.map(x=>({v:x.variant, u:Number(x.users||0), r:Number(x.users)>0?Number(x.logged_first_day||0)/Number(x.users):0}))
+                   .filter(x=>x.u>0).sort((a,b)=>b.r-a.r);
+    if(scored.length){ abVal=String(scored[0].v||'—');
+      if(scored.length>1){ const lift=Math.round(100*(scored[0].r-scored[1].r)); abSub='logged-D1 lead +'+lift+'%'; } }
+  }
+  // #5 Viral K
+  const savers=prod.total_users||0, refs=prod.referrals||0;
+  const KN = savers>0 ? refs/savers : 0;
+  const K = KN.toFixed(2);
+  // #6 Traffic (vanity)
+  const t=(acq.totals)||{}; const views=Number(t.views||0), subs=Number(t.subs||0);
+
+  // progress-bar HTML with 3 honest states:
+  //   tgt==null  → target not set yet → "baseline pending" (neutral grey, no false flag)
+  //   val==null  → target set but no data yet → "awaiting data" (neutral, not "behind")
+  //   both set   → real bar + on-track/watch/behind flag
+  const bar=(val,tgt,unit)=>{
+    if(tgt==null){
+      return '<div class="sbbar"><div class="sbbar-fill" style="width:0%;background:#D3D1C7"></div></div>'
+        +'<div class="sbtgt"><span>set target after launch data</span>'
+        +'<span class="sbflag" style="color:'+flagPending[3]+';background:'+flagPending[2]+'">'+flagPending[0]+'</span></div>';
+    }
+    if(val==null){
+      return '<div class="sbbar"><div class="sbbar-fill" style="width:0%;background:#D3D1C7"></div></div>'
+        +'<div class="sbtgt"><span>target '+tgt+unit+'</span>'
+        +'<span class="sbflag" style="color:'+flagPending[3]+';background:'+flagPending[2]+'">awaiting data</span></div>';
+    }
+    const p=prog(val,tgt);
+    const f=flag(p);
+    return '<div class="sbbar"><div class="sbbar-fill" style="width:'+p+'%;background:'+f[1]+'"></div></div>'
+      +'<div class="sbtgt"><span>target '+tgt+unit+'</span>'
+      +'<span class="sbflag" style="color:'+f[3]+';background:'+f[2]+'">'+f[0]+'</span></div>';
+  };
+
+  const card=(rank,tag,tagcls,color,val,vs,label,q,warn,vanity,barHtml)=>
+    '<div class="sbcard'+(vanity?' vanity':'')+'" style="border-left-color:'+color+'">'
+    +'<div class="sbtop"><span class="sbrank">'+rank+'</span><span class="sbtag '+tagcls+'">'+tag+'</span></div>'
+    +'<div class="sbv" style="color:'+color+'">'+val+(vs?' <span class="sbvs">'+vs+'</span>':'')+'</div>'
+    +'<div class="sbl">'+label+'</div>'
+    +(barHtml||'')
+    +(q?'<div class="sbq">'+q+'</div>':'')
+    +(warn?'<div class="sbwarn">'+warn+'</div>':'')
+    +'</div>';
+
+  // ── primary goal banner: users → 300, weekly sub-goal, + D30 gate status ──
+  const uNow = savers;
+  const uPct = Math.min(100, Math.round(100*uNow/GOAL_USERS));
+  // D30 gate (PRD): read only on a matured cohort with real sample
+  const coD30=(prod.cohorts||[]).slice().sort((a,b)=>new Date(b.wk)-new Date(a.wk));
+  const matureD30=coD30.find(c=>ageDays(c.wk)>=34 && c.users>=5);
+  let d30line;
+  if(matureD30){
+    const d30v=Math.round(100*matureD30.d30/matureD30.users);
+    const pass=d30v>=TGT.d30;
+    d30line='<span class="sbgate '+(pass?'pass':'fail')+'">D30 gate: '+d30v+'% '
+      +(pass?'≥':'<')+' '+TGT.d30+'% '+(pass?'✓ passed':'— not yet')+'</span>';
+  } else {
+    d30line='<span class="sbgate pend">D30 gate ('+TGT.d30+'%): awaiting a matured 300-user cohort</span>';
+  }
+  const goalBanner =
+    '<div class="sbgoal">'
+    +'<div class="sbgoal-row"><span class="sbgoal-lbl">Primary goal · savers</span>'
+    +'<span class="sbgoal-num">'+uNow.toLocaleString('en-PH')+' <span class="sbgoal-of">/ '+GOAL_USERS+'</span> '
+    +'<span class="sbgoal-pct">'+uPct+'%</span></span></div>'
+    +'<div class="sbbar big"><div class="sbbar-fill" style="width:'+uPct+'%;background:linear-gradient(90deg,#12A472,#7C5CFC)"></div></div>'
+    +'<div class="sbgoal-sub">This week\u2019s sub-goal: <b>+'+WEEK_TARGET+'</b> net-new savers · '+(GOAL_USERS-uNow>0?(GOAL_USERS-uNow)+' to go':'reached 🎉')+'</div>'
+    +'<div class="sbgoal-gate">'+d30line+'</div>'
+    +'</div>';
+
+  document.getElementById('scoreboard').innerHTML =
+    '<div class="sbhd"><h2>★ Launch Week Scoreboard</h2></div>'
+    +'<div class="sbsub">The 6 numbers that matter, ranked. Watch the top two — traffic is last for a reason.</div>'
+    +goalBanner
+    +'<div class="sbgrid">'
+    +card('1 · Activation','SIGNAL','sig',C2.sig, actPct,'', 'logged first expense · day 1','did they DO the core thing?','',false, bar(actN,TGT.activation,'%'))
+    +card('2 · Retention','SIGNAL','sig',C2.sig, d1,'D1 · '+d7+' D7', 'came back after first day','did they COME BACK?','',false, bar(d1N,TGT.d1,'%'))
+    +card('3 · Best channel','SIGNAL','sig',C2.info, chVal,'', chSub,'which channel sends stickers?',chWarn,false, best?bar(best.d1_pct,TGT.d1,'%'):bar(null,TGT.d1,'%'))
+    +card('4 · A/B winner','SIGNAL','sig',C2.prem, abVal,'', abSub,'which onboarding wins?','',false, '')
+    +card('5 · Viral K','SIGNAL · soft','sig',C2.cel, K,'', 'shares ÷ users · noisy early','do they PULL others in?','',false, bar(KN,TGT.K,''))
+    +card('6 · Traffic','VANITY','van',C2.van, views.toLocaleString('en-PH'),'', subs+' signups','feels best, means least','',true, '')
+    +'</div>';
+}
 async function loadAcq(){
   const c = await client();
   let a={}, pub={};
   try{ const r=await c.rpc('landing_metrics'); if(!r.error && r.data && !r.data.error) a=r.data; }catch(e){}
   try{ const r=await c.rpc('public_stats');   if(!r.error && r.data) pub=r.data; }catch(e){}
+  let chan={};
+  try{ const r=await c.rpc('channel_retention'); if(!r.error && r.data && !r.data.error) chan=r.data; }catch(e){}
   renderNorthStar(window._prod, a, pub);
+  renderScoreboard(window._prod, a, chan);
   if(!a.totals) return;   // acquisition RPC empty/forbidden → north star still renders, skip acq cards
   {
     const t=a.totals||{}, cv=a.conv||{}, at=a.attributed||{};
@@ -381,9 +595,13 @@ async function loadAcq(){
         return '<tr><td>'+escH(s.source)+'</td><td>'+s.views+'</td><td>'+s.opens+'</td><td>'+s.subs+'</td><td>'+or+'%</td></tr>'; }).join('')
         : '<tr><td colspan="5" style="color:var(--muted)">No landing traffic yet.</td></tr>');
     const bl=a.by_lang||[];
-    document.getElementById('acq-lang').innerHTML = bl.length
+    const sw = L => (bl.find(x=>x.lang===L)||{}).switches || 0;
+    document.getElementById('acq-lang').innerHTML = (bl.length
       ? bl.map(l=>kpi(Number(l.views||0).toLocaleString('en-PH'),(l.lang==='en'?'English':l.lang==='tl'?'Taglish':escH(l.lang))+' views')).join('')
-      : kpi('—','No data');
+      : kpi('—','No data'))
+      // views record the language at page load; switches capture real EN demand
+      + kpi(Number(sw('en')).toLocaleString('en-PH'),'Switched to EN')
+      + kpi(Number(sw('tl')).toLocaleString('en-PH'),'Switched back to TL');
   }
 }
 function pct(a,b){ return b>0 ? Math.round(a/b*100) : null; }
@@ -503,8 +721,8 @@ function sessNote(s){
 /* ---------- CHART HELPERS ---------- */
 function mkChart(id, cfg){ if(charts[id]) charts[id].destroy(); const el=document.getElementById(id); if(!el) return; charts[id]=new Chart(el.getContext('2d'), cfg); }
 // factories return fresh objects each call — never share a scale config across charts
-const noGrid = () => ({ grid:{display:false}, border:{display:false}, ticks:{color:C.muted, font:{size:11}} });
-const yAxis  = (t={}, a={}) => Object.assign({ grid:{color:C.line}, border:{display:false}, beginAtZero:true, ticks:Object.assign({color:C.muted, font:{size:11}, precision:0}, t) }, a);
+function noGrid(){ return { grid:{display:false}, border:{display:false}, ticks:{color:C.muted, font:{size:11}} }; }
+function yAxis(t={}, a={}){ return Object.assign({ grid:{color:C.line}, border:{display:false}, beginAtZero:true, ticks:Object.assign({color:C.muted, font:{size:11}, precision:0}, t) }, a); }
 
 /* ---------- MAIN RENDER ---------- */
 function renderMetrics(d){
@@ -697,6 +915,95 @@ function renderMetrics(d){
   document.getElementById('bk').innerHTML =
     kpi(b.goals||0,'Shared jars') + kpi(b.memberships||0,'Memberships') +
     kpi(b.deposits||0,'Deposits') + kpi('₱'+Number(b.deposit_total||0).toLocaleString('en-PH'),'Total in jars');
+
+  // Notes / merchants
+  const nt = d.notes || {}, nfr = Number(nt.fill_rate||0);
+  document.getElementById('note-kpis').innerHTML =
+    kpi(nfr+'%','Note fill rate') +
+    kpi(Number(nt.with_note||0).toLocaleString('en-PH'),'Expenses named') +
+    kpi(nt.users_using||0,'Users writing notes') +
+    kpi(nt.recurring_adopted||0,'Auto-recurring adopted') +
+    kpi(Number(nt.chip_rate||0)+'%','Notes from chips');
+  const ntop = nt.top || [];
+  document.getElementById('noteTable').innerHTML =
+    '<tr><th>Note</th><th>Users</th><th>Times</th><th>Avg</th></tr>' +
+    (ntop.length ? ntop.map(x=>'<tr><td>'+escH(x.note)+'</td><td><b>'+x.users+'</b></td><td>'+x.n+'</td><td>₱'+Number(x.avg_amt||0).toLocaleString('en-PH')+'</td></tr>').join('')
+      : '<tr><td colspan="4" style="color:var(--muted)">No note used by 3+ users yet. Either fill rate is still low, or people name things uniquely.</td></tr>') +
+    (nfr && nfr < 30 ? '' : '');
+  { const w=document.getElementById('note-warn'); const cr=Number(nt.chip_rate||0);
+    let html='';
+    if(nt.expenses && nfr < 30)
+      html += '<div class="card" style="border-color:'+C.celebrate+';color:'+C.celebrate+';font-size:12px;font-weight:700">⚠️ Fill rate '+nfr+'% — too sparse to build coaching on. Note-level insights will only reach a minority of users.</div>';
+    if(Number(nt.with_note||0) >= 20)
+      html += (cr >= 60)
+        ? '<div class="card" style="border-color:'+C.money+';color:'+C.money+';font-size:12px;font-weight:700">✅ '+cr+'% of notes come from chips — variants are mostly prevented at the source. Fuzzy matching and alias maps are NOT worth building yet.</div>'
+        : '<div class="card" style="border-color:'+C.info+';color:'+C.info+';font-size:12px;font-weight:700">ℹ️ Only '+cr+'% of notes come from chips — people are typing. Make chips more prominent first; build fuzzy matching (Tier 2) only if this stays low.</div>';
+    w.innerHTML = html; }
+
+  // Activation / Coach front door
+  const ac = d.activation || {}, av = ac.by_variant || [];
+  const FEELLBL = { gipit:'😣 Tight', sakto:'😐 Just enough', okay:'🙂 Doing okay', lito:'🤔 Not sure' };
+  const sumV = k => av.reduce((a,x)=>a+Number(x[k]||0),0);
+  const pctA = (n,dn) => dn ? Math.round(100*n/dn) : 0;
+  document.getElementById('act-kpis').innerHTML =
+    kpi(sumV('users'),'In A/B test') +
+    kpi(pctA(sumV('shared_feeling'),sumV('users'))+'%','Shared a feeling') +
+    kpi(pctA(sumV('logged_first_day'),sumV('users'))+'%','Logged day 1') +
+    kpi(pctA(sumV('deposited'),sumV('users'))+'%','Ever deposited') +
+    kpi(ac.nudge_opens||0,'Nudge-driven opens');
+  document.getElementById('actTable').innerHTML =
+    '<tr><th>Variant</th><th>Users</th><th>Shared feeling</th><th>Skipped</th><th>Logged D1</th><th>Deposited</th></tr>' +
+    (av.length ? av.map(x=>{
+        const u=Number(x.users||0);
+        const vl = x.variant==='must' ? 'must (mandatory)' : x.variant==='skip' ? 'skip (skippable)' : escH(x.variant);
+        return '<tr><td>'+vl+'</td><td>'+u+'</td>'
+          +'<td>'+x.shared_feeling+' <span style="color:var(--muted)">('+pctA(x.shared_feeling,u)+'%)</span></td>'
+          +'<td>'+(x.skipped||0)+'</td>'
+          +'<td><b style="color:'+C.money+'">'+x.logged_first_day+'</b> <span style="color:var(--muted)">('+pctA(x.logged_first_day,u)+'%)</span></td>'
+          +'<td><b style="color:'+C.premium+'">'+x.deposited+'</b> <span style="color:var(--muted)">('+pctA(x.deposited,u)+'%)</span></td></tr>'; }).join('')
+      : '<tr><td colspan="6" style="color:var(--muted)">No first-run cohorts yet — starts with v3.1.0.</td></tr>');
+  const fl = ac.feelings || [];
+  mkChart('feelChart', {
+    type:'bar',
+    data:{ labels: fl.map(x=>FEELLBL[x.feeling]||escH(x.feeling)), datasets:[{ label:'Times shared', data:fl.map(x=>x.n),
+      backgroundColor:[C.danger, C.celebrate, C.money, C.info], borderRadius:8, borderWidth:0 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:noGrid(), y:yAxis() } }
+  });
+
+  // Money Mood
+  const md = d.mood || {};
+  const MOODLBL = { sulit:'😌 Sulit', guilt:'😬 Guilty', need:'🥲 Kailangan', treat:'🎉 Treat' };
+  const moodL = m => MOODLBL[m] || escH(m||'—');
+  const unj = Number(md.unjoined||0), mtot = Number(md.total||0);
+  const unjPct = mtot ? Math.round(100*unj/mtot) : 0;
+  document.getElementById('mood-kpis').innerHTML =
+    kpi(mtot.toLocaleString('en-PH'),'Mood tags') +
+    kpi(md.users||0,'Users tagging') +
+    kpi((md.tag_rate||0)+'%','Tag rate') +
+    kpi((md.by_mood||[]).length ? moodL(md.by_mood[0].mood) : '—','Most common') +
+    kpi(unj + (unj?' ('+unjPct+'%)':''),'Unsynced tags');
+  const uw = document.getElementById('mood-warn');
+  uw.innerHTML = unjPct >= 10
+    ? '<div class="card" style="border-color:'+C.danger+';color:'+C.danger+';font-size:12px;font-weight:700">⚠️ '+unjPct+'% of mood tags can’t be matched to a synced expense — the category breakdown below is under-counting. Check sync reliability.</div>'
+    : '';
+  const bm = md.by_mood || [];
+  mkChart('moodChart', {
+    type:'bar',
+    data:{ labels: bm.map(x=>moodL(x.mood)), datasets:[{ label:'Tags', data:bm.map(x=>x.n),
+      backgroundColor:[C.money, C.danger, C.info, C.celebrate], borderRadius:8, borderWidth:0 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}},
+      scales:{ x:noGrid(), y:yAxis() } }
+  });
+  const guilt = (md.by_cat||[]).filter(x=>x.mood==='guilt').slice(0,8);
+  const gTot = guilt.reduce((a,x)=>a+Number(x.n||0),0);
+  document.getElementById('guiltTable').innerHTML =
+    '<tr><th>Category</th><th>Guilt tags</th><th>Share</th></tr>' +
+    (guilt.length ? guilt.map(x=>{
+        const lbl = x.cat ? catL(x.cat)
+          : '<span style="color:'+C.muted+'" title="mood tag whose expense never synced to the server">(unsynced)</span>';
+        return '<tr><td>'+lbl+'</td><td>'+x.n+'</td><td>'+(gTot?Math.round(100*x.n/gTot):0)+'%</td></tr>'; }).join('')
+      : '<tr><td colspan="3" style="color:var(--muted)">No mood tags yet — ships with v3.0.0.</td></tr>');
 }
 
 // auto-load if already signed in
