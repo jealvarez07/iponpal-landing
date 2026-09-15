@@ -1009,5 +1009,6 @@ function renderMetrics(d){
 // auto-load if already signed in
 (async()=>{ try{ const c=await client(); const {data}=await c.auth.getSession(); if(data.session) load(); }catch(e){} })();
 </script>
+  <script type="module" src="./sweldo-panel.js"></script>
 </body>
 </html>
