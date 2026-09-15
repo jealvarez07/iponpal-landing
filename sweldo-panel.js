@@ -5,10 +5,10 @@
  *
  *        <script type="module" src="./sweldo-panel.js"></script>
  *
- * That is all. The panel makes its own container and puts it at the end of
- * #board, so it appears with the rest of the dashboard and stays hidden on the
- * login screen. If you would rather place it yourself, add an empty
- * <div id="sweldo-panel"></div> anywhere and it will use that instead.
+ * That is all. The panel makes its own container and puts it at the END OF THE
+ * PRODUCT TAB (#tab-product), below Money Mood. If you would rather place it
+ * somewhere else, add an empty <div id="sweldo-panel"></div> anywhere in the
+ * page and it will use that instead.
  *
  * It brings its own styles, scoped under #sweldo-panel, so it cannot collide
  * with the dashboard's CSS. It calls ONE function on the Sweldo project —
@@ -116,6 +116,8 @@ function verdictFor(h, d) {
 
 const CSS = `
 #sweldo-panel{
+  border-top:2px solid var(--sp-line,#E8ECE6);
+  padding-top:28px;
   --sp-bg:#F5F7F4; --sp-surface:#FFFFFF; --sp-surface-2:#ECF0EA;
   --sp-ink:#16211A; --sp-ink-2:#2A3230; --sp-ink-3:#68705F;
   --sp-line:#E8ECE6; --sp-line-soft:#F0F3EF;
@@ -400,21 +402,49 @@ function hoverBars(root) {
 /* Boot                                                                */
 /* ------------------------------------------------------------------ */
 
-/** Its own container, so metrics.html needs one line changed and no more. */
+/**
+ * Its own container, so metrics.html needs one line changed and no more.
+ *
+ * It goes at the END OF THE PRODUCT TAB, next to the other product metrics,
+ * because that is where a person looking for product numbers actually looks.
+ * Falling back to the board, then the page, if this is not the dashboard.
+ */
+function host() {
+  return document.getElementById('tab-product')
+      || document.getElementById('board')
+      || document.body;
+}
+
 function mount() {
-  const existing = document.getElementById('sweldo-panel');
-  if (existing) return existing;
-  const el = document.createElement('div');
+  let el = document.getElementById('sweldo-panel');
+  if (el && el.isConnected) return el;
+  el = document.createElement('div');
   el.id = 'sweldo-panel';
-  // Inside #board, so it is hidden with the dashboard until the founder logs
-  // in. Falling back to <body> only if this page is not the dashboard.
-  (document.getElementById('board') || document.body).appendChild(el);
+  host().appendChild(el);
   return el;
+}
+
+/**
+ * The dashboard rebuilds parts of itself after the founder signs in. If that
+ * rebuild takes our container with it, put it back — for a short while, then
+ * stop. A watcher that runs forever is a leak; this one gives up after 20s.
+ */
+function keepMounted(paint) {
+  const until = Date.now() + 20000;
+  const timer = setInterval(() => {
+    const el = document.getElementById('sweldo-panel');
+    if (!el || !el.isConnected) {
+      console.info('[sweldo-panel] container was removed — remounting');
+      paint(mount());
+    }
+    if (Date.now() > until) clearInterval(timer);
+  }, 1000);
 }
 
 (async function boot() {
   const root = mount();
   if (!root) return;
+  console.info('[sweldo-panel] mounted inside #' + (root.parentElement && root.parentElement.id || 'body'));
 
   if (!document.getElementById('sweldo-panel-css')) {
     const st = document.createElement('style');
@@ -436,7 +466,9 @@ function mount() {
       body: '{}',
     });
     if (!res.ok) throw new Error('HTTP ' + res.status);
-    render(root, await res.json());
+    const data = await res.json();
+    render(root, data);
+    keepMounted(el => render(el, data));
   } catch (err) {
     root.innerHTML = `<div class="sp-head"><h2>Sweldo Check</h2></div>
       <div class="sp-empty"><strong>Could not read the Sweldo project.</strong>
