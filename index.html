@@ -1,38 +1,25 @@
-<!doctype html>
-<html lang="en-PH">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-
-<title>Sweldo Check — Philippine take-home pay calculator 2026 | IponPal</title>
-<meta name="description" content="Enter your monthly gross salary and see your real take-home pay. SSS, PhilHealth, Pag-IBIG and BIR withholding tax explained line by line, in plain English. Free, no sign-up. A tool by IponPal.">
-<link rel="canonical" href="https://iponpal.com/sweldo/">
-<meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#F5F7F4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F1613" media="(prefers-color-scheme: dark)">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IponPal — See your real take-home pay, then make it last</title>
+<meta name="description" content="Type your gross salary and see your real Philippine take-home — SSS, PhilHealth, Pag-IBIG and tax explained. Then IponPal shows what's already promised and what's free to spend, so your pay lasts the month. Free, private, no download.">
+<link rel="canonical" href="https://iponpal.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IponPal">
-<meta property="og:locale" content="en_PH">
-<meta property="og:url" content="https://iponpal.com/sweldo/">
-<meta property="og:title" content="Where did my salary go?">
-<meta property="og:description" content="Type your monthly gross. See every peso that never reaches you — SSS, PhilHealth, Pag-IBIG, tax — and why.">
-<meta property="og:image" content="https://iponpal.com/sweldo/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Sweldo Check by IponPal — a Philippine payslip, decoded.">
+<meta property="og:title" content="Where does your salary actually go?">
+<meta property="og:description" content="See your real take-home pay, the bills already promised, and what's free to spend — so your pay lasts the month. Free, made in the Philippines.">
+<meta property="og:url" content="https://iponpal.com/">
+<meta property="og:image" content="https://iponpal.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Where did my salary go?">
-<meta name="twitter:description" content="Type your monthly gross. See every peso that never reaches you — SSS, PhilHealth, Pag-IBIG, tax — and why.">
-<meta name="twitter:image" content="https://iponpal.com/sweldo/og.png">
+<meta name="twitter:title" content="Where does your salary actually go?">
+<meta name="twitter:description" content="See your real take-home, what's promised, and what's free to spend.">
+<meta name="twitter:image" content="https://iponpal.com/og-image.png">
+<meta name="theme-color" content="#12A472">
+<meta name="robots" content="index,follow,max-image-preview:large">
 
-<link rel="icon" href="/sweldo/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/sweldo/favicon.svg">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Onest:wght@400;500;600;700;800&display=swap">
-
+<!-- Structured data: rich results + clean entity info for AI engines -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -42,1147 +29,488 @@
       "@id": "https://iponpal.com/#org",
       "name": "IponPal",
       "url": "https://iponpal.com/",
-      "slogan": "Kaya mo 'yan!"
+      "logo": "https://app.iponpal.com/icon-512.png",
+      "description": "A free personal-money app for Filipinos, built around the pay cycle: see your real take-home, your committed bills, and what's free to spend.",
+      "foundingLocation": { "@type": "Country", "name": "Philippines" },
+      "areaServed": { "@type": "Country", "name": "Philippines" },
+      "email": "hello@iponpal.com",
+      "sameAs": ["https://instagram.com/iponpal"]
     },
     {
-      "@type": "WebApplication",
-      "@id": "https://iponpal.com/sweldo/#app",
-      "name": "Sweldo Check",
-      "url": "https://iponpal.com/sweldo/",
+      "@type": "SoftwareApplication",
+      "@id": "https://iponpal.com/#app",
+      "name": "IponPal",
       "applicationCategory": "FinanceApplication",
-      "operatingSystem": "Any",
-      "browserRequirements": "Requires JavaScript",
-      "inLanguage": "en-PH",
+      "operatingSystem": "Web (Progressive Web App)",
+      "url": "https://app.iponpal.com",
+      "description": "IponPal is a free money app for Filipinos organised around payday. It computes your real take-home from your gross salary (SSS, PhilHealth, Pag-IBIG, BIR withholding tax), tracks the bills already committed each month, and shows what's actually free to spend. Manual logging, no bank connection, works offline, no ads, never sells data.",
+      "inLanguage": ["en", "fil"],
       "publisher": { "@id": "https://iponpal.com/#org" },
-      "description": "A Philippine take-home pay calculator that explains SSS, PhilHealth, Pag-IBIG and BIR withholding tax line by line.",
       "featureList": [
-        "Take-home pay from monthly gross",
-        "Reverse: the gross needed for a target take-home",
-        "Compare two job offers",
-        "Plain-English explanation of every deduction"
+        "Take-home pay calculator (SSS, PhilHealth, Pag-IBIG, withholding tax)",
+        "Committed bills and subscriptions, normalised to a monthly figure",
+        "Free-to-spend: income minus committed minus savings",
+        "Manual expense logging, no bank connection",
+        "Works offline (Progressive Web App)"
       ],
-      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "PHP" },
-      "isAccessibleForFree": true
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "PHP",
+        "description": "Free during early access; a free tier always remains."
+      }
     },
     {
       "@type": "FAQPage",
-      "@id": "https://iponpal.com/sweldo/#faq",
+      "@id": "https://iponpal.com/#faq",
       "mainEntity": [
         {
           "@type": "Question",
           "name": "What is deducted from my salary in the Philippines?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A private-sector employee normally has four things taken from each pay: the SSS contribution, the PhilHealth premium, the Pag-IBIG contribution, and withholding tax. The first three are fixed by law and depend on your salary bracket. Withholding tax is charged on what is left after the first three."
-          }
+          "acceptedAnswer": { "@type": "Answer", "text": "A private-sector employee normally has four things taken from each pay: the SSS contribution, the PhilHealth premium, the Pag-IBIG contribution, and withholding tax. The first three depend on your salary bracket; withholding tax is charged on what's left after them." }
         },
         {
           "@type": "Question",
-          "name": "Why is my take-home pay lower than my offer letter?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "An offer letter states gross pay. Take-home pay is gross pay minus the mandatory contributions and withholding tax. The gap is normally a single-digit to low double-digit percentage of gross, and it widens as pay rises because withholding tax is charged in rising brackets."
-          }
+          "name": "Is IponPal really free? (Libre ba talaga?)",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes — 100% free while we're in early access. If there's ever a premium tier, a free version will still remain. The take-home calculator needs no sign-up at all." }
         },
         {
           "@type": "Question",
-          "name": "Do minimum wage earners pay income tax in the Philippines?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. A statutory minimum wage earner is exempt from income tax on the basic minimum wage. The SSS, PhilHealth and Pag-IBIG contributions still apply."
-          }
+          "name": "Do I need to connect my bank?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Logging is manual and takes about 10 seconds. There's no bank login and we never ask for a password." }
         },
         {
           "@type": "Question",
-          "name": "Why does this calculator differ from my payslip by a few centavos?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Withholding tax can be worked out two ways: from the BIR published table for the pay period, or from annual tax divided by twelve. The two differ by centavos. This tool uses the published period table, because that is what payroll systems use. If your payslip still disagrees, your payslip is the authority."
-          }
+          "name": "Does it work offline?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. IponPal is a Progressive Web App — once opened it works without a connection, and your data stays on your device unless you turn on backup." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data safe?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Your data is private, never sold, and you can export or delete everything anytime. There's no lending and we never hold your money." }
         }
       ]
     }
   ]
 }
 </script>
-
+<link rel="icon" href="https://app.iponpal.com/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js';</script>
 <style>
-  :root{
-    --paper:#F5F7F4;
-    --card:#FFFFFF;
-    --card-2:#ECF0EA;
-    --ink:#16211A;
-    --ink-2:#2A3230;
-    --ink-3:#68705F;
-    --rule:#E8ECE6;
-    --rule-soft:#F0F3EF;
-    --keep:#0E8A5F;
-    --keep-soft:rgba(14,138,95,0.10);
-    --violet:#6847E8;
-    --gone:#C4485E;
-    --gone-soft:rgba(196,72,94,0.10);
-    --warn:#B07C13;
-    --warn-soft:rgba(176,124,19,0.12);
-    --focus:#7C5CFC;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#0F1613;
-      --card:#171E1A;
-      --card-2:#1F2723;
-      --ink:#E8ECE6;
-      --ink-2:#B4BEB7;
-      --ink-3:#9AA394;
-      --rule:rgba(255,255,255,0.12);
-      --rule-soft:rgba(255,255,255,0.07);
-      --keep:#3FCF9A;
-      --keep-soft:rgba(18,164,114,0.16);
-      --violet:#A48BFF;
-      --gone:#E8808F;
-      --gone-soft:rgba(196,72,94,0.16);
-      --warn:#EAC77A;
-      --warn-soft:rgba(176,124,19,0.18);
-      --focus:#A48BFF;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#0F1613; --card:#171E1A; --card-2:#1F2723;
-    --ink:#E8ECE6; --ink-2:#B4BEB7; --ink-3:#9AA394;
-    --rule:rgba(255,255,255,0.12); --rule-soft:rgba(255,255,255,0.07);
-    --keep:#3FCF9A; --keep-soft:rgba(18,164,114,0.16); --violet:#A48BFF;
-    --gone:#E8808F; --gone-soft:rgba(196,72,94,0.16);
-    --warn:#EAC77A; --warn-soft:rgba(176,124,19,0.18);
-    --focus:#A48BFF;
-  }
+:root{
+  --bg:#F5F7F4; --ink:#16211A; --ink2:#2A3230; --muted:#68705F; --line:#E8ECE6;
+  --green:#12A472; --green-dk:#0E8A5F; --violet:#7C5CFC; --violet-dk:#6847E8; --gold:#B07C13; --red:#C4485E;
+  --glass:rgba(255,255,255,.62); --glass-strong:rgba(255,255,255,.72); --border-glass:rgba(255,255,255,.9);
+  --grad:linear-gradient(90deg,#12A472,#7C5CFC);
+  --sh:0 18px 50px rgba(14,138,95,.12); --sh-lg:0 30px 80px rgba(22,33,26,.18);
+  --font:'Onest','Helvetica Neue',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:radial-gradient(700px 460px at 90% -3%, rgba(20,160,110,.16), transparent 60%), radial-gradient(640px 480px at -6% 30%, rgba(124,92,252,.11), transparent 62%), radial-gradient(600px 500px at 50% 110%, rgba(20,160,110,.10), transparent 60%);
+  background-attachment:fixed}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.wordmark{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800;letter-spacing:-.03em}
+.cta{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--green);color:#fff;font-family:var(--font);font-weight:700;font-size:17px;padding:16px 30px;border-radius:16px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 12px 30px rgba(14,138,95,.28);transition:transform .18s cubic-bezier(.22,1,.36,1),box-shadow .18s}
+.cta:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(14,138,95,.34)}
+.cta:active{transform:scale(.98)}
+.cta.ghost{background:var(--glass);color:var(--green-dk);border:1px solid var(--border-glass);box-shadow:none}
+.cta.ghost:hover{box-shadow:var(--sh)}
+.microcopy{font-size:13.5px;color:var(--muted);font-weight:600;margin-top:14px}
+.hero .ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 
-  *{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%}
-  body{
-    background:var(--paper); color:var(--ink);
-    font-family:"Onest","Helvetica Neue",system-ui,sans-serif;
-    font-size:16px; line-height:1.5;
-    padding-inline:18px; padding-block:0 56px;
-    -webkit-tap-highlight-color:transparent;
-    overscroll-behavior:none;
-  }
-  .wrap{max-width:460px;margin:0 auto}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(245,247,244,.7);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .in{max-width:1080px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;gap:14px}
+.nav .brand{font-size:20px;font-weight:800}
+.nav .sp{flex:1}
+.nav .navlink{font-weight:700;font-size:13.5px;color:var(--muted);text-decoration:none}
+.nav .navlink:hover{color:var(--green-dk)}
+.seg{display:flex;background:#fff;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:none;background:none;font-family:var(--font);font-weight:700;font-size:12.5px;padding:6px 12px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--green);color:#fff}
+.nav .cta{padding:9px 18px;font-size:14px;box-shadow:0 8px 20px rgba(14,138,95,.24)}
+@media(max-width:620px){ .nav .navlink{display:none} }
 
-  @media (min-width: 900px){
-    .wrap{max-width:1000px}
-    .app{display:grid;grid-template-columns:376px 1fr;gap:30px;align-items:start}
-    .modes{max-width:376px}
-    header{padding-block:26px 18px}
-    h1{font-size:32px}
-    .sub{max-width:52ch}
-    .privacy{max-width:62ch}
-    details.cover{margin-top:26px}
-    footer{margin-top:18px}
-  }
-  .num{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+/* section rhythm */
+section{padding:clamp(64px,12vh,140px) 0}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--green-dk)}
+.eyebrow.v{color:var(--violet-dk)}
+h1{font-size:clamp(38px,8vw,72px);font-weight:800;letter-spacing:-.035em;line-height:1.03}
+h2{font-size:clamp(30px,5.6vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.06}
+.lead{font-size:clamp(17px,2.4vw,22px);color:var(--ink2);font-weight:500;max-width:560px;line-height:1.5}
+.center{text-align:center}
+.center .lead{margin-left:auto;margin-right:auto}
+.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.js .reveal.in{opacity:1;transform:none}
 
-  header{padding-block:26px 18px}
-  .brand{display:flex;align-items:baseline;gap:9px;margin-bottom:5px;flex-wrap:wrap}
-  .brand .mark{
-    font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
-    letter-spacing:.16em;text-transform:uppercase;color:var(--keep);
-  }
-  .brand .by{
-    font-size:11px;color:var(--ink-3);text-decoration:none;
-    display:inline-flex;align-items:baseline;gap:4px;
-  }
-  .brand .by:hover .wordmark{opacity:.8}
-  .wordmark{
-    font-family:"Onest","Helvetica Neue",system-ui,sans-serif;
-    font-weight:800;font-size:12.5px;letter-spacing:-.01em;
-    background:linear-gradient(95deg,var(--keep),var(--violet));
-    -webkit-background-clip:text;background-clip:text;
-    -webkit-text-fill-color:transparent;color:var(--keep);
-  }
-  h1{font-size:25px;font-weight:700;letter-spacing:-.025em;margin:0 0 5px;line-height:1.15}
-  .sub{font-size:14.5px;color:var(--ink-2);margin:0}
+/* hero */
+.hero{padding-top:clamp(40px,7vh,80px);text-align:center;position:relative}
+.hero .badge{display:inline-flex;align-items:center;gap:8px;background:var(--glass);border:1px solid var(--border-glass);backdrop-filter:blur(10px);border-radius:999px;padding:7px 15px;font-size:12.5px;font-weight:700;color:var(--muted)}
+.hero h1{margin:22px auto 0;max-width:14ch}
+.hero .lead{margin:20px auto 0}
+.hero .phonewrap{margin:56px auto 0;position:relative;width:322px;max-width:88vw}
 
-  .modes{display:flex;gap:3px;background:var(--card-2);padding:3px;border-radius:9px;margin-block:18px 14px}
-  .modes button{
-    flex:1;appearance:none;border:0;background:transparent;color:var(--ink-3);
-    font-family:inherit;font-size:13.5px;font-weight:600;padding:8px 4px;border-radius:7px;
-    cursor:pointer;touch-action:manipulation;transition:background .12s,color .12s;
-  }
-  .modes button[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.07)}
-  .modes button:focus-visible{outline:2px solid var(--focus);outline-offset:1px}
+/* phone */
+.phone{position:relative;width:322px;max-width:88vw;border-radius:42px;background:linear-gradient(165deg,#F5F7F4,#ECF1EC);border:1px solid rgba(255,255,255,.7);box-shadow:var(--sh-lg);overflow:hidden;padding:22px 18px 18px}
+.phone .porb{position:absolute;border-radius:50%;filter:blur(40px);pointer-events:none}
+.phone .porb.g{width:220px;height:220px;background:rgba(20,160,110,.18);top:-70px;right:-60px}
+.phone .porb.v{width:200px;height:200px;background:rgba(124,92,252,.14);bottom:40px;left:-80px}
+.p-hd{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.p-hd .g{font-size:11px;color:var(--muted);font-weight:600}
+.p-hd .n{font-size:16px;font-weight:800}
+.p-av{width:38px;height:38px;border-radius:50%;background:var(--glass-strong);border:1px solid var(--border-glass);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--green-dk);font-size:15px}
+.g-card{position:relative;z-index:1;background:var(--glass);border:1px solid var(--border-glass);backdrop-filter:blur(18px);border-radius:20px;box-shadow:0 12px 30px rgba(14,138,95,.08);padding:15px;margin-top:13px}
+.p-plan .cap{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.p-plan .big{font-size:30px;font-weight:800;letter-spacing:-.02em;color:var(--violet-dk);margin-top:2px}
+.p-plan .free{font-size:11px;color:var(--muted);font-weight:600;margin-top:-2px}
+.p-plan .rows{margin-top:10px;border-top:1px solid rgba(22,33,26,.08);padding-top:8px}
+.p-plan .prow{display:flex;justify-content:space-between;font-size:11.5px;font-weight:600;padding:3px 0;color:var(--ink2)}
+.p-plan .prow .neg{color:var(--green-dk)}
+.p-bud .bar{display:flex;height:9px;border-radius:99px;overflow:hidden;background:rgba(22,33,26,.06)}
+.p-bud .leg{display:flex;gap:12px;margin-top:8px;font-size:10px;color:var(--muted);font-weight:600}
+.p-bud .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px}
+.p-nav{position:relative;z-index:1;display:flex;justify-content:space-around;margin-top:14px;padding:9px 6px;border-radius:999px;background:var(--glass-strong);border:1px solid var(--border-glass);backdrop-filter:blur(20px)}
+.p-nav span{font-size:10px;font-weight:600;color:var(--muted)}
+.p-nav span.on{color:var(--green-dk);font-weight:800}
 
-  .field{margin-bottom:12px}
-  .field label{
-    display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px;
-  }
-  .inp{
-    display:flex;align-items:center;gap:8px;background:var(--card);
-    border:1.5px solid var(--rule);border-radius:11px;padding:11px 14px;
-    transition:border-color .12s;
-  }
-  .inp:focus-within{border-color:var(--focus)}
-  .inp .peso{font-family:"IBM Plex Mono",monospace;font-size:22px;color:var(--ink-3);font-weight:500}
-  .inp input{
-    flex:1;min-width:0;appearance:none;border:0;background:transparent;color:var(--ink);
-    font-family:"IBM Plex Mono",monospace;font-size:24px;font-weight:600;
-    font-variant-numeric:tabular-nums;padding:0;outline:none;
-  }
-  .inp input::placeholder{color:var(--ink-3);font-weight:400}
+/* calc (Sweldo teaser) */
+.calc{max-width:460px;margin:34px auto 0;background:var(--glass);border:1px solid var(--border-glass);border-radius:26px;box-shadow:var(--sh);padding:24px;backdrop-filter:blur(18px);text-align:left}
+.calc .inrow{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 16px}
+.calc .inrow:focus-within{border-color:var(--violet)}
+.calc .peso{font-family:var(--mono);font-size:22px;color:var(--muted);font-weight:600}
+.calc input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-family:var(--mono);font-size:24px;font-weight:600;color:var(--ink)}
+.calc .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.calc .out{margin-top:16px;background:rgba(20,160,110,.07);border-radius:16px;padding:16px}
+.calc .out .cap{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.calc .out .net{font-size:clamp(30px,7vw,40px);font-weight:800;letter-spacing:-.03em;color:var(--green-dk);margin-top:2px;font-variant-numeric:tabular-nums}
+.calc .out .sub{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:3px}
+.calc .ded{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:12px}
+.calc .ded span{font-size:12.5px;color:var(--ink2);font-weight:600}
+.calc .ded b{color:var(--red);font-variant-numeric:tabular-nums}
+.calc .more{display:inline-block;margin-top:16px;font-weight:800;font-size:14.5px;color:var(--violet-dk);text-decoration:none;border-bottom:2px solid var(--violet-dk);padding-bottom:1px}
 
-  .flip, .samelink{
-    appearance:none;border:0;background:none;padding:6px 0 0;
-    font-family:inherit;font-size:13px;font-weight:600;color:var(--keep);
-    cursor:pointer;text-decoration:underline;text-underline-offset:3px;
-  }
-  .samelink{float:right;padding-top:0;font-size:12.5px}
-  #copylink{display:block;margin:-14px 0 20px;color:var(--ink-3);font-weight:500}
-  #copylink:hover{color:var(--keep)}
-  .flip:focus-visible,.samelink:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
+/* split rows */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.split.r .txt{order:2}
+@media(max-width:820px){.split{grid-template-columns:1fr;gap:32px;text-align:center}.split.r .txt{order:0}.split .lead{margin-left:auto;margin-right:auto}.viz{margin:0 auto}}
+.txt h2{margin-top:14px}
+.txt .lead{margin-top:18px}
+.viz{display:flex;justify-content:center;align-items:center}
 
-  .viewsw{display:inline-flex;gap:2px;background:var(--card-2);padding:3px;border-radius:9px;margin-bottom:11px}
-  .viewsw button{
-    appearance:none;border:0;background:transparent;color:var(--ink-3);
-    font-family:inherit;font-size:12.5px;font-weight:600;padding:6px 12px;border-radius:7px;cursor:pointer;
-  }
-  .viewsw button[aria-pressed="true"]{background:var(--card);color:var(--ink)}
-  .viewsw button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* step cards */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;text-align:left}
+@media(max-width:820px){.steps{grid-template-columns:1fr}}
+.step{background:var(--glass);border:1px solid var(--border-glass);border-radius:24px;padding:24px;box-shadow:var(--sh);backdrop-filter:blur(14px)}
+.step .ic{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;background:#fff;border:1px solid var(--border-glass)}
+.step .k{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--muted);margin-top:14px}
+.step h3{font-size:20px;font-weight:800;margin-top:4px}
+.step p{font-size:14px;color:var(--muted);font-weight:500;margin-top:8px;line-height:1.5}
 
-  .segs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
-  .segs button{
-    appearance:none;border:1.5px solid var(--rule);background:var(--card);color:var(--ink-2);
-    font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;
-    padding:7px 11px;border-radius:99px;cursor:pointer;touch-action:manipulation;
-  }
-  .segs button[aria-pressed="true"]{border-color:var(--keep);background:var(--keep-soft);color:var(--keep);font-weight:600}
-  .segs button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+/* why cards */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px;text-align:left}
+@media(max-width:820px){.feats{grid-template-columns:1fr}}
+.feat{background:var(--glass);border:1px solid var(--border-glass);border-radius:24px;padding:24px;box-shadow:var(--sh);backdrop-filter:blur(14px)}
+.feat .em{font-size:26px}
+.feat h3{font-size:18px;font-weight:800;margin-top:12px}
+.feat p{font-size:14px;color:var(--muted);font-weight:500;margin-top:6px;line-height:1.5}
 
-  .result{background:var(--card);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-bottom:14px}
-  .hero{padding:20px 18px 17px;border-bottom:1px solid var(--rule-soft)}
-  .hero .cap{
-    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;
-    text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;
-  }
-  .hero .big{
-    font-size:clamp(36px,11vw,46px);font-weight:700;letter-spacing:-.035em;line-height:1;
-    font-variant-numeric:tabular-nums;color:var(--keep);
-  }
-  .hero .big .cent{font-size:.58em;font-weight:600;letter-spacing:-.01em}
-  .hero .note{font-size:13.5px;color:var(--ink-2);margin-top:9px}
+/* trust */
+.trust{background:linear-gradient(160deg,#0E2A20,#12211A);color:#fff;border-radius:36px;margin:0 24px;padding:clamp(60px,10vw,110px) clamp(28px,6vw,80px);text-align:center;box-shadow:0 40px 90px rgba(14,44,32,.4)}
+.trust .eyebrow{color:#7FE3BE}
+.trust h2{color:#fff;margin-top:18px}
+.trust h2 .dim{color:rgba(255,255,255,.42)}
+.trust p{color:rgba(255,255,255,.7);font-weight:500;max-width:560px;margin:22px auto 0;font-size:16px}
 
-  .rows{padding:4px 0}
-  .row{
-    width:100%;appearance:none;border:0;background:transparent;text-align:left;
-    display:flex;align-items:center;gap:10px;padding:11px 18px;cursor:pointer;
-    font-family:inherit;color:var(--ink);touch-action:manipulation;
-  }
-  .row:hover{background:var(--card-2)}
-  .row:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
-  .row .lbl{flex:1;min-width:0;font-size:14.5px;font-weight:500}
-  .row .lbl small{display:block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--ink-3);font-weight:400;margin-top:1px}
-  .row .amt{font-family:"IBM Plex Mono",monospace;font-size:14.5px;font-variant-numeric:tabular-nums;color:var(--ink-2)}
-  .row .chev{width:9px;height:9px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);
-    transform:rotate(45deg);margin-top:-4px;flex:0 0 auto;transition:transform .15s}
-  .row[aria-expanded="true"] .chev{transform:rotate(225deg);margin-top:3px}
-  .why{padding:0 18px 14px 18px;font-size:13.5px;line-height:1.55;color:var(--ink-2)}
-  .why[hidden]{display:none}
+/* faq */
+.faq details{background:var(--glass);border:1px solid var(--border-glass);border-radius:16px;box-shadow:var(--sh);margin-top:12px;overflow:hidden;backdrop-filter:blur(10px)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 18px;font-weight:800;font-size:16px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--green-dk);font-size:22px;font-weight:800;flex-shrink:0}
+.faq details[open] summary::after{content:'–'}
+.faq details p{padding:0 18px 16px;font-size:14.5px;color:var(--muted);font-weight:500;line-height:1.55}
 
-  .gone{
-    display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-    padding:14px 18px;background:var(--gone-soft);border-top:1px solid var(--rule-soft);
-  }
-  .gone .l{font-size:14px;font-weight:600;color:var(--gone)}
-  .gone .r{font-family:"IBM Plex Mono",monospace;font-size:15.5px;font-weight:600;
-    font-variant-numeric:tabular-nums;color:var(--gone)}
+/* final */
+.final{text-align:center}
+.final .wm{font-size:clamp(30px,6vw,52px)}
+.final h2{margin-top:10px}
+.final .ctas{margin-top:30px}
 
-  .offer + .offer{
-    margin-top:14px;padding-top:16px;border-top:1px dashed var(--rule);
-  }
-
-  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-  .cmpv.win{border-color:var(--keep);box-shadow:0 0 0 1px var(--keep)}
-  .cmpv .win-tag{
-    display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:9.5px;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--keep);
-    background:var(--keep-soft);border-radius:999px;padding:2px 7px;margin-top:7px;
-  }
-  .cmprow{
-    display:flex;justify-content:space-between;gap:8px;font-size:12px;
-    color:var(--ink-2);padding-block:3px;
-  }
-  .cmprow span:first-child{min-width:0}
-  .cmprow .v{white-space:nowrap}
-  .cmprow + .cmprow{border-top:1px solid var(--rule-soft)}
-  .cmprow .v{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-  .verdictbar.flip{background:var(--warn-soft)}
-  .verdictbar.flip b{color:var(--warn)}
-  .cmpv{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:14px}
-  .cmpv .t{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.1em;
-    text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
-  .cmpv .n{font-family:"IBM Plex Mono",monospace;font-size:19px;font-weight:600;
-    font-variant-numeric:tabular-nums;color:var(--keep);line-height:1.15}
-  .cmpv .d{font-size:12.5px;color:var(--ink-2);margin-top:5px}
-  .verdictbar{background:var(--keep-soft);border-radius:11px;padding:13px 15px;margin-bottom:14px;
-    font-size:14.5px;color:var(--ink);line-height:1.45}
-  .verdictbar b{color:var(--keep)}
-
-  .notice{
-    display:flex;gap:9px;padding:11px 14px;border-radius:10px;
-    font-size:13px;line-height:1.5;margin-bottom:9px;
-  }
-  .notice.warn{background:var(--warn-soft);color:var(--warn)}
-  .notice.info{background:var(--card-2);color:var(--ink-2)}
-  .notice .ic{flex:0 0 auto;font-weight:700}
-
-  .acts{display:flex;gap:9px;margin-bottom:22px}
-  .acts button{
-    flex:1;appearance:none;border:1.5px solid var(--rule);background:var(--card);color:var(--ink);
-    font-family:inherit;font-size:14px;font-weight:600;padding:12px;border-radius:11px;
-    cursor:pointer;touch-action:manipulation;
-  }
-  .acts button.primary{background:var(--keep);border-color:var(--keep);color:var(--paper)}
-  :root[data-theme="dark"] .acts button.primary{color:#101416}
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]) .acts button.primary{color:#101416}
-  }
-  .acts button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-  .acts button:active{transform:translateY(1px)}
-
-  .ask{
-    background:var(--card);border:1px solid var(--rule);border-radius:12px;
-    padding:15px 16px;margin-bottom:14px;
-  }
-  .ask .q{font-size:14.5px;font-weight:600;margin-bottom:3px}
-  .ask .why{font-size:12.5px;color:var(--ink-3);margin:0 0 11px;line-height:1.45}
-  .chips{display:flex;flex-wrap:wrap;gap:6px}
-  .chips button{
-    appearance:none;border:1.5px solid var(--rule);background:var(--card-2);color:var(--ink-2);
-    font-family:inherit;font-size:12.5px;font-weight:500;padding:7px 11px;border-radius:99px;
-    cursor:pointer;touch-action:manipulation;
-  }
-  .chips button:hover{border-color:var(--keep);color:var(--keep)}
-  .chips button:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
-  .chips button.skip{border-style:dashed;color:var(--ink-3)}
-  .ask.done{background:var(--keep-soft);border-color:var(--keep)}
-  .ask.done .q{color:var(--keep)}
-  .privacy{
-    font-size:12px;color:var(--ink-3);margin:-6px 0 18px;line-height:1.5;
-  }
-
-  .next{
-    background:var(--card);border:1px solid var(--rule);border-left:3px solid var(--violet);
-    border-radius:11px;padding:15px 17px;margin-bottom:22px;
-  }
-  .next .h{font-size:15px;font-weight:600;margin-bottom:5px}
-  .next p{font-size:13.5px;color:var(--ink-2);margin:0 0 11px}
-  .next a{
-    display:inline-block;font-size:13.5px;font-weight:600;color:var(--violet);
-    text-decoration:none;border-bottom:1.5px solid var(--violet);padding-bottom:1px;
-  }
-  .next .who{
-    font-family:"Onest","Helvetica Neue",system-ui,sans-serif;font-weight:800;
-  }
-
-  footer .sign{
-    margin-bottom:10px;font-size:12.5px;color:var(--ink-2);
-  }
-  footer .sign .wordmark{font-size:13px}
-  footer .sign a{color:var(--keep);text-decoration:none;font-weight:600}
-
-  details.allow{margin-bottom:14px}
-  details.allow summary{
-    font-size:13.5px;font-weight:600;color:var(--keep);cursor:pointer;
-    list-style:none;padding:7px 0;display:inline-flex;align-items:center;gap:6px;
-  }
-  details.allow summary::-webkit-details-marker{display:none}
-  details.allow summary::after{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--ink-3)}
-  details.allow[open] summary::after{content:"−"}
-  details.allow summary:focus-visible{outline:2px solid var(--focus);outline-offset:3px;border-radius:4px}
-  .allow-body{
-    background:var(--card-2);border-radius:11px;padding:4px 15px 15px;margin-top:2px;
-  }
-  .allow-why{font-size:13px;color:var(--ink-2);margin:11px 0 4px;line-height:1.45}
-  .hint{font-size:12px;color:var(--ink-3);margin:6px 0 0;line-height:1.45}
-
-  .paid{
-    background:var(--card);border:1px solid var(--rule);border-radius:11px;
-    padding:12px 15px;margin-bottom:12px;
-  }
-  .paid .cap{
-    font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;
-  }
-  .paid .pline{display:flex;justify-content:space-between;gap:12px;font-size:14px;padding-block:4px}
-  .paid .pline + .pline{border-top:1px solid var(--rule-soft)}
-  .paid .pline .v{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
-  .paid .pline.tot{border-top:1px solid var(--rule);margin-top:4px;padding-top:8px;font-weight:600}
-  .paid .pline small{display:block;font-size:11.5px;color:var(--ink-3);font-weight:400}
-
-  details.cover{background:var(--card-2);border-radius:10px;padding:12px 15px;margin-bottom:20px}
-  details.cover summary{font-size:13.5px;font-weight:600;cursor:pointer;color:var(--ink-2);list-style:none}
-  details.cover summary::-webkit-details-marker{display:none}
-  details.cover summary::after{content:" +";font-family:"IBM Plex Mono",monospace;color:var(--ink-3)}
-  details.cover[open] summary::after{content:" −"}
-  details.cover ul{margin:11px 0 0;padding-left:0;list-style:none;font-size:13px;color:var(--ink-2)}
-  details.cover li{position:relative;padding-left:16px;margin-bottom:6px}
-  details.cover li::before{content:"";position:absolute;left:2px;top:.68em;width:5px;height:1.5px;background:var(--ink-3)}
-
-  footer{border-top:1px solid var(--rule);padding-top:16px;font-size:12px;color:var(--ink-3);line-height:1.6}
-  footer p{margin:0 0 8px}
-  footer .ver{font-family:"IBM Plex Mono",monospace;font-size:11px}
-
-  .toast{
-    position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(70px);
-    background:var(--ink);color:var(--paper);font-size:13.5px;font-weight:500;
-    padding:11px 18px;border-radius:99px;transition:transform .22s ease;z-index:50;
-    box-shadow:0 6px 24px -8px rgba(0,0,0,.5);
-  }
-  .toast.show{transform:translateX(-50%) translateY(0)}
-  @media (prefers-reduced-motion: reduce){
-    *{transition:none !important}
-  }
+/* footer */
+footer{padding:50px 0 60px;text-align:center;color:var(--muted);border-top:1px solid var(--line);margin-top:40px}
+footer .fl{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin:14px 0;font-weight:700;font-size:14px}
+footer a{color:var(--green-dk);text-decoration:none}
+.whisper{font-size:12.5px;color:var(--muted);font-weight:600;margin-top:8px}
+.nlform{display:flex;gap:8px;max-width:360px;margin:14px auto 0}
+.nlform input{flex:1;min-width:0;border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-family:var(--font);font-size:14px;font-weight:600;background:#fff;color:var(--ink)}
+.nlform input:focus{outline:none;border-color:var(--green)}
+.nlform button{border:none;background:var(--green);color:#fff;font-family:var(--font);font-weight:700;font-size:14px;padding:11px 18px;border-radius:12px;cursor:pointer}
+#nl-msg{font-size:13px;font-weight:700;min-height:18px;margin-top:8px}
 </style>
-
 </head>
 <body>
+<!-- NAV -->
+<div class="nav"><div class="in">
+  <span class="brand wordmark">IponPal</span>
+  <span class="sp"></span>
+  <a class="navlink" href="#calc" data-k="nav_calc">Take-home calculator</a>
+  <a class="navlink" href="#how" data-k="nav_how">How it works</a>
+  <div class="seg"><button id="lang-en" class="on" onclick="switchLang('en')">EN</button><button id="lang-tl" onclick="switchLang('tl')">TL</button></div>
+  <a class="cta" href="https://app.iponpal.com" data-k="open">Open app</a>
+</div></div>
 
-<div class="wrap">
-
-<header>
-  <div class="brand">
-    <span class="mark">Sweldo Check</span>
-    <a class="by" href="https://iponpal.com/?utm_source=sweldo&amp;utm_medium=header" rel="noopener">by <span class="wordmark">IponPal</span></a>
+<!-- HERO -->
+<section class="hero"><div class="wrap">
+  <span class="badge reveal" data-k="badge">🇵🇭 Made in the Philippines · building in public</span>
+  <h1 class="reveal" data-k="h1">Where does your salary actually go?</h1>
+  <p class="lead reveal" data-k="hero_sub">See your real take-home pay, the bills already promised, and what's actually free to spend — so your pay lasts the month. Free, private, no download.</p>
+  <div class="ctas reveal">
+    <a class="cta" href="https://app.iponpal.com" data-k="open_hero">Open IponPal →</a>
+    <a class="cta ghost" href="#calc" data-k="hero_calc">Check your take-home</a>
   </div>
-  <h1>Where did my salary go?</h1>
-  <p class="sub">Type your pay. See what is taken out, and why.</p>
-</header>
+  <div class="microcopy reveal" data-k="hero_fine">No download · works in your browser · 100% free</div>
 
-<div class="modes" role="tablist" aria-label="Mode">
-  <button role="tab" id="m-take" aria-selected="true" aria-controls="panel">My pay</button>
-  <button role="tab" id="m-cmp" aria-selected="false" aria-controls="panel">Two offers</button>
-</div>
-
-<div class="app">
-
-<div class="col-in" id="panel">
-
-  <div class="offer" id="off-a">
-  <div class="field">
-    <label for="a" id="lab-a">Monthly gross pay</label>
-    <div class="inp">
-      <span class="peso">₱</span>
-      <input id="a" type="text" inputmode="decimal" enterkeyhint="done"
-             autocomplete="off" value="25,000" aria-labelledby="lab-a">
+  <div class="phonewrap reveal">
+    <div class="phone">
+      <div class="porb g"></div><div class="porb v"></div>
+      <div class="p-hd"><div><div class="g" data-k="p_greet">Good morning ☀️</div><div class="n">Juan</div></div><div class="p-av">J</div></div>
+      <div class="g-card p-plan">
+        <div class="cap" data-k="p_plan_cap">Monthly plan</div>
+        <div class="big">₱17,951</div>
+        <div class="free" data-k="p_free">free to spend</div>
+        <div class="rows">
+          <div class="prow"><span data-k="p_income">Income</span><span>₱25,000</span></div>
+          <div class="prow"><span data-k="p_committed">Committed bills</span><span class="neg">−₱2,049</span></div>
+          <div class="prow"><span data-k="p_savings">Savings (20%)</span><span class="neg">−₱5,000</span></div>
+        </div>
+      </div>
+      <div class="g-card p-bud">
+        <div class="bar"><div style="width:52%;background:var(--green)"></div><div style="width:31%;background:var(--gold)"></div><div style="width:17%;background:var(--violet)"></div></div>
+        <div class="leg"><span><span class="dot" style="background:var(--green)"></span>Needs</span><span><span class="dot" style="background:var(--gold)"></span>Wants</span><span><span class="dot" style="background:var(--violet)"></span>Savings</span></div>
+      </div>
+      <div class="p-nav"><span class="on" data-k="p_today">Today</span><span data-k="p_payday">Payday</span><span data-k="p_comm">Committed</span></div>
     </div>
-    <button type="button" class="flip" id="flip">Work it backwards</button>
   </div>
+</div></section>
 
-  <details class="allow" id="allow">
-    <summary>I get allowances</summary>
-    <div class="allow-body">
-      <p class="allow-why">₱1,000 that is taxed is worth less than ₱1,000 that is not. Put each one in the right box.</p>
+<!-- SWELDO TEASER CALCULATOR -->
+<section id="calc" class="center"><div class="wrap">
+  <span class="eyebrow reveal" data-k="calc_eye">Free · no sign-up</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="calc_h">What's your real take-home?</h2>
+  <p class="lead reveal" style="margin:16px auto 0" data-k="calc_p">Type your monthly gross. See what's left after SSS, PhilHealth, Pag-IBIG and tax.</p>
+  <div class="calc reveal">
+    <div class="lab" data-k="calc_lab">Monthly gross pay</div>
+    <div class="inrow"><span class="peso">₱</span><input id="calc-in" type="text" inputmode="numeric" value="25,000" oninput="onCalc()" aria-label="Monthly gross pay"></div>
+    <div id="calc-out"></div>
+    <a class="more" id="calc-more" href="https://iponpal.com/sweldo" data-k="calc_more">See the full breakdown, reverse-compute &amp; compare offers on Sweldo →</a>
+  </div>
+</div></section>
 
-      <div class="field">
-        <label for="at">Taxed allowance</label>
-        <div class="inp">
-          <span class="peso">₱</span>
-          <input id="at" type="text" inputmode="decimal" enterkeyhint="done"
-                 autocomplete="off" value="" placeholder="0" aria-describedby="at-h">
-        </div>
-        <p class="hint" id="at-h">Cash you get every payday and do not liquidate. Transport or load allowance, usually.</p>
-      </div>
-
-      <div class="field">
-        <label for="an">Tax-free allowance</label>
-        <div class="inp">
-          <span class="peso">₱</span>
-          <input id="an" type="text" inputmode="decimal" enterkeyhint="done"
-                 autocomplete="off" value="" placeholder="0" aria-describedby="an-h">
-        </div>
-        <p class="hint" id="an-h">Rice, uniform, laundry, medical. Each has a limit. Anything above the limit is taxed.</p>
-      </div>
+<!-- HOW IT WORKS -->
+<section id="how" class="center"><div class="wrap">
+  <span class="eyebrow reveal" data-k="how_eye">How it works</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="how_h">Your money, around payday.</h2>
+  <p class="lead reveal" style="margin:16px auto 0" data-k="how_p">Three simple screens that follow your pay cycle — not a spreadsheet.</p>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="ic">💵</div><div class="k" data-k="how_1k">Payday</div>
+      <h3 data-k="how_1h">Know your real pay</h3>
+      <p data-k="how_1p">Type your gross and see your true take-home — SSS, PhilHealth, Pag-IBIG and tax. Set it as your income in one tap.</p>
     </div>
-  </details>
-  </div><!-- /offer A -->
-
-  <div class="offer" id="off-b" hidden>
-    <div class="field">
-      <label for="b" id="lab-b">Second offer</label>
-      <button type="button" class="samelink" id="same">Same as the first</button>
-      <div class="inp">
-        <span class="peso">₱</span>
-        <input id="b" type="text" inputmode="decimal" enterkeyhint="done"
-               autocomplete="off" value="28,000" aria-labelledby="lab-b">
-      </div>
+    <div class="step reveal">
+      <div class="ic">🔒</div><div class="k" data-k="how_2k">Committed</div>
+      <h3 data-k="how_2h">Count what's promised</h3>
+      <p data-k="how_2p">List the bills that repeat — rent, utilities, subscriptions, loans. IponPal turns them into one monthly number.</p>
     </div>
-
-    <details class="allow" id="allow-b">
-      <summary>This one has allowances</summary>
-      <div class="allow-body">
-        <p class="allow-why">Two offers rarely split the same way. One can be all basic pay. The other can hide part of it in allowances.</p>
-        <div class="field">
-          <label for="at-b">Taxed allowance</label>
-          <div class="inp">
-            <span class="peso">₱</span>
-            <input id="at-b" type="text" inputmode="decimal" enterkeyhint="done"
-                   autocomplete="off" value="" placeholder="0">
-          </div>
-        </div>
-        <div class="field">
-          <label for="an-b">Tax-free allowance</label>
-          <div class="inp">
-            <span class="peso">₱</span>
-            <input id="an-b" type="text" inputmode="decimal" enterkeyhint="done"
-                   autocomplete="off" value="" placeholder="0">
-          </div>
-        </div>
-      </div>
-    </details>
-  </div><!-- /offer B -->
-
-  <div class="segs" role="group" aria-label="Pay frequency">
-    <button id="p-m" aria-pressed="true">Monthly</button>
-    <button id="p-s" aria-pressed="false">Semi-monthly</button>
-    <button id="p-mw" aria-pressed="false" title="Statutory minimum wage earners are exempt from income tax">Minimum wage</button>
+    <div class="step reveal">
+      <div class="ic">📅</div><div class="k" data-k="how_3k">Today</div>
+      <h3 data-k="how_3h">See what's free to spend</h3>
+      <p data-k="how_3p">Income minus committed minus savings = what's actually yours this month. Log as you go, in 10 seconds.</p>
+    </div>
   </div>
+</div></section>
 
-</div><!-- /col-in -->
-
-<div class="col-out">
-
-  <div class="viewsw" id="viewsw" role="group" aria-label="Show pay per">
-    <button id="v-m" aria-pressed="true">A month</button>
-    <button id="v-y" aria-pressed="false">A year</button>
+<!-- WHY DIFFERENT -->
+<section class="center"><div class="wrap">
+  <span class="eyebrow reveal" data-k="why_eye">Why IponPal</span>
+  <h2 class="reveal" style="margin-top:14px" data-k="why_h">Built for a Filipino paycheck.</h2>
+  <div class="feats">
+    <div class="feat reveal"><div class="em">🇵🇭</div><h3 data-k="why_1h">Made for the PH pay cycle</h3><p data-k="why_1p">13th month, SSS/PhilHealth/Pag-IBIG, semi-monthly pay — handled properly, not bolted onto a generic budget app.</p></div>
+    <div class="feat reveal"><div class="em">🔒</div><h3 data-k="why_2h">Private &amp; honest</h3><p data-k="why_2p">No ads. We never sell your data, never hold your money, and there's no lending. Works offline. Export or delete anytime.</p></div>
+    <div class="feat reveal"><div class="em">✨</div><h3 data-k="why_3h">Simple on purpose</h3><p data-k="why_3p">One clear number — what's free to spend — instead of charts you have to decode. Made for people starting out.</p></div>
   </div>
+</div></section>
 
-  <div id="out"></div>
+<!-- TRUST -->
+<section style="padding-left:0;padding-right:0"><div class="trust reveal">
+  <span class="eyebrow" data-k="t_eye">Our promise</span>
+  <h2 data-k="t_h">Not a bank.<br>Not a lending app.<br><span class="dim">Just your money, clearer.</span></h2>
+  <p data-k="t_p">We never lend. We never touch your money. We never sell your data. No paluwagan. You hold the keys — export or delete anytime.</p>
+</div></section>
 
-  <div class="acts">
-  <button class="primary" id="copy">Copy</button>
-  <button id="share">Share</button>
-  <button id="reset">Reset</button>
+<!-- FAQ -->
+<section><div class="wrap" style="max-width:720px">
+  <span class="eyebrow reveal" style="display:block;text-align:center" data-k="faq_eye">Questions</span>
+  <h2 class="reveal" style="margin-top:14px;text-align:center" data-k="faq_h">Before you even ask.</h2>
+  <div class="faq" style="margin-top:30px">
+    <details class="reveal"><summary data-k="faq_q1">What's deducted from my salary?</summary><p data-k="faq_a1">Usually four things: SSS, PhilHealth and Pag-IBIG contributions (set by your salary bracket), plus withholding tax on what's left. IponPal's take-home calculator shows each one.</p></details>
+    <details class="reveal"><summary data-k="faq_q2">Is it really free?</summary><p data-k="faq_a2">Yes — 100% free while we're in early access, and the take-home calculator needs no sign-up at all. If there's ever a premium tier, a free version stays.</p></details>
+    <details class="reveal"><summary data-k="faq_q3">Do I have to connect my bank?</summary><p data-k="faq_a3">No. Logging is manual — about 10 seconds. No bank login, no passwords requested.</p></details>
+    <details class="reveal"><summary data-k="faq_q4">Does it work offline?</summary><p data-k="faq_a4">Yes. IponPal is a Progressive Web App — once opened it runs without a connection, and your data stays on your device unless you turn on backup.</p></details>
+    <details class="reveal"><summary data-k="faq_q5">Is my data safe?</summary><p data-k="faq_a5">Yes. Private, never sold, and you can export or delete everything anytime. No lending, and we never hold your money.</p></details>
   </div>
+</div></section>
 
-  <button type="button" class="flip" id="copylink">Copy a link with this number</button>
+<!-- FINAL CTA -->
+<section class="final"><div class="wrap">
+  <div class="wm wordmark reveal">IponPal</div>
+  <h2 class="reveal" data-k="f_h">See what your pay is really worth.</h2>
+  <div class="ctas reveal">
+    <a class="cta" href="https://app.iponpal.com" data-k="open_final">Open IponPal →</a>
+    <a class="cta ghost" href="#calc" data-k="f_calc">Take-home calculator</a>
+  </div>
+  <div class="microcopy reveal" data-k="f_fine">Free while we build · no download</div>
+</div></section>
 
-  <div class="ask" id="ask" hidden></div>
+<footer><div class="wrap">
+  <div class="wordmark" style="font-size:22px;font-weight:800">IponPal</div>
+  <div class="fl"><a href="https://app.iponpal.com" data-k="open_foot">Open the app</a><a href="https://iponpal.com/sweldo" data-k="foot_calc">Take-home calculator</a><a href="https://instagram.com/iponpal" rel="noopener">Instagram</a><a href="/privacy.html" data-k="privacy">Privacy</a><a href="/terms.html" data-k="terms">Terms</a><a href="mailto:hello@iponpal.com" data-k="contact">Contact</a></div>
+  <form class="nlform" onsubmit="subscribe(event)"><input id="nl-email" type="email" placeholder="you@gmail.com" autocomplete="email" required><button type="submit" data-k="nl_btn">Subscribe</button></form>
+  <div id="nl-msg"></div>
+  <p class="whisper" data-k="whisper">IponPal updates only · no spam, unsubscribe anytime.</p>
+  <p class="whisper" style="margin-top:6px" data-k="nl_consent">By subscribing you agree we may use your email for IponPal updates. We never sell it. Read the <a href="/privacy.html" style="text-decoration:underline">Privacy Policy</a>.</p>
+  <p class="whisper" style="margin-top:10px" data-k="made">Made with 💚 in the Philippines 🇵🇭 · Built in public by a small PH team</p>
+</div></footer>
 
-  <div class="next" id="next"></div>
+<script>
+  const _q=new URLSearchParams(location.search);
 
-
-
-</div><!-- /col-out -->
-</div><!-- /app -->
-
-<details class="cover">
-  <summary>What this doesn't cover yet</summary>
-  <ul>
-    <li>Government workers. GSIS is not the same as SSS, and a guess would be worse than no answer.</li>
-    <li>Contractual and talent-fee work. That uses expanded withholding tax instead.</li>
-    <li>Daily and weekly pay.</li>
-    <li>The ₱90,000 yearly limit on 13th month pay and other benefits. We do not track it across the year.</li>
-  </ul>
-</details>
-
-<p class="privacy">We keep the number, not you. No account, no email. Salaries are
-saved rounded off and with nothing attached, so no row can be traced back to
-anyone. Your last entry stays on your own phone.</p>
-
-<footer>
-  <p><strong>This is an estimate.</strong> Your payslip is the real answer. If ours does not match, yours wins, and we want to hear about it.</p>
-  <p>We use the BIR table for your pay period, not the yearly tax split twelve ways. That is what payroll systems do, so it should match your payslip.</p>
-  <p class="sign">A free tool by
-    <a href="https://iponpal.com/?utm_source=sweldo&amp;utm_medium=footer" rel="noopener"><span class="wordmark">IponPal</span></a>
-    — the budgeting app that helps your pay last.</p>
-  <p class="ver" id="ver"></p>
-</footer>
-
-</div>
-
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-<script type="module">
-/* ─────────────────────────────────────────────────────────────────────────
-   SELF-CONTAINED BUILD — the payroll engine and the (stubbed) analytics are
-   inlined below, so this page loads NO external .js. That removes the module
-   404 that happened under the /sweldo subpath. The math is byte-identical to
-   Sweldo's lib/payroll.js. To restore analytics + the community question,
-   drop events.js back in and re-import.
-   ───────────────────────────────────────────────────────────────────────── */
-function toCentavos(pesos) {
-  if (!Number.isFinite(pesos)) throw new TypeError('toCentavos: not a finite number');
-  return Math.round((pesos + Number.EPSILON) * 100);
-}
-function toPesos(centavos) { return Math.round(centavos) / 100; }
-function applyRate(centavos, rate) { return Math.round(centavos * rate); }
-function clamp(n, lo, hi) {
-  if (lo != null && n < lo) return lo;
-  if (hi != null && n > hi) return hi;
-  return n;
-}
-function sssMSC(monthlySalaryC, rates) {
-  const { mscMin, mscMax, mscStep } = rates.sss;
-  const stepC = toCentavos(mscStep);
-  const minC = toCentavos(mscMin);
-  const maxC = toCentavos(mscMax);
-  if (monthlySalaryC <= minC) return minC;
-  if (monthlySalaryC >= maxC) return maxC;
-  const stepped = Math.round(monthlySalaryC / stepC) * stepC;
-  return clamp(stepped, minC, maxC);
-}
-function sssEmployee(monthlySalaryC, rates) {
-  const msc = sssMSC(monthlySalaryC, rates);
-  return applyRate(msc, rates.sss.employeeRate);
-}
-function philhealthEmployee(monthlySalaryC, rates) {
-  const base = clamp(monthlySalaryC, toCentavos(rates.philhealth.floor), toCentavos(rates.philhealth.ceiling));
-  return applyRate(base, rates.philhealth.employeeRate);
-}
-function pagibigEmployee(monthlySalaryC, rates) {
-  const { lowRate, lowRateCeiling, standardRate, salaryCap } = rates.pagibig;
-  const capped = clamp(monthlySalaryC, null, toCentavos(salaryCap));
-  const rate = monthlySalaryC <= toCentavos(lowRateCeiling) ? lowRate : standardRate;
-  return applyRate(capped, rate);
-}
-function withholdingTax(taxableC, period, rates) {
-  const table = rates.withholding[period];
-  if (!table) throw new RangeError(`withholdingTax: no table for period "${period}"`);
-  for (const bracket of table) {
-    const overC = toCentavos(bracket.over);
-    const upToC = bracket.upTo == null ? Infinity : toCentavos(bracket.upTo);
-    if (taxableC > overC && taxableC <= upToC) {
-      return toCentavos(bracket.base) + applyRate(taxableC - overC, bracket.rate);
-    }
-  }
-  return 0;
-}
-function computePayroll(input, rates) {
-  const {
-    basic, gross, period = 'monthly', taxableAllowance = 0,
-    nonTaxableAllowance, nonTaxableAllowances = 0,
-    isMinimumWageEarner = false, contributionBase = 'basic',
-  } = input;
-  const basicPay = basic != null ? basic : gross;
-  const nonTaxPay = nonTaxableAllowance != null ? nonTaxableAllowance : nonTaxableAllowances;
-  if (!Number.isFinite(basicPay) || basicPay < 0) throw new RangeError('computePayroll: basic must be a non-negative number');
-  if (!Number.isFinite(taxableAllowance) || taxableAllowance < 0) throw new RangeError('computePayroll: taxableAllowance must be a non-negative number');
-  if (!Number.isFinite(nonTaxPay) || nonTaxPay < 0) throw new RangeError('computePayroll: nonTaxableAllowance must be a non-negative number');
-  if (period !== 'monthly' && period !== 'semiMonthly') throw new RangeError(`computePayroll: unsupported period "${period}"`);
-  if (contributionBase !== 'basic' && contributionBase !== 'withTaxableAllowance') throw new RangeError(`computePayroll: unsupported contributionBase "${contributionBase}"`);
-  const basicC = toCentavos(basicPay);
-  const taxAllowC = toCentavos(taxableAllowance);
-  const allowancesC = toCentavos(nonTaxPay);
-  const grossC = basicC + taxAllowC + allowancesC;
-  const contribBaseC = contributionBase === 'withTaxableAllowance' ? basicC + taxAllowC : basicC;
-  const warnings = [];
-  if (contribBaseC === 0) return emptyResult(period, taxAllowC, allowancesC, rates);
-  const monthlyEquivalentC = period === 'semiMonthly' ? contribBaseC * 2 : contribBaseC;
-  if (monthlyEquivalentC < toCentavos(rates.philhealth.floor)) warnings.push({ code: 'philhealth_floor', message: `PhilHealth uses the ₱${rates.philhealth.floor.toLocaleString()} minimum here, not your real pay.` });
-  if (monthlyEquivalentC < toCentavos(rates.sss.mscMin)) warnings.push({ code: 'sss_floor', message: `SSS uses the ₱${rates.sss.mscMin.toLocaleString()} minimum salary credit here, not your real pay.` });
-  const sssMonthlyC = sssEmployee(monthlyEquivalentC, rates);
-  const phMonthlyC = philhealthEmployee(monthlyEquivalentC, rates);
-  const piMonthlyC = pagibigEmployee(monthlyEquivalentC, rates);
-  const divisor = period === 'semiMonthly' ? 2 : 1;
-  const sssC = Math.round(sssMonthlyC / divisor);
-  const phC = Math.round(phMonthlyC / divisor);
-  const piC = Math.round(piMonthlyC / divisor);
-  const contributionsC = sssC + phC + piC;
-  const taxableC = Math.max(0, basicC + taxAllowC - contributionsC);
-  const taxC = isMinimumWageEarner ? 0 : withholdingTax(taxableC, period, rates);
-  const netC = grossC - contributionsC - taxC;
-  const deductionsC = contributionsC + taxC;
-  if (allowancesC > 0) {
-    warnings.push({ code: 'allowance_assumptions', message: 'We assume your tax-free allowance is within the legal limit. Anything above the limit is taxed, and counts against the ₱90,000 a year for 13th month pay and other benefits.' });
-  }
-  if (taxAllowC > 0 && contributionBase === 'basic') {
-    warnings.push({ code: 'contribution_base', message: 'SSS, PhilHealth and Pag-IBIG here are based on basic pay only. Some employers count allowances too, which makes SSS a little higher.' });
-  }
-  if (deductionsC > grossC) {
-    warnings.push({ code: 'deductions_exceed_gross', message: 'The deductions come to more than the pay. Check the amount, or this may be a pay type we do not handle yet.' });
-  }
-  return {
-    period, warnings,
-    gross: toPesos(grossC), basic: toPesos(basicC),
-    taxableAllowance: toPesos(taxAllowC), nonTaxableAllowance: toPesos(allowancesC),
-    nonTaxableAllowances: toPesos(allowancesC),
-    contributions: { sss: toPesos(sssC), philhealth: toPesos(phC), pagibig: toPesos(piC), total: toPesos(contributionsC) },
-    taxableIncome: toPesos(taxableC), withholdingTax: toPesos(taxC),
-    totalDeductions: toPesos(deductionsC), net: toPesos(netC), whereItWent: toPesos(deductionsC),
-    deductionRate: grossC === 0 ? 0 : Math.round((deductionsC / grossC) * 10000) / 100,
-    meta: {
-      ratesEffective: rates.effective, isMinimumWageEarner, contributionBase,
-      contributionBaseAmount: toPesos(contribBaseC),
-      sssMSC: toPesos(sssMSC(monthlyEquivalentC, rates)),
-      method: 'BIR published period withholding table',
-    },
+  /* ============ Taglish overrides (English is the default, in the HTML) ============ */
+  const TL = {
+    open:'Buksan', open_hero:'Buksan ang IponPal →', open_final:'Buksan ang IponPal →', open_foot:'Buksan ang app',
+    nav_calc:'Take-home calculator', nav_how:'Paano gumagana', hero_calc:'Tingnan ang take-home', f_calc:'Take-home calculator', foot_calc:'Take-home calculator',
+    badge:'🇵🇭 Gawa sa Pilipinas · building in public',
+    h1:'Saan ba talaga napupunta ang sweldo mo?',
+    hero_sub:'Tingnan ang tunay mong uuwiing sweldo, ang mga bayaring nakatakda na, at kung magkano ang talagang pwede mong gastusin — para umabot ang sweldo sa buong buwan. Libre, private, walang download.',
+    hero_fine:'Walang download · gumagana sa browser · 100% libre',
+    p_greet:'Magandang umaga ☀️', p_plan_cap:'Buwanang plano', p_free:'pwedeng gastusin', p_income:'Kita', p_committed:'Nakatakdang bayarin', p_savings:'Ipon (20%)',
+    p_today:'Today', p_payday:'Payday', p_comm:'Committed',
+    calc_eye:'Libre · walang sign-up', calc_h:'Magkano ang tunay mong take-home?',
+    calc_p:'I-type ang buwanang gross mo. Tingnan kung magkano ang matitira pagkatapos ng SSS, PhilHealth, Pag-IBIG at tax.',
+    calc_lab:'Buwanang gross', calc_more:'Tingnan ang buong breakdown, reverse-compute &amp; i-compare ang offers sa Sweldo →',
+    how_eye:'Paano gumagana', how_h:'Ang pera mo, sa paligid ng sweldo.',
+    how_p:'Tatlong simpleng screen na sumusunod sa pay cycle mo — hindi spreadsheet.',
+    how_1k:'Payday', how_1h:'Alamin ang tunay mong sweldo', how_1p:'I-type ang gross at tingnan ang tunay na take-home — SSS, PhilHealth, Pag-IBIG at tax. I-set bilang income sa isang tap.',
+    how_2k:'Committed', how_2h:'Bilangin ang nakatakda na', how_2p:'Ilista ang mga paulit-ulit na bayarin — upa, kuryente, subscriptions, utang. Gagawing isang buwanang numero.',
+    how_3k:'Today', how_3h:'Tingnan ang pwedeng gastusin', how_3p:'Kita bawas committed bawas ipon = kung magkano ang talagang sa’yo ngayong buwan. Mag-log habang gumagastos, 10 seconds lang.',
+    why_eye:'Bakit IponPal', why_h:'Gawa para sa sweldong Pinoy.',
+    why_1h:'Para sa PH pay cycle', why_1p:'13th month, SSS/PhilHealth/Pag-IBIG, semi-monthly — tamang-tama, hindi basta dinikit sa generic na budget app.',
+    why_2h:'Private at honest', why_2p:'Walang ads. Hindi ibinebenta ang data mo, hindi hinahawakan ang pera mo, walang pautang. Gumagana offline. Export o delete anytime.',
+    why_3h:'Sadyang simple', why_3p:'Isang malinaw na numero — kung magkano ang pwedeng gastusin — imbes na chart na kailangan mo pang intindihin.',
+    t_eye:'Ang pangako namin', t_h:'Hindi bangko.<br>Hindi lending app.<br><span class="dim">Ang pera mo lang, mas malinaw.</span>',
+    t_p:'Hindi kami nagpapautang. Hindi namin hinahawakan ang pera mo. Hindi ibinebenta ang data mo. Walang paluwagan. Ikaw ang may hawak — export o burahin anytime.',
+    faq_eye:'Mga tanong', faq_h:'Bago ka pa magtanong.',
+    faq_q1:'Ano ang kinakaltas sa sweldo ko?', faq_a1:'Kadalasan apat: SSS, PhilHealth at Pag-IBIG (base sa bracket ng sweldo), tapos withholding tax sa matitira. Ipinapakita ng calculator ang bawat isa.',
+    faq_q2:'Libre ba talaga?', faq_a2:'Oo — 100% libre habang early access, at ang take-home calculator ay walang sign-up. Kung may premium man, may libreng version pa rin.',
+    faq_q3:'Kailangan i-connect ang bank?', faq_a3:'Hindi. Manu-mano ang paglo-log — mga 10 seconds. Walang bank login, walang password na hinihingi.',
+    faq_q4:'Gumagana ba offline?', faq_a4:'Oo. PWA ang IponPal — pagka-bukas, gumagana kahit walang connection, at nasa device mo ang data maliban kung i-on mo ang backup.',
+    faq_q5:'Safe ba ang data ko?', faq_a5:'Oo. Private, hindi ibinebenta, at pwede mong i-export o burahin lahat anytime. Walang pautang, hindi namin hinahawakan ang pera mo.',
+    f_h:'Tingnan ang tunay na halaga ng sweldo mo.', f_fine:'Libre habang ginagawa namin · walang download',
+    privacy:'Privacy', terms:'Terms', contact:'Contact', nl_btn:'Subscribe',
+    whisper:'IponPal updates lang · no spam, unsubscribe anytime.',
+    nl_consent:'Sa pag-subscribe, pumapayag kang gamitin namin ang email mo para sa updates. Hindi namin ito ibinebenta. Basahin ang <a href="/privacy.html" style="text-decoration:underline">Privacy Policy</a>.',
+    made:'Gawa nang may 💚 sa Pilipinas 🇵🇭 · Built in public by a small PH team'
   };
-}
-function emptyResult(period, taxAllowC, allowancesC, rates) {
-  const cashC = taxAllowC + allowancesC;
-  return {
-    period, warnings: [],
-    gross: toPesos(cashC), basic: 0,
-    taxableAllowance: toPesos(taxAllowC), nonTaxableAllowance: toPesos(allowancesC),
-    nonTaxableAllowances: toPesos(allowancesC),
-    contributions: { sss: 0, philhealth: 0, pagibig: 0, total: 0 },
-    taxableIncome: 0, withholdingTax: 0, totalDeductions: 0,
-    net: toPesos(cashC), whereItWent: 0, deductionRate: 0,
-    meta: { ratesEffective: rates.effective, isMinimumWageEarner: false, contributionBase: 'basic', contributionBaseAmount: 0, sssMSC: 0, method: 'BIR published period withholding table' },
-  };
-}
-function grossFromNet(targetNet, options, rates) {
-  const { period = 'monthly', ...rest } = options || {};
-  const targetC = toCentavos(targetNet);
-  let lo = 0;
-  let hi = toCentavos(Math.max(targetNet * 3, 10000));
-  let guard = 0;
-  while (toCentavos(computePayroll({ ...rest, basic: toPesos(hi), period }, rates).net) < targetC) {
-    hi *= 2;
-    if (++guard > 40) throw new RangeError('grossFromNet: no solution found');
-  }
-  while (lo < hi) {
-    const mid = Math.floor((lo + hi) / 2);
-    const net = toCentavos(computePayroll({ ...rest, basic: toPesos(mid), period }, rates).net);
-    if (net < targetC) lo = mid + 1;
-    else hi = mid;
-  }
-  return computePayroll({ ...rest, basic: toPesos(lo), period }, rates);
-}
-function compare(a, b, rates) {
-  const left = computePayroll(a, rates);
-  const right = computePayroll(b, rates);
-  return {
-    left, right,
-    netDifference: Math.round((right.net - left.net) * 100) / 100,
-    grossDifference: Math.round((right.gross - left.gross) * 100) / 100,
-  };
-}
-/* events.js inlined as safe stubs — analytics + the optional rotating question.
-   The calculator itself uses only the payroll functions above. */
-function track(){ /* analytics disabled in the self-contained build */ }
-function nextQuestion(){ return null; }   // hides the one-question box after results
-function markAnswered(){}
-
-/* Rates are DATA, versioned by effective date. Inlined here (self-contained build). */
-const rates = {"effective":"2026-01-01","sss":{"employeeRate":0.05,"mscMin":5000,"mscMax":35000,"mscStep":500},"philhealth":{"employeeRate":0.025,"floor":10000,"ceiling":100000},"pagibig":{"lowRate":0.01,"lowRateCeiling":1500,"standardRate":0.02,"salaryCap":10000},"withholding":{"monthly":[{"over":0,"upTo":20833,"base":0,"rate":0},{"over":20833,"upTo":33333,"base":0,"rate":0.15},{"over":33333,"upTo":66667,"base":1875,"rate":0.2},{"over":66667,"upTo":166667,"base":8541.8,"rate":0.25},{"over":166667,"upTo":666667,"base":33541.8,"rate":0.3},{"over":666667,"upTo":null,"base":183541.8,"rate":0.35}],"semiMonthly":[{"over":0,"upTo":10417,"base":0,"rate":0},{"over":10417,"upTo":16667,"base":0,"rate":0.15},{"over":16667,"upTo":33333,"base":937.5,"rate":0.2},{"over":33333,"upTo":83333,"base":4270.7,"rate":0.25},{"over":83333,"upTo":333333,"base":16770.7,"rate":0.3},{"over":333333,"upTo":null,"base":91770.7,"rate":0.35}]}};
-
-const $ = id => document.getElementById(id);
-const out = $('out'), inA = $('a'), inB = $('b');
-const inAT = $('at'), inAN = $('an'), allowBox = $('allow');
-const inBT = $('at-b'), inBN = $('an-b'), allowBoxB = $('allow-b');
-const offB = $('off-b');
-let mode = 'take', period = 'monthly', mwe = false, annual = false;
-
-const LS_LAST = 'sc.last';
-
-function readLink() {
-  try {
-    const q = new URLSearchParams(location.search);
-    const num = k => { const v = q.get(k); const n = v == null ? NaN : parseFloat(v.replace(/[^0-9.]/g,'')); return Number.isFinite(n) && n >= 0 ? n : null; };
-    const g = num('gross');
-    if (g == null) return null;
-    return {
-      basic: g,
-      taxableAllowance: num('at') || 0,
-      nonTaxableAllowance: num('an') || 0,
-      period: q.get('period') === 'semi' ? 'semiMonthly' : 'monthly',
-      mwe: q.get('mwe') === '1',
-    };
-  } catch { return null; }
-}
-
-function readStore() {
-  try {
-    const v = JSON.parse(localStorage.getItem(LS_LAST) || 'null');
-    if (!v || !Number.isFinite(v.basic) || v.basic <= 0) return null;
-    return v;
-  } catch { return null; }
-}
-
-function saveStore() {
-  try {
-    const A = offerA();
-    if (!A.basic) return;
-    localStorage.setItem(LS_LAST, JSON.stringify({ ...A, period, mwe }));
-  } catch { /* private mode, full disk — never worth an error */ }
-}
-
-function linkForCurrent() {
-  const A = offerA();
-  const q = new URLSearchParams({ gross: String(Math.round(A.basic)) });
-  if (A.taxableAllowance) q.set('at', String(Math.round(A.taxableAllowance)));
-  if (A.nonTaxableAllowance) q.set('an', String(Math.round(A.nonTaxableAllowance)));
-  if (period === 'semiMonthly') q.set('period', 'semi');
-  if (mwe) q.set('mwe', '1');
-  return location.origin + location.pathname + '?' + q.toString();
-}
-
-const money = n => n.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
-const parse = s => { const n = parseFloat(String(s).replace(/[^0-9.]/g,'')); return Number.isFinite(n) ? n : 0; };
-const fmtIn = s => { const n = parse(s); return n ? n.toLocaleString('en-PH',{maximumFractionDigits:2}) : ''; };
-
-function offerA() {
-  return {
-    basic: parse(inA.value),
-    taxableAllowance: allowBox.open ? parse(inAT.value) : 0,
-    nonTaxableAllowance: allowBox.open ? parse(inAN.value) : 0,
-  };
-}
-function offerB() {
-  return {
-    basic: parse(inB.value),
-    taxableAllowance: allowBoxB.open ? parse(inBT.value) : 0,
-    nonTaxableAllowance: allowBoxB.open ? parse(inBN.value) : 0,
-  };
-}
-
-function mainLabel() {
-  const split = allowBox.open;
-  if (split) return period === 'monthly' ? 'Monthly basic pay' : 'Basic pay per payday';
-  return period === 'monthly' ? 'Monthly gross pay' : 'Gross pay per payday';
-}
-
-const WHY = {
-  sss: '5% of your salary credit. That credit moves in steps, so it is not a flat share of your pay. It buys sickness, maternity, disability and retirement cover. A pension needs 120 monthly payments, so ten years.',
-  philhealth: '2.5% of your pay, and your employer pays the same again. It covers part of a hospital bill, never all of it. Below ₱10,000 you pay as if you earned ₱10,000. Above ₱100,000 it stops going up.',
-  pagibig: '2%, but never more than ₱200 a month. Someone on ₱200,000 pays the same ₱200 you do. It is what makes you eligible for a housing loan, and you can take the savings out after twenty years.',
-  tax: 'Only the part above ₱20,833 a month is taxed, and only after SSS, PhilHealth and Pag-IBIG come off. The first ₱250,000 a year is free. In a first job this is usually small.',
-};
-
-function paidBlock(r) {
-  if (!(r.taxableAllowance > 0 || r.nonTaxableAllowance > 0)) return '';
-  const line = (l, sub, v) =>
-    `<div class="pline"><span>${l}${sub ? `<small>${sub}</small>` : ''}</span><span class="v">₱${money(v)}</span></div>`;
-  return `<div class="paid">
-    <div class="cap">Your pay</div>
-    ${line('Basic pay', '', sc(r.basic))}
-    ${r.taxableAllowance > 0 ? line('Taxed allowance', '', sc(r.taxableAllowance)) : ''}
-    ${r.nonTaxableAllowance > 0 ? line('Tax-free allowance', '', sc(r.nonTaxableAllowance)) : ''}
-    <div class="pline tot"><span>Total pay</span><span class="v">₱${money(sc(r.gross))}</span></div>
-  </div>`;
-}
-
-const perYear = () => (period === 'monthly' ? 12 : 24);
-const sc = v => annual ? v * perYear() : v;
-const per = () => annual ? 'a year' : (period === 'monthly' ? 'a month' : 'a payday');
-
-function hero(label, value, note) {
-  const [w, c] = money(value).split('.');
-  return `<div class="hero">
-    <div class="cap">${label}</div>
-    <div class="big">₱${w}<span class="cent">.${c}</span></div>
-    ${note ? `<div class="note">${note}</div>` : ''}
-  </div>`;
-}
-
-function rowsFor(r) {
-  const rows = [
-    ['sss','SSS','on a ₱'+money(r.meta.sssMSC)+' salary credit', sc(r.contributions.sss)],
-    ['philhealth','PhilHealth','2.5% of your pay', sc(r.contributions.philhealth)],
-    ['pagibig','Pag-IBIG','2%, never more than ₱200', sc(r.contributions.pagibig)],
-    ['tax','Tax', r.meta.isMinimumWageEarner ? 'minimum wage, so none' : 'on ₱'+money(sc(r.taxableIncome))+' taxable', sc(r.withholdingTax)],
-  ];
-  return `<div class="rows">` + rows.map(([k,l,s,v],i)=>`
-    <button class="row" type="button" aria-expanded="false" data-why="w-${k}">
-      <span class="lbl">${l}<small>${s}</small></span>
-      <span class="amt">−${money(v)}</span>
-      <span class="chev"></span>
-    </button>
-    <div class="why" id="w-${k}" hidden>${WHY[k]}</div>`).join('') + `</div>`;
-}
-
-function notices(r) {
-  let h = '';
-  for (const w of r.warnings) h += `<div class="notice warn"><span class="ic">!</span><span>${w.message}</span></div>`;
-  return h;
-}
-
-function render() {
-  const A = offerA();
-  const a = A.basic;
-  const taxableAllowance = A.taxableAllowance;
-  const nonTaxableAllowance = A.nonTaxableAllowance;
-  const opts = { period, isMinimumWageEarner: mwe, taxableAllowance, nonTaxableAllowance };
-  let html = '', nextHtml = '';
-
-  if (mode === 'cmp') {
-    const B = offerB();
-    const shared = { period, isMinimumWageEarner: mwe };
-    const c = compare({ ...A, ...shared }, { ...B, ...shared }, rates);
-    const L = c.left, R = c.right;
-    const diff = c.netDifference, gd = c.grossDifference;
-
-    const flip = (gd > 0 && diff < 0) || (gd < 0 && diff > 0);
-    const winRight = diff > 0;
-    const side = (r, name, isWin) => `
-      <div class="cmpv${isWin && diff !== 0 ? ' win' : ''}">
-        <div class="t">${name}</div>
-        <div class="n">₱${money(sc(r.net))}</div>
-        <div class="cmprow"><span>Total pay</span><span class="v">₱${money(sc(r.gross))}</span></div>
-        ${(r.taxableAllowance + r.nonTaxableAllowance) > 0
-          ? `<div class="cmprow"><span>Allowance</span><span class="v">₱${money(sc(r.taxableAllowance + r.nonTaxableAllowance))}</span></div>` : ''}
-        <div class="cmprow"><span>Taken out</span><span class="v">−₱${money(sc(r.totalDeductions))}</span></div>
-        ${isWin && diff !== 0 ? `<span class="win-tag">Takes home more</span>` : ''}
-      </div>`;
-
-    let verdict;
-    if (diff === 0) {
-      verdict = `<div class="verdictbar">Both land <b>₱${money(sc(L.net))}</b> in your pocket. Decide on something other than the money.</div>`;
-    } else if (flip) {
-      verdict = `<div class="verdictbar flip">The ${gd > 0 ? 'second' : 'first'} offer has the bigger headline —
-        <b>₱${money(sc(Math.abs(gd)))}</b> more total pay — but the ${gd > 0 ? 'first' : 'second'} one puts
-        <b>₱${money(sc(Math.abs(diff)))}</b> more in your pocket. How a package is split matters more than its size here.</div>`;
-    } else if (Math.abs(diff) > Math.abs(gd)) {
-      verdict = `<div class="verdictbar">The ${winRight ? 'second' : 'first'} offer pays
-        <b>₱${money(sc(Math.abs(gd)))}</b> more in total — but <b>₱${money(sc(Math.abs(diff)))}</b> more lands.
-        More than the gap, because part of it is not taxed.</div>`;
-    } else {
-      const kept = Math.abs(gd) > 0 ? Math.round((Math.abs(diff)/Math.abs(gd))*100) : 100;
-      verdict = `<div class="verdictbar">The ${winRight ? 'second' : 'first'} offer pays
-        <b>₱${money(sc(Math.abs(gd)))}</b> more in total, and <b>₱${money(sc(Math.abs(diff)))}</b> of that actually lands —
-        <b>${kept}%</b>. The rest goes to deductions.</div>`;
-    }
-
-    html = `<div class="cmp">${side(L,'First',!winRight)}${side(R,'Second',winRight)}</div>`
-      + verdict
-      + notices({ warnings: [...new Map([...L.warnings, ...R.warnings].map(w => [w.code, w])).values()] })
-      + `<div class="notice info"><span class="ic">→</span><span>Fare and rent are not counted here. A job that pays more can still cost more to get to.</span></div>`;
-  } else if (mode === 'rev') {
-    const r = grossFromNet(a, opts, rates);
-    const hasAl = (taxableAllowance + nonTaxableAllowance) > 0;
-    html = hero(hasAl ? 'Ask for this basic pay' : 'Ask for this pay', sc(hasAl ? r.basic : r.gross),
-        `to take home ₱${money(sc(r.net))} ${per()}${hasAl ? ', with your allowances on top' : ''}.`)
-      + paidBlock(r)
-      + rowsFor(r)
-      + `<div class="gone"><span class="l">Taken out</span><span class="r">₱${money(sc(r.whereItWent))}</span></div>`;
-    html = `<div class="result">${html}</div>` + notices(r);
-  } else {
-    const r = computePayroll({ basic:a, ...opts }, rates);
-    const daily = r.net > 0 ? r.net / (period==='monthly'?30:15) : 0;
-    const note = annual
-      ? `From ₱${money(sc(r.gross))} a year. That is your payslip ${perYear()} times over, not a tax return.`
-      : `From ₱${money(r.gross)} pay. That is ₱${money(daily)} a day.`;
-    html = hero('Take home', sc(r.net), note)
-      + paidBlock(r)
-      + rowsFor(r)
-      + `<div class="gone"><span class="l">Taken out</span><span class="r">₱${money(sc(r.whereItWent))} · ${r.deductionRate}%</span></div>`;
-    html = `<div class="result">${html}</div>` + notices(r);
-
-    if (r.net > 0) {
-      nextHtml = `<div class="h">₱${money(daily)} a day.</div>
-        <p>That is what you have to work with each day. <span class="who">IponPal</span> can tell you if it lasts.</p>
-        <a href="https://app.iponpal.com/?income=${Math.round(r.net)}&utm_source=sweldo&utm_medium=result" rel="noopener">Open IponPal with this number →</a>`;
-    }
-  }
-
-  out.innerHTML = html;
-  $('next').innerHTML = nextHtml;
-  $('next').hidden = !nextHtml;
-
-  out.querySelectorAll('.row').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const why = $(btn.dataset.why);
-      const open = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!open));
-      why.hidden = open;
+  function setLang(l){
+    document.querySelectorAll('[data-k]').forEach(el=>{
+      const k=el.dataset.k;
+      if(el.getAttribute('data-en')===null) el.setAttribute('data-en', el.innerHTML); // capture EN original once
+      el.innerHTML = (l==='tl' && TL[k]!=null) ? TL[k] : el.getAttribute('data-en');
     });
-  });
-
-  queueEvent();
-  saveStore();
-}
-
-function summaryText() {
-  const a = parse(inA.value);
-  const r = computePayroll({ gross:a, period, isMinimumWageEarner:mwe }, rates);
-  const pad = (l, v) => l.padEnd(14) + ('−' + money(v)).padStart(12);
-  return [
-    `₱${money(r.gross)} gross${period==='semiMonthly'?' (semi-monthly)':''}`,
-    '─'.repeat(26),
-    pad('SSS', r.contributions.sss),
-    pad('PhilHealth', r.contributions.philhealth),
-    pad('Pag-IBIG', r.contributions.pagibig),
-    pad('Tax', r.withholdingTax),
-    '─'.repeat(26),
-    'Take home'.padEnd(14) + ('₱' + money(r.net)).padStart(12),
-    '',
-    `₱${money(r.whereItWent)} gone — ${r.deductionRate}% of your pay.`,
-  ].join('\n');
-}
-
-function toast(msg) {
-  const t = $('toast');
-  t.textContent = msg; t.classList.add('show');
-  clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 2200);
-}
-
-let sendTimer = null, lastSent = null, asked = false;
-
-function queueEvent() {
-  clearTimeout(sendTimer);
-  sendTimer = setTimeout(() => {
-    const basic = parse(inA.value);
-    if (!basic) return;
-    const useAllow = allowBox.open;
-    const ta = useAllow ? parse(inAT.value) : 0;
-    const na = useAllow ? parse(inAN.value) : 0;
-    const gross = basic + ta + na;
-    const sig = `${basic}|${ta}|${na}|${period}|${mwe}|${mode}`;
-    if (sig === lastSent) return;
-    lastSent = sig;
-    track({ gross, basic, period, isMwe: mwe, mode, ratesVersion: rates.effective });
-    if (!asked && mode === 'take') { asked = true; renderAsk(); }
-  }, 1800);
-}
-
-function renderAsk() {
-  const box = $('ask');
-  const q = nextQuestion();
-  if (!q) { box.hidden = true; return; }
-
-  box.hidden = false;
-  box.className = 'ask';
-  box.innerHTML = `
-    <div class="q">${q.prompt}</div>
-    <p class="why">One question only. It is how we build a real picture of Filipino pay.
-      We never show a range until five people have answered.</p>
-    <div class="chips">
-      ${q.options.map(o => `<button type="button" data-v="${o}">${o}</button>`).join('')}
-      <button type="button" class="skip" data-v="">Skip</button>
-    </div>`;
-
-  box.querySelectorAll('button').forEach(b => {
-    b.addEventListener('click', () => {
-      const v = b.dataset.v;
-      markAnswered(q.key);
-      if (v) {
-        track({
-          gross: parse(inA.value), period, isMwe: mwe, mode,
-          ratesVersion: rates.effective, answerKey: q.key, answerValue: v,
-        });
-        box.className = 'ask done';
-        box.innerHTML = `<div class="q">Thanks &mdash; that is now part of the picture.</div>
-          <p class="why" style="margin-bottom:0">Come back on your next payday and
-          we will ask one more. Four visits and you have told us everything we need.</p>`;
-      } else {
-        box.hidden = true;
-      }
-    });
-  });
-}
-
-function setMode(m) {
-  mode = m;
-  const tabId = m === 'cmp' ? 'm-cmp' : 'm-take';
-  document.querySelectorAll('.modes button').forEach(b => b.setAttribute('aria-selected', String(b.id === tabId)));
-  offB.hidden = m !== 'cmp';
-  $('flip').hidden = m === 'cmp';
-  $('flip').textContent = m === 'rev' ? 'Back to my pay' : 'Work it backwards';
-  $('lab-a').textContent = m === 'rev' ? 'Take-home you want'
-                         : (m === 'cmp' ? 'First offer' : mainLabel());
-  $('copy').style.display = m === 'take' ? '' : 'none';
-  $('copylink').hidden = m === 'cmp';
-  render();
-}
-$('m-take').addEventListener('click', () => setMode(mode === 'rev' ? 'rev' : 'take'));
-$('m-cmp').addEventListener('click', () => setMode('cmp'));
-$('flip').addEventListener('click', () => setMode(mode === 'rev' ? 'take' : 'rev'));
-
-$('same').addEventListener('click', () => {
-  inB.value = inA.value;
-  inBT.value = allowBox.open ? inAT.value : '';
-  inBN.value = allowBox.open ? inAN.value : '';
-  allowBoxB.open = allowBox.open && (parse(inAT.value) > 0 || parse(inAN.value) > 0);
-  render();
-  toast('Copied the first offer');
-});
-
-for (const [id, on] of [['v-m', false], ['v-y', true]]) {
-  $(id).addEventListener('click', () => {
-    annual = on;
-    $('v-m').setAttribute('aria-pressed', String(!on));
-    $('v-y').setAttribute('aria-pressed', String(on));
-    render();
-  });
-}
-for (const [id, p] of [['p-m','monthly'],['p-s','semiMonthly']]) {
-  $(id).addEventListener('click', () => {
-    period = p;
-    $('p-m').setAttribute('aria-pressed', String(p==='monthly'));
-    $('p-s').setAttribute('aria-pressed', String(p==='semiMonthly'));
-    if (mode==='take') $('lab-a').textContent = mainLabel();
-    render();
-  });
-}
-$('p-mw').addEventListener('click', () => {
-  mwe = !mwe; $('p-mw').setAttribute('aria-pressed', String(mwe)); render();
-});
-$('copy').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(summaryText()); toast('Copied — paste it anywhere'); }
-  catch { toast('Could not copy on this device'); }
-});
-$('share').addEventListener('click', async () => {
-  const url = location.origin + location.pathname;
-  const data = {
-    title: 'Sweldo Check — where did my salary go?',
-    text: 'Type your monthly gross and see every peso that never reaches you. Free, no sign-up.',
-    url,
-  };
-  try {
-    if (navigator.share) { await navigator.share(data); return; }
-    await navigator.clipboard.writeText(url);
-    toast('Link copied — paste it anywhere');
-  } catch (err) {
-    if (err && err.name === 'AbortError') return;
-    try { await navigator.clipboard.writeText(url); toast('Link copied'); }
-    catch { toast('Could not share on this device'); }
+    document.getElementById('lang-en').classList.toggle('on', l!=='tl');
+    document.getElementById('lang-tl').classList.toggle('on', l==='tl');
+    document.documentElement.lang = (l==='tl') ? 'tl' : 'en';
+    try{ localStorage.setItem('ip_lang', l); }catch(e){}
+    onCalc(); // keep the calculator copy in the current language
   }
-});
-$('copylink').addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(linkForCurrent()); toast('Link copied. It opens on this number.'); }
-  catch { toast('Could not copy on this device'); }
-});
+  function switchLang(l){ setLang(l); try{ track('lang_switch'); }catch(e){} }
 
-$('reset').addEventListener('click', () => {
-  inA.value = '25,000'; inB.value = '28,000';
-  inAT.value = ''; inAN.value = ''; allowBox.open = false;
-  inBT.value = ''; inBN.value = ''; allowBoxB.open = false;
-  mode='take'; period='monthly'; mwe=false; annual=false;
-  $('v-m').setAttribute('aria-pressed','true'); $('v-y').setAttribute('aria-pressed','false');
-  try { localStorage.removeItem(LS_LAST); } catch {}
-  setMode('take'); $('p-m').click();
-  $('p-mw').setAttribute('aria-pressed','false');
-  render();
-});
-window.addEventListener('pagehide', () => { clearTimeout(sendTimer); });
-allowBox.addEventListener('toggle', () => {
-  if (mode === 'take') $('lab-a').textContent = mainLabel();
-  render();
-});
-allowBoxB.addEventListener('toggle', render);
-for (const el of [inA, inB, inAT, inAN, inBT, inBN]) {
-  el.addEventListener('input', () => { const p = el.selectionStart, before = el.value.length;
-    el.value = fmtIn(el.value);
-    try { el.setSelectionRange(p + (el.value.length - before), p + (el.value.length - before)); } catch {}
-    render(); });
-}
-
-$('ver').textContent = 'Rates effective ' + rates.effective + ' · not yet checked against the official tables';
-
-(function boot() {
-  const seed = readLink() || readStore();
-  if (!seed) { setMode('take'); return; }
-  inA.value = seed.basic.toLocaleString('en-PH', { maximumFractionDigits: 2 });
-  if (seed.taxableAllowance || seed.nonTaxableAllowance) {
-    allowBox.open = true;
-    if (seed.taxableAllowance) inAT.value = seed.taxableAllowance.toLocaleString('en-PH');
-    if (seed.nonTaxableAllowance) inAN.value = seed.nonTaxableAllowance.toLocaleString('en-PH');
+  /* ============ take-home teaser (same engine as the app / Sweldo) ============ */
+  const RATES={"sss":{"employeeRate":0.05,"mscMin":5000,"mscMax":35000,"mscStep":500},"philhealth":{"employeeRate":0.025,"floor":10000,"ceiling":100000},"pagibig":{"lowRate":0.01,"lowRateCeiling":1500,"standardRate":0.02,"salaryCap":10000},"withholding":[{"over":0,"upTo":20833,"base":0,"rate":0},{"over":20833,"upTo":33333,"base":0,"rate":0.15},{"over":33333,"upTo":66667,"base":1875,"rate":0.2},{"over":66667,"upTo":166667,"base":8541.8,"rate":0.25},{"over":166667,"upTo":666667,"base":33541.8,"rate":0.3},{"over":666667,"upTo":null,"base":183541.8,"rate":0.35}]};
+  const c=p=>Math.round((p+Number.EPSILON)*100), toP=x=>Math.round(x)/100, rate=(x,r)=>Math.round(x*r), clamp=(n,lo,hi)=>lo!=null&&n<lo?lo:(hi!=null&&n>hi?hi:n);
+  function takeHome(grossPesos){
+    const g=c(grossPesos); if(g<=0) return null;
+    const msc=g<=c(RATES.sss.mscMin)?c(RATES.sss.mscMin):g>=c(RATES.sss.mscMax)?c(RATES.sss.mscMax):clamp(Math.round(g/c(RATES.sss.mscStep))*c(RATES.sss.mscStep),c(RATES.sss.mscMin),c(RATES.sss.mscMax));
+    const sss=rate(msc,RATES.sss.employeeRate);
+    const ph=rate(clamp(g,c(RATES.philhealth.floor),c(RATES.philhealth.ceiling)),RATES.philhealth.employeeRate);
+    const pi=rate(clamp(g,null,c(RATES.pagibig.salaryCap)), g<=c(RATES.pagibig.lowRateCeiling)?RATES.pagibig.lowRate:RATES.pagibig.standardRate);
+    const contrib=sss+ph+pi, taxable=Math.max(0,g-contrib);
+    let tax=0; for(const b of RATES.withholding){ const o=c(b.over), u=b.upTo==null?Infinity:c(b.upTo); if(taxable>o&&taxable<=u){ tax=c(b.base)+rate(taxable-o,b.rate); break; } }
+    const ded=contrib+tax, net=g-ded;
+    return { net:toP(net), sss:toP(sss), ph:toP(ph), pi:toP(pi), tax:toP(tax), ded:toP(ded), rate:Math.round((ded/g)*1000)/10 };
   }
-  if (seed.period === 'semiMonthly') { period = 'semiMonthly';
-    $('p-m').setAttribute('aria-pressed','false'); $('p-s').setAttribute('aria-pressed','true'); }
-  if (seed.mwe) { mwe = true; $('p-mw').setAttribute('aria-pressed','true'); }
-  setMode('take');
-})();
+  const peso=n=>'₱'+Math.round(n).toLocaleString('en-PH');
+  const peso2=n=>'₱'+n.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const parseNum=s=>{const n=parseFloat(String(s).replace(/[^0-9.]/g,''));return Number.isFinite(n)?n:0;};
+  function onCalc(){
+    const out=document.getElementById('calc-out'); if(!out) return;
+    const tl=document.documentElement.lang==='tl';
+    const r=takeHome(parseNum((document.getElementById('calc-in')||{}).value));
+    if(!r){ out.innerHTML=''; return; }
+    out.innerHTML =
+      '<div class="out"><div class="cap">'+(tl?'UUWIING SWELDO · kada buwan':'TAKE-HOME · per month')+'</div>'
+      +'<div class="net">'+peso2(r.net)+'</div>'
+      +'<div class="sub">'+r.rate+'% '+(tl?'kinaltas sa':'taken from')+' '+peso(parseNum(document.getElementById('calc-in').value))+'</div>'
+      +'<div class="ded"><span>SSS <b>−'+peso(r.sss)+'</b></span><span>PhilHealth <b>−'+peso(r.ph)+'</b></span><span>Pag-IBIG <b>−'+peso(r.pi)+'</b></span><span>'+(tl?'Tax':'Tax')+' <b>−'+peso(r.tax)+'</b></span></div></div>';
+  }
+
+  /* ============ analytics + attribution + waitlist ============ */
+  const SB_URL='https://anbmihwvzbazjjufdnse.supabase.co', SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
+  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||_q.get('m')||null, utm_campaign:_q.get('utm_campaign')||_q.get('c')||null, referrer:document.referrer||null, path:location.pathname||'/' };
+  function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(Object.assign({type,lang:document.documentElement.lang||'en'},_acq))}); }catch(e){} }
+  function nlMsg(t,ok){ const el=document.getElementById('nl-msg'); if(!el)return; el.textContent=t; el.style.color=ok?'var(--green-dk)':'#C4485E'; }
+  async function subscribe(e){
+    e.preventDefault();
+    const email=(document.getElementById('nl-email').value||'').trim(), tl=document.documentElement.lang==='tl';
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ nlMsg(tl?'Maglagay ng valid na email 🙂':'Enter a valid email 🙂',false); return; }
+    try{
+      const r=await fetch(SB_URL+'/rest/v1/waitlist',{method:'POST',headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify({email,source:'landing'})});
+      if(r.status===201||r.ok){ nlMsg(tl?"Nasali ka na! 🎉 Salamat!":"You're in! 🎉 Thanks.",true); document.getElementById('nl-email').value=''; track('subscribe'); }
+      else if(r.status===409){ nlMsg(tl?"Nasa list ka na! 💚":"You're already on the list! 💚",true); }
+      else { nlMsg(tl?'Subukan ulit mamaya.':'Hmm, try again later.',false); }
+    }catch(err){ nlMsg(tl?'Subukan ulit mamaya.':'Hmm, try again later.',false); }
+  }
+  window.addEventListener('load',()=>track('view'));
+
+  // tag Open-app CTAs so the app attributes installs back to this landing/campaign
+  document.querySelectorAll('a[href*="app.iponpal.com"]').forEach(a=>{
+    try{ const u=new URL(a.href); u.searchParams.set('ref','landing');
+      if(_acq.utm_source) u.searchParams.set('utm_source',_acq.utm_source);
+      if(_acq.utm_campaign) u.searchParams.set('utm_campaign',_acq.utm_campaign);
+      a.href=u.toString();
+    }catch(e){}
+    a.addEventListener('click',()=>track('open_app'));
+  });
+  // tag Sweldo links (subpath) so we can measure landing → calculator
+  document.querySelectorAll('a[href*="/sweldo"]').forEach(a=>{
+    try{ const u=new URL(a.href, location.origin); u.searchParams.set('utm_source','landing'); u.searchParams.set('utm_medium','calc'); a.href=u.toString(); }catch(e){}
+    a.addEventListener('click',()=>track('open_sweldo'));
+  });
+
+  // English is the default; a returning visitor's saved choice wins.
+  setLang((function(){ try{ return localStorage.getItem('ip_lang')==='tl' ? 'tl' : 'en'; }catch(e){ return 'en'; } })());
+  onCalc();
+
+  const reveals=[...document.querySelectorAll('.reveal')];
+  const io=new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.12});
+  reveals.forEach((el,i)=>{ el.style.transitionDelay=(i%3*70)+'ms'; io.observe(el); });
+  requestAnimationFrame(()=>reveals.forEach(el=>{ if(el.getBoundingClientRect().top < innerHeight){ el.classList.add('in'); io.unobserve(el); } }));
+  setTimeout(()=>reveals.forEach(el=>el.classList.add('in')), 2500);
 </script>
-
 </body>
 </html>
