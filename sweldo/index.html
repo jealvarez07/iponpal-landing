@@ -8,8 +8,7 @@
 <meta name="description" content="Enter your monthly gross salary and see your real take-home pay. SSS, PhilHealth, Pag-IBIG and BIR withholding tax explained line by line, in plain English. Free, no sign-up. A tool by IponPal.">
 <link rel="canonical" href="https://iponpal.com/sweldo/">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#F5F7F4" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0F1613" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F5F7F4">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="IponPal">
@@ -109,7 +108,7 @@
 <style>
   :root{
     --paper:#F5F7F4;
-    --card:#FFFFFF;
+    --card:rgba(255,255,255,0.66);
     --card-2:#ECF0EA;
     --ink:#16211A;
     --ink-2:#2A3230;
@@ -125,40 +124,14 @@
     --warn-soft:rgba(176,124,19,0.12);
     --focus:#7C5CFC;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper:#0F1613;
-      --card:#171E1A;
-      --card-2:#1F2723;
-      --ink:#E8ECE6;
-      --ink-2:#B4BEB7;
-      --ink-3:#9AA394;
-      --rule:rgba(255,255,255,0.12);
-      --rule-soft:rgba(255,255,255,0.07);
-      --keep:#3FCF9A;
-      --keep-soft:rgba(18,164,114,0.16);
-      --violet:#A48BFF;
-      --gone:#E8808F;
-      --gone-soft:rgba(196,72,94,0.16);
-      --warn:#EAC77A;
-      --warn-soft:rgba(176,124,19,0.18);
-      --focus:#A48BFF;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper:#0F1613; --card:#171E1A; --card-2:#1F2723;
-    --ink:#E8ECE6; --ink-2:#B4BEB7; --ink-3:#9AA394;
-    --rule:rgba(255,255,255,0.12); --rule-soft:rgba(255,255,255,0.07);
-    --keep:#3FCF9A; --keep-soft:rgba(18,164,114,0.16); --violet:#A48BFF;
-    --gone:#E8808F; --gone-soft:rgba(196,72,94,0.16);
-    --warn:#EAC77A; --warn-soft:rgba(176,124,19,0.18);
-    --focus:#A48BFF;
-  }
+  /* v2: dark mode removed so Sweldo always matches the light landing page. */
 
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
     background:var(--paper); color:var(--ink);
+    background-image:radial-gradient(700px 460px at 90% -3%, rgba(20,160,110,.16), transparent 60%), radial-gradient(640px 480px at -6% 30%, rgba(124,92,252,.11), transparent 62%), radial-gradient(600px 500px at 50% 110%, rgba(20,160,110,.10), transparent 60%);
+    background-attachment:fixed;
     font-family:"Onest","Helvetica Neue",system-ui,sans-serif;
     font-size:16px; line-height:1.5;
     padding-inline:18px; padding-block:0 56px;
@@ -440,6 +413,12 @@
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important}
   }
+  /* v2: align Sweldo's look with the landing — glass cards, softer radii, Onest labels (numbers stay tabular, like the landing's calculator) */
+  .result,.paid,.next,.ask,.cmpv{border-radius:20px;border-color:rgba(255,255,255,.9);box-shadow:0 18px 50px rgba(14,138,95,.10);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .field label,.hero .cap,.paid .cap,.cmpv .t,.segs button,.row .lbl small,.viewsw button{font-family:"Onest","Helvetica Neue",system-ui,sans-serif}
+  .inp{border-radius:14px}
+  .acts button{border-radius:14px}
+  .acts button.primary{box-shadow:0 12px 30px rgba(14,138,95,.24)}
 </style>
 
 </head>
