@@ -366,6 +366,29 @@ footer a{color:var(--green-dk);text-decoration:none}
   </div>
 </div></section>
 
+<!-- GUIDES -->
+<style>
+  .guidesec .glist{display:grid;gap:12px;margin-top:30px}
+  @media(min-width:640px){.guidesec .glist{grid-template-columns:1fr 1fr}}
+  .guidesec a.gcard{display:block;background:#fff;border:1.5px solid var(--line,#E8ECE6);border-radius:16px;padding:16px 18px;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
+  .guidesec a.gcard:hover{border-color:var(--green,#0E8A5F);transform:translateY(-2px)}
+  .guidesec a.gcard .gt{font-weight:700;font-size:16px}
+  .guidesec a.gcard .gd{display:block;font-size:13.5px;color:#68705F;margin-top:3px}
+</style>
+<section class="guidesec"><div class="wrap" style="max-width:820px">
+  <span class="eyebrow" style="display:block;text-align:center" data-k="g_eye">Free guides · 2026</span>
+  <h2 style="margin-top:14px;text-align:center" data-k="g_h">Know your pay, line by line.</h2>
+  <p class="lead" style="margin:16px auto 0;text-align:center" data-k="g_p">Plain-English answers to the questions behind your payslip — no sign-up, no download.</p>
+  <div class="glist">
+    <a class="gcard" href="https://iponpal.com/sweldo/take-home-pay-calculator-philippines-2026?utm_medium=guides"><span class="gt" data-k="g1t">Take-home pay calculator</span><span class="gd" data-k="g1d">Gross → net, all four deductions</span></a>
+    <a class="gcard" href="https://iponpal.com/sweldo/sss-contribution-table-2026?utm_medium=guides"><span class="gt" data-k="g2t">SSS contribution table</span><span class="gd" data-k="g2d">5% of your salary credit</span></a>
+    <a class="gcard" href="https://iponpal.com/sweldo/philhealth-contribution-table-2026?utm_medium=guides"><span class="gt" data-k="g3t">PhilHealth contribution table</span><span class="gd" data-k="g3d">2.5% employee share</span></a>
+    <a class="gcard" href="https://iponpal.com/sweldo/pag-ibig-contribution-table-2026?utm_medium=guides"><span class="gt" data-k="g4t">Pag-IBIG table &amp; MP2</span><span class="gd" data-k="g4d">Up to ₱200, plus MP2 savings</span></a>
+    <a class="gcard" href="https://iponpal.com/sweldo/withholding-tax-table-2026?utm_medium=guides"><span class="gt" data-k="g5t">Withholding tax table</span><span class="gd" data-k="g5d">The BIR TRAIN brackets</span></a>
+    <a class="gcard" href="https://iponpal.com/sweldo/13th-month-pay-2026?utm_medium=guides"><span class="gt" data-k="g6t">13th month pay</span><span class="gd" data-k="g6d">How it is computed &amp; taxed</span></a>
+  </div>
+</div></section>
+
 <!-- FINAL CTA -->
 <section class="final"><div class="wrap">
   <div class="wm wordmark reveal">IponPal</div>
@@ -411,6 +434,8 @@ footer a{color:var(--green-dk);text-decoration:none}
     why_eye:'Bakit IponPal', why_h:'Gawa para sa sweldong Pinoy.',
     why_1h:'Para sa PH pay cycle', why_1p:'13th month, SSS/PhilHealth/Pag-IBIG, semi-monthly — tamang-tama, hindi basta dinikit sa generic na budget app.',
     why_2h:'Private at honest', why_2p:'Walang ads. Hindi ibinebenta ang data mo, hindi hinahawakan ang pera mo, walang pautang. Gumagana offline. Export o delete anytime.',
+    g_eye:'Libreng gabay · 2026', g_h:'Alamin ang sweldo mo, bawat linya.', g_p:'Malinaw na sagot sa mga tanong sa likod ng payslip mo — walang sign-up, walang download.',
+    g1t:'Take-home calculator', g1d:'Gross → net, lahat ng bawas', g2t:'SSS contribution table', g2d:'5% ng salary credit', g3t:'PhilHealth table', g3d:'2.5% na share mo', g4t:'Pag-IBIG table at MP2', g4d:'Hanggang ₱200, kasama ang MP2', g5t:'Withholding tax table', g5d:'Ang BIR TRAIN brackets', g6t:'13th month pay', g6d:'Paano kino-compute at binubuwisan',
     why_3h:'Sadyang simple', why_3p:'Isang malinaw na numero — kung magkano ang pwedeng gastusin — imbes na chart na kailangan mo pang intindihin.',
     t_eye:'Ang pangako namin', t_h:'Hindi bangko.<br>Hindi lending app.<br><span class="dim">Ang pera mo lang, mas malinaw.</span>',
     t_p:'Hindi kami nagpapautang. Hindi namin hinahawakan ang pera mo. Hindi ibinebenta ang data mo. Walang paluwagan. Ikaw ang may hawak — export o burahin anytime.',
@@ -496,10 +521,13 @@ footer a{color:var(--green-dk);text-decoration:none}
     }catch(e){}
     a.addEventListener('click',()=>track('open_app'));
   });
-  // tag Sweldo links (subpath) so we can measure landing → calculator
+  // tag Sweldo links (subpath) so we can measure landing → calculator / guides
   document.querySelectorAll('a[href*="/sweldo"]').forEach(a=>{
-    try{ const u=new URL(a.href, location.origin); u.searchParams.set('utm_source','landing'); u.searchParams.set('utm_medium','calc'); a.href=u.toString(); }catch(e){}
-    a.addEventListener('click',()=>track('open_sweldo'));
+    let med='calc';
+    try{ const u=new URL(a.href, location.origin); u.searchParams.set('utm_source','landing');
+      if(u.searchParams.get('utm_medium')){ med=u.searchParams.get('utm_medium'); } else { u.searchParams.set('utm_medium','calc'); }
+      a.href=u.toString(); }catch(e){}
+    a.addEventListener('click',()=>track(med==='guides'?'open_guide':'open_sweldo'));
   });
 
   // English is the default; a returning visitor's saved choice wins.
