@@ -562,6 +562,30 @@
   </ul>
 </details>
 
+<style>
+  .guides{margin-top:30px}
+  .guides h2{font-size:16px;font-weight:700;letter-spacing:-.01em;margin:0 0 4px;color:var(--ink)}
+  .guides .gsub{font-size:13px;color:var(--ink-3);margin:0 0 12px}
+  .guides .glist{display:grid;gap:9px}
+  @media(min-width:560px){.guides .glist{grid-template-columns:1fr 1fr}}
+  .guides a{display:block;background:var(--card);border:1.5px solid var(--rule);border-radius:13px;padding:12px 14px;text-decoration:none;color:var(--ink);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:border-color .12s}
+  .guides a:hover{border-color:var(--keep)}
+  .guides a .gt{font-weight:600;font-size:14px}
+  .guides a .gd{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+</style>
+<section class="guides" aria-label="Pay guides">
+  <h2>Free guides for 2026</h2>
+  <p class="gsub">Plain-English answers to the questions behind your payslip.</p>
+  <div class="glist">
+    <a href="https://iponpal.com/sweldo/take-home-pay-calculator-philippines-2026?utm_source=sweldo&amp;utm_medium=guides"><span class="gt">Take-home pay calculator</span><span class="gd">Gross → net, all four deductions</span></a>
+    <a href="https://iponpal.com/sweldo/sss-contribution-table-2026?utm_source=sweldo&amp;utm_medium=guides"><span class="gt">SSS contribution table</span><span class="gd">5% of your salary credit</span></a>
+    <a href="https://iponpal.com/sweldo/philhealth-contribution-table-2026?utm_source=sweldo&amp;utm_medium=guides"><span class="gt">PhilHealth contribution table</span><span class="gd">2.5% employee share</span></a>
+    <a href="https://iponpal.com/sweldo/pag-ibig-contribution-table-2026?utm_source=sweldo&amp;utm_medium=guides"><span class="gt">Pag-IBIG table &amp; MP2</span><span class="gd">Up to ₱200, plus MP2 savings</span></a>
+    <a href="https://iponpal.com/sweldo/withholding-tax-table-2026?utm_source=sweldo&amp;utm_medium=guides"><span class="gt">Withholding tax table</span><span class="gd">The BIR TRAIN brackets</span></a>
+    <a href="https://iponpal.com/sweldo/13th-month-pay-2026?utm_source=sweldo&amp;utm_medium=guides"><span class="gt">13th month pay</span><span class="gd">How it is computed &amp; taxed</span></a>
+  </div>
+</section>
+
 <p class="privacy">We keep the number, not you. No account, no email. Salaries are
 saved rounded off and with nothing attached, so no row can be traced back to
 anyone. Your last entry stays on your own phone.</p>
@@ -735,10 +759,28 @@ function compare(a, b, rates) {
     grossDifference: Math.round((right.gross - left.gross) * 100) / 100,
   };
 }
-/* events.js inlined as safe stubs — analytics + the optional rotating question.
-   The calculator itself uses only the payroll functions above. */
-function track(){ /* analytics disabled in the self-contained build */ }
-function nextQuestion(){ return null; }   // hides the one-question box after results
+/* Analytics restored (self-contained build) — posts to Supabase landing_events.
+   The rotating community question stays disabled (needs the events backend). */
+const SB_URL='https://anbmihwvzbazjjufdnse.supabase.co', SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
+const _q = new URLSearchParams(location.search);
+const _acq = {
+  utm_source: _q.get('utm_source') || _q.get('ref') || null,
+  utm_medium: _q.get('utm_medium') || _q.get('m') || null,
+  utm_campaign: _q.get('utm_campaign') || _q.get('c') || null,
+  referrer: document.referrer || null,
+  path: location.pathname || '/sweldo/',
+};
+function send(type, variant){
+  try {
+    fetch(SB_URL + '/rest/v1/landing_events', {
+      method: 'POST', keepalive: true,
+      headers: { apikey: SB_KEY, authorization: 'Bearer ' + SB_KEY, 'content-type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify(Object.assign({ type, lang: document.documentElement.lang || 'en', variant: variant || null }, _acq)),
+    });
+  } catch (e) {}
+}
+function track(payload){ payload = payload || {}; send('sweldo_calc', payload.mode || null); }
+function nextQuestion(){ return null; }   // one-question box stays hidden
 function markAnswered(){}
 
 /* Rates are DATA, versioned by effective date. Inlined here (self-contained build). */
@@ -1161,6 +1203,13 @@ $('ver').textContent = 'Rates effective ' + rates.effective + ' · not yet check
   if (seed.mwe) { mwe = true; $('p-mw').setAttribute('aria-pressed','true'); }
   setMode('take');
 })();
+
+/* page view + Open-IponPal click (CTA is inserted into #out dynamically) */
+send('sweldo_view');
+document.addEventListener('click', (e) => {
+  const a = e.target.closest && e.target.closest('a[href*="app.iponpal.com"]');
+  if (a) send('sweldo_open_app');
+});
 </script>
 
 </body>
