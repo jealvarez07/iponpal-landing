@@ -263,9 +263,12 @@ salIn.addEventListener('input',function(){fmtInput(salIn);renderCalc();trackCalc
 
 var SB_URL='https://anbmihwvzbazjjufdnse.supabase.co',SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
 var _q=new URLSearchParams(location.search);
-var _acq={utm_source:_q.get('utm_source')||_q.get('ref')||null,utm_medium:_q.get('utm_medium')||_q.get('m')||null,utm_campaign:_q.get('utm_campaign')||_q.get('c')||null,referrer:document.referrer||null,path:location.pathname||''};
+function ipCid(){try{var c=_q.get('cid')||localStorage.getItem('ip_cid');if(!c){c=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now().toString(36)+Math.random().toString(36).slice(2));}localStorage.setItem('ip_cid',c);return c;}catch(e){return _q.get('cid')||null;}}
+var CID=ipCid();
+var _acq={cid:CID,utm_source:_q.get('utm_source')||_q.get('ref')||null,utm_medium:_q.get('utm_medium')||_q.get('m')||null,utm_campaign:_q.get('utm_campaign')||_q.get('c')||null,referrer:document.referrer||null,path:location.pathname||''};
 function send(type){try{fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(Object.assign({type:type,lang:document.documentElement.lang||'en',variant:'bir'},_acq))});}catch(e){}}
 send('bir_view');
+document.querySelectorAll('a[href*="app.iponpal.com"]').forEach(function(a){try{var u=new URL(a.href);if(CID)u.searchParams.set('cid',CID);a.href=u.toString();}catch(e){}});
 var _s=document.getElementById('cta-sweldo');if(_s)_s.addEventListener('click',function(){send('bir_open_sweldo');});
 var _a=document.getElementById('cta-app');if(_a)_a.addEventListener('click',function(){send('bir_open_app');});
 var _calcT=null;

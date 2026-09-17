@@ -394,7 +394,10 @@ renderCalc();
 /* ---------- analytics → Supabase landing_events (same shape as landing + Sweldo) ---------- */
 var SB_URL='https://anbmihwvzbazjjufdnse.supabase.co', SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
 var _q = new URLSearchParams(location.search);
+function ipCid(){try{var c=_q.get('cid')||localStorage.getItem('ip_cid');if(!c){c=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now().toString(36)+Math.random().toString(36).slice(2));}localStorage.setItem('ip_cid',c);return c;}catch(e){return _q.get('cid')||null;}}
+var CID=ipCid();
 var _acq = {
+  cid: CID,
   utm_source:_q.get('utm_source')||_q.get('ref')||null,
   utm_medium:_q.get('utm_medium')||_q.get('m')||null,
   utm_campaign:_q.get('utm_campaign')||_q.get('c')||null,
@@ -409,6 +412,7 @@ function send(type){
   } catch(e){}
 }
 send('sss_view');
+document.querySelectorAll('a[href*="app.iponpal.com"]').forEach(function(a){try{var u=new URL(a.href);if(CID)u.searchParams.set('cid',CID);a.href=u.toString();}catch(e){}});
 var s = document.getElementById('cta-sweldo'); if (s) s.addEventListener('click', function(){ send('sss_open_sweldo'); });
 var a = document.getElementById('cta-app'); if (a) a.addEventListener('click', function(){ send('sss_open_app'); });
 </script>
