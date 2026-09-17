@@ -492,11 +492,15 @@ footer a{color:var(--green-dk);text-decoration:none}
       +'<div class="net">'+peso2(r.net)+'</div>'
       +'<div class="sub">'+r.rate+'% '+(tl?'kinaltas sa':'taken from')+' '+peso(parseNum(document.getElementById('calc-in').value))+'</div>'
       +'<div class="ded"><span>SSS <b>−'+peso(r.sss)+'</b></span><span>PhilHealth <b>−'+peso(r.ph)+'</b></span><span>Pag-IBIG <b>−'+peso(r.pi)+'</b></span><span>'+(tl?'Tax':'Tax')+' <b>−'+peso(r.tax)+'</b></span></div></div>';
+    try{ clearTimeout(window._ct); window._ct=setTimeout(function(){ track('calc_used'); }, 1200); }catch(e){}
   }
 
   /* ============ analytics + attribution + waitlist ============ */
   const SB_URL='https://anbmihwvzbazjjufdnse.supabase.co', SB_KEY='sb_publishable_acsXJGzbpvyTabyTKEQtDw_61dPw0vG';
-  const _acq={ utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||_q.get('m')||null, utm_campaign:_q.get('utm_campaign')||_q.get('c')||null, referrer:document.referrer||null, path:location.pathname||'/' };
+  // shared anonymous id so one person can be followed across landing → sweldo → app
+  function ipCid(){ try{ var c=_q.get('cid')||localStorage.getItem('ip_cid'); if(!c){ c=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():(Date.now().toString(36)+Math.random().toString(36).slice(2)); } localStorage.setItem('ip_cid',c); return c; }catch(e){ return _q.get('cid')||null; } }
+  const CID=ipCid();
+  const _acq={ cid:CID, utm_source:_q.get('utm_source')||_q.get('ref')||null, utm_medium:_q.get('utm_medium')||_q.get('m')||null, utm_campaign:_q.get('utm_campaign')||_q.get('c')||null, referrer:document.referrer||null, path:location.pathname||'/' };
   function track(type){ try{ fetch(SB_URL+'/rest/v1/landing_events',{method:'POST',keepalive:true,headers:{apikey:SB_KEY,authorization:'Bearer '+SB_KEY,'content-type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(Object.assign({type,lang:document.documentElement.lang||'en'},_acq))}); }catch(e){} }
   function nlMsg(t,ok){ const el=document.getElementById('nl-msg'); if(!el)return; el.textContent=t; el.style.color=ok?'var(--green-dk)':'#C4485E'; }
   async function subscribe(e){
@@ -517,6 +521,7 @@ footer a{color:var(--green-dk);text-decoration:none}
     try{ const u=new URL(a.href); u.searchParams.set('ref','landing');
       if(_acq.utm_source) u.searchParams.set('utm_source',_acq.utm_source);
       if(_acq.utm_campaign) u.searchParams.set('utm_campaign',_acq.utm_campaign);
+      if(CID) u.searchParams.set('cid',CID);
       a.href=u.toString();
     }catch(e){}
     a.addEventListener('click',()=>track('open_app'));
@@ -526,6 +531,7 @@ footer a{color:var(--green-dk);text-decoration:none}
     let med='calc';
     try{ const u=new URL(a.href, location.origin); u.searchParams.set('utm_source','landing');
       if(u.searchParams.get('utm_medium')){ med=u.searchParams.get('utm_medium'); } else { u.searchParams.set('utm_medium','calc'); }
+      if(CID) u.searchParams.set('cid',CID);
       a.href=u.toString(); }catch(e){}
     a.addEventListener('click',()=>track(med==='guides'?'open_guide':'open_sweldo'));
   });
